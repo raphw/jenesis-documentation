@@ -190,7 +190,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **R15 · The console** — using the web UI: navigating repositories and artifacts, the settings and
   installed-modules screens, and the tenant-scoped view (implicit when there is one tenant). What an operator
   can see and do — not how the console is extended in code.
-- [ ] **R16 · Configuration reference** — every setting in one place, grouped by chapter, with defaults.
+- [x] **R16 · Configuration reference** — every setting in one place, grouped by chapter, with defaults.
 
 ## Final pass (after all chapters are written)
 
