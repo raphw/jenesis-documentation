@@ -69,7 +69,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   is the exact mechanism a custom step must respect. *(demo-02/04/08/27/28/29/30/33/34)*
 - [x] **T4 · Configuration** — `jenesis.properties` (global `~/.jenesis` and the project file); per-module
   configuration under `META-INF/build.jenesis/`; profiles; the precedence order. *(demo-15)*
-- [ ] **T5 · Building & running** — compile / test / jar / javadoc; **compiler arguments** and **annotation
+- [x] **T5 · Building & running** — compile / test / jar / javadoc; **compiler arguments** and **annotation
   processing**; running a module's `main` with `Execute.java` (implicit vs. explicit main); watch mode.
   *(demo-05/06/09/10)*
 - [ ] **T6 · Dependencies** — resolution over Maven and module repositories; **strict pinning** (SHA-256 pins
