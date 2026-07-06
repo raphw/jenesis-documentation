@@ -75,7 +75,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **T6 · Dependencies** — resolution over Maven and module repositories; **strict pinning** (SHA-256 pins
   in `module-info.java`); how `requires` names are looked up (link to Jenesis Modules); **Maven exclusions**;
   version negotiation. *(demo-26)*
-- [ ] **T7 · Code quality & testing** *(new topic — the demos cover it, the outline did not)* — formatting and
+- [x] **T7 · Code quality & testing** *(new topic — the demos cover it, the outline did not)* — formatting and
   static analysis; code coverage; **test selection** (run only the tests a change affects); **mutation
   testing** (pitest). *(demo-11/23/24/25)*
 - [ ] **T8 · Other JVM languages** *(new)* — Kotlin, Scala, and Groovy: alone and mixed with Java, with their
