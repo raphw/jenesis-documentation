@@ -180,7 +180,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **R11 · Multi-tenancy & authentication** — SPIs: the tenants directory and the auth mechanisms.
   Implementations: routing, key auth, OIDC token exchange, SAML, SCIM; roles and memberships. Settings:
   tenancy mode, default tenant, trusts.
-- [ ] **R12 · Publish-through forwarding** — SPI: the forward transport. Implementations: the Central Portal
+- [x] **R12 · Publish-through forwarding** — SPI: the forward transport. Implementations: the Central Portal
   transport and same-protocol replay over the store-backed outbox. Settings: targets and credentials.
 - [ ] **R13 · Migration & import** — SPI: the import source. Implementations: the Nexus, Artifactory, and
   Jenesis importers, the generic Maven tree-walk, and format-native enumeration; the `/api/assets` export
