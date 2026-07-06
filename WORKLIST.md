@@ -192,6 +192,15 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   can see and do — not how the console is extended in code.
 - [ ] **R16 · Configuration reference** — every setting in one place, grouped by chapter, with defaults.
 
+## Final pass (after all chapters are written)
+
+- [ ] **Mobile-friendliness walkthrough** — once the chapters are done, walk the whole site on a narrow
+  (phone-width) viewport and fix anything that overflows or is hard to use: the landing project grid and the
+  release/version strip; each tool's chapter menu collapsed behind the "Menu" button (open/close, current
+  item); every chapter's prose measure; **code blocks and tables scrolling within their own container with no
+  horizontal page overflow**; the demos list; admonitions; the theme toggle and footer. Check both light and
+  dark. `npm run serve` with the browser devtools device toolbar (e.g. 360px wide). This is the last item.
+
 ---
 
 ## Done
