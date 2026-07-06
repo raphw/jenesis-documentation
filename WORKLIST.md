@@ -122,7 +122,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   read the class path, named modules do not; package shadowing follows the JDK's rules); common pitfalls.
 - [x] **L5 · Comparison with a fat jar** — module-info collisions, hand-merged `META-INF/services`, and the
   lost module graph — each contrasted with the launcher's subfolder approach.
-- [ ] **L6 · Reference** — the manifest entries the launcher reads and its own configuration.
+- [x] **L6 · Reference** — the manifest entries the launcher reads and its own configuration.
 
 ## Jenesis Modules (`src/modules/`) — user-facing: how you resolve modules through repo.jenesis.build
 
