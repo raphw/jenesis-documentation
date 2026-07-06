@@ -90,7 +90,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **T11 · Build performance & isolation** — building/launching inside a container
   (`jenesis.project.docker.*` / `jenesis.execute.docker.*`, what is mounted) and sharing outputs through the
   **build cache**. *(demo-38/42)*
-- [ ] **T12 · Extending the build** — writing your own `BuildStep`, plus custom assemblers and fully custom
+- [x] **T12 · Extending the build** — writing your own `BuildStep`, plus custom assemblers and fully custom
   Maven / modular / build definitions. **Custom-step best practices, and the change-detection limitation
   (do not omit these — they are in the README and easy to get wrong):**
   - A step is a **pure function of its input folders** → a fresh output folder; treat it as such.
