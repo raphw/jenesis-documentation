@@ -167,7 +167,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   RPM, …), grouped by shape. Settings: per-format upstreams.
 - [x] **R6 · Proxying & groups** — SPI: the fetcher provider. Implementations: pull-through caching and group
   repositories over it; routing. Settings: proxy toggle, upstreams, negative-cache.
-- [ ] **R7 · The compliance gate** — SPIs: the publication interceptor, gate policy, quality inspector, and
+- [x] **R7 · The compliance gate** — SPIs: the publication interceptor, gate policy, quality inspector, and
   advisory source. Implementations: licence policy, the vulnerability feeds (OSV, GHSA, EPSS, KEV), malware.
   Settings: `license-allowed`/`-denied`, `vulnerability-threshold`, `malware-action`, `deny-list`.
 - [ ] **R8 · Provenance** — SPI: the provenance signer. Implementations: keyless Sigstore signing (Fulcio +
