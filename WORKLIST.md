@@ -56,7 +56,7 @@ narrow viewport to confirm it stays readable.
 The chapter set covers every topic the demos exercise; the demo each chapter should cross-link is noted in
 `(demo …)`. Set each chapter's `order` front matter to its number here; Demos stays at `order: 99`.
 
-- [ ] **T2 · Getting started** — install with SDKMAN (`sdk install jenesis`); the
+- [x] **T2 · Getting started** — install with SDKMAN (`sdk install jenesis`); the
   `java build/jenesis/Project.java build` invocation; build the bundled example end to end and read its
   output; a first tour of the `Project.java` record (root, target, layout, steps). *(demo-01…04)*
 - [ ] **T3 · Core concepts** — the `BuildStep` (input folders → a fresh output folder); the build graph
