@@ -177,7 +177,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **R10 · Maintenance** — SPI: the maintenance task and its lease. Implementations: cleanup, retention,
   vulnerability re-scan, dependents index, reclamation. Settings: `scheduled-cleanup`, intervals,
   `keep-last`, `max-age`.
-- [ ] **R11 · Multi-tenancy & authentication** — SPIs: the tenants directory and the auth mechanisms.
+- [x] **R11 · Multi-tenancy & authentication** — SPIs: the tenants directory and the auth mechanisms.
   Implementations: routing, key auth, OIDC token exchange, SAML, SCIM; roles and memberships. Settings:
   tenancy mode, default tenant, trusts.
 - [ ] **R12 · Publish-through forwarding** — SPI: the forward transport. Implementations: the Central Portal
