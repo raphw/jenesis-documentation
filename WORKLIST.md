@@ -126,7 +126,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 
 ## Jenesis Modules (`src/modules/`) — user-facing: how you resolve modules through repo.jenesis.build
 
-- [ ] **M2 · Resolving through repo.jenesis.build** — the HTTP service is the product, and this is the
+- [x] **M2 · Resolving through repo.jenesis.build** — the HTTP service is the product, and this is the
   chapter that matters most. Mine the module README's repository section in full and cover, explicitly:
   - **It is a module-name-addressable mirror of Maven Central.** Every response is a 302 redirect to the jar
     (or POM, or metadata) on Maven Central; the service is a thin wrapper over the resolved TSVs.
