@@ -24,7 +24,8 @@ Two convictions shape everything here:
 
 <div class="tip">
   New to Jenesis? Read this page, then <strong>Getting started</strong> to install it and run your first
-  build. Every later chapter assumes only what came before it.
+  build. Every later chapter assumes only what came before it. Prefer to learn by example? Every feature has a
+  runnable project in <a href="/tool/demos/">Demos</a>.
 </div>
 
 ## What's in this section
@@ -41,3 +42,4 @@ The chapters build up from zero knowledge:
 8. **Running in Docker** — building or launching inside a container.
 9. **jpx** — running a published module's main class.
 10. **Reference** — the command line, configuration keys, and the built-in steps.
+11. **Demos** — a runnable example project for every feature (already available).

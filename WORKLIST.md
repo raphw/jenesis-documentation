@@ -67,6 +67,11 @@ narrow viewport to confirm it stays readable.
   resolves and caches.
 - [ ] **T10 · Reference** — the command line and selectors; a configuration-key table; the built-in steps.
 
+  When writing the chapters above, **cross-link the relevant demos** with a small note or `tip` (e.g. the
+  Packaging chapter → the executables/native-image/bundle demos; Dependencies → the licensing and
+  vulnerability demos). The demo list lives in `src/_data/demos.js`; keep it in sync with `demo/` in
+  raphw/jenesis when demos are added or renamed.
+
 ## Jenesis Launcher (`src/launcher/`)
 
 - [ ] **L2 · How it works** — `ModuleLayer` reconstruction via an in-memory module finder; the single loader
@@ -141,3 +146,5 @@ narrow viewport to confirm it stays readable.
 - [x] Site skeleton — landing page, `base`/`docs` layouts, sidebar navigation, brand + console styling,
   dark/light theme, mobile layout, the build-validate-deploy pipeline, and `CNAME` for jenesis.build.
 - [x] **T1 / L1 / M1 / R1** — each tool's Introduction chapter.
+- [x] **Demos page** — `src/tool/demos.njk`, driven by `src/_data/demos.js`, linking every demo in
+  raphw/jenesis to its folder on GitHub, grouped and linked from the tool introduction.
