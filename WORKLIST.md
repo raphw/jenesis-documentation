@@ -67,7 +67,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   **serialized form**, not just its inputs. Flag the consequence plainly (detailed in *Extending the build*):
   what invalidates a step is its serialized *state*, so editing a step's configuration re-runs it, but that
   is the exact mechanism a custom step must respect. *(demo-02/04/08/27/28/29/30/33/34)*
-- [ ] **T4 · Configuration** — `jenesis.properties` (global `~/.jenesis` and the project file); per-module
+- [x] **T4 · Configuration** — `jenesis.properties` (global `~/.jenesis` and the project file); per-module
   configuration under `META-INF/build.jenesis/`; profiles; the precedence order. *(demo-15)*
 - [ ] **T5 · Building & running** — compile / test / jar / javadoc; **compiler arguments** and **annotation
   processing**; running a module's `main` with `Execute.java` (implicit vs. explicit main); watch mode.
