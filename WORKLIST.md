@@ -72,7 +72,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **T5 · Building & running** — compile / test / jar / javadoc; **compiler arguments** and **annotation
   processing**; running a module's `main` with `Execute.java` (implicit vs. explicit main); watch mode.
   *(demo-05/06/09/10)*
-- [ ] **T6 · Dependencies** — resolution over Maven and module repositories; **strict pinning** (SHA-256 pins
+- [x] **T6 · Dependencies** — resolution over Maven and module repositories; **strict pinning** (SHA-256 pins
   in `module-info.java`); how `requires` names are looked up (link to Jenesis Modules); **Maven exclusions**;
   version negotiation. *(demo-26)*
 - [ ] **T7 · Code quality & testing** *(new topic — the demos cover it, the outline did not)* — formatting and
