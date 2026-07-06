@@ -10,6 +10,12 @@ tools' **Getting started** chapters first (they are what a new reader reaches fo
 
 ## Writing conventions
 
+- **Audience: users and operators, not developers.** This is user documentation — how to *use* and *run*
+  the tools. Write for the person building with Jenesis, running a repository, or resolving a module — not
+  for someone modifying Jenesis itself. No internals tours, no "how to contribute", no code-level walk of a
+  class. The repository's SPI-first chapters (below) are still user-facing: the SPI is presented as *what a
+  capability does and that it is a swappable, discoverable plug-in point an operator chooses and configures*
+  — never as an interface to implement in code.
 - **Build from zero knowledge.** The first chapters assume nothing; later ones assume the earlier ones.
   Never forward-reference a concept you have not introduced.
 - **Stay focused — no wall of text.** Short sections under clear `##`/`###` headings. If a section runs past
@@ -20,9 +26,10 @@ tools' **Getting started** chapters first (they are what a new reader reaches fo
 - **One idea per paragraph**, active voice, second person ("you run", not "one runs").
 - **End meatier chapters** with a one-line "next" pointer only if it is not obvious; the prev/next pager is
   automatic.
-- **Repository chapters follow a fixed order** (below): the **SPI** first (the interface and its contract),
-  then the **implementations**, then the **settings** that tune them. Read a chapter's SPI even to use a
-  built-in — it is the shortest statement of what the capability does.
+- **Repository chapters follow a fixed order** (below): the **capability (its SPI)** first — what it does and
+  that it is a discovered, swappable plug-in point — then the **implementations** you can choose, then the
+  **settings** that configure them. Frame the SPI as the shortest statement of what the capability *does* and
+  what you are choosing between, not as an interface to implement.
 
 Verify while writing: `npm run check` builds and link-checks; open `npm run serve` and read the page on a
 narrow viewport to confirm it stays readable.
@@ -73,19 +80,19 @@ narrow viewport to confirm it stays readable.
   lost module graph — each contrasted with the launcher's subfolder approach.
 - [ ] **L6 · Reference** — the manifest entries the launcher reads and its own configuration.
 
-## Jenesis Modules (`src/modules/`)
+## Jenesis Modules (`src/modules/`) — user-facing: how you resolve modules through repo.jenesis.build
 
-- [ ] **M2 · Using the catalogue** — the `data/modules/<dotted-name>/` layout (`modules.tsv`,
-  `artifacts.tsv`, `versions.tsv`); looking a module name up to a Maven coordinate; the aggregated
-  `module-maven.properties`; consuming the mapping from a build.
-- [ ] **M3 · How it is built** — the Maven Central Nexus index walk (the streaming reader); the scanner's
-  module-name extraction (root vs. multi-release `module-info`, `Automatic-Module-Name`); the named vs.
-  automatic distinction; the classifier-less "masked main jar" problem and how it is handled.
-- [ ] **M4 · The published data** — `SUMMARY.md`; the per-year "top modules" reports (`data/top/<year>.md`)
-  and the current-state `BLEEDING.md`; `DRIFTERS.md`.
-- [ ] **M5 · Companion tools** — `ReconcileMetadata` (versions missing from the index), `LoadCoordinates`
-  (seed a coordinate the index has not caught up to), `RetryFailed`, `IndexProbe`, `Regenerate`, `ModuleMaven`.
-- [ ] **M6 · Reference** — the TSV column formats; the crawler's configuration keys; the scheduled workflows.
+- [ ] **M2 · Resolving through repo.jenesis.build** — the HTTP service is the product. Document the URL
+  shapes (`/module/<name>[/<version>]`, `/artifact/<…>`), the 302-redirect-to-Maven-Central contract, how
+  versions and classifiers are requested, following it with `curl -L`, how the Jenesis build tool uses it by
+  default, and pointing at a mirror that serves the same shapes. This is the chapter that matters most.
+- [ ] **M3 · The catalogue & reports** — reading the coverage summary, the per-year "top modules" reports
+  (`/top/<year>`) and the current-state bleeding-edge report, and the drift report — as a *user* browsing
+  what is modular, not as data files to parse.
+- [ ] **M4 · How the catalogue is produced** — a short, non-code overview for trust: Maven Central is scanned
+  regularly, each artifact's real module name is read, named vs. automatic modules are distinguished, and the
+  catalogue self-heals missing entries. Keep it to *what* happens and *how current* it is — not the crawler's
+  internals, which are out of scope for user documentation.
 
 ## Jenesis Repository (`src/repository/`) — SPI → implementations → settings in every chapter
 
@@ -122,8 +129,9 @@ narrow viewport to confirm it stays readable.
   surface. Settings: import triggers and source configuration.
 - [ ] **R14 · Observability** — the Micrometer metric convention, the Prometheus endpoint, and OTLP tracing.
   Settings: exposure and tracing toggles.
-- [ ] **R15 · The console** — the web UI; the `ServerModuleProvider` and `ConsoleModuleProvider` contribution
-  seams; the settings and modules screens; the tenant-scoped view.
+- [ ] **R15 · The console** — using the web UI: navigating repositories and artifacts, the settings and
+  installed-modules screens, and the tenant-scoped view (implicit when there is one tenant). What an operator
+  can see and do — not how the console is extended in code.
 - [ ] **R16 · Configuration reference** — every setting in one place, grouped by chapter, with defaults.
 
 ---

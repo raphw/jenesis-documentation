@@ -27,16 +27,17 @@ back to them:
 
 ## How these docs are organised
 
-Because the system *is* its seams, each capability chapter is written the same way, in this order:
+Because the system *is* its capabilities, each chapter is written the same way, in this order:
 
-1. **The SPI** — the interface the core discovers, what it is handed, and what it must return.
-2. **The implementations** — the modules that provide it (for example, the storage chapter's filesystem, S3,
+1. **The capability (its SPI)** — what it does, and that it is a discovered, swappable plug-in point: a
+   provider supplies it, so it can be replaced with another implementation or simply be absent.
+2. **The implementations** — the ones you can choose from (for example, the storage chapter's filesystem, S3,
    and Azure backends), and how they differ.
-3. **The settings** — the configuration keys that tune that capability.
+3. **The settings** — the configuration keys that turn it on and tune it.
 
 <div class="tip">
-  Read the SPI first even if you only mean to use a built-in implementation: it is the shortest explanation of
-  what the capability actually does, and it tells you exactly what a replacement would have to satisfy.
+  Read the capability overview first even if you only mean to run a built-in: it is the shortest explanation of
+  what the feature does and what you are choosing between.
 </div>
 
 ## What's in this section
