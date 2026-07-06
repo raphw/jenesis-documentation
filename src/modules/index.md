@@ -4,11 +4,11 @@ title: Introduction
 description: What Jenesis Modules is, and how you resolve a module name through repo.jenesis.build.
 ---
 
-**Jenesis Modules is a service that resolves a Java module name to the jar that carries it.** When a
-`module-info.java` says `requires com.fasterxml.jackson.databind`, something has to turn that module name
-into a downloadable artifact. Jenesis Modules answers that: it maps every module name published to Maven
-Central to its coordinate and serves the mapping over HTTP at
-**[repo.jenesis.build](https://repo.jenesis.build/)**.
+**Jenesis Modules is a module-name-addressable mirror of Maven Central.** When a `module-info.java` says
+`requires com.fasterxml.jackson.databind`, something has to turn that module name into a downloadable
+artifact. Jenesis Modules answers that: it records the module name every artifact on Maven Central declares,
+and serves the mapping over HTTP at **[repo.jenesis.build](https://repo.jenesis.build/)** — every request
+is a 302 redirect to the real file on Maven Central, so nothing is re-hosted.
 
 ## How you use it
 
@@ -22,6 +22,11 @@ curl -L https://repo.jenesis.build/module/com.fasterxml.jackson.databind
 # Pin a version, or ask for a classifier:
 curl -L https://repo.jenesis.build/module/com.fasterxml.jackson.databind/2.18.0
 ```
+
+There are two main modes: `/module/…` resolves by the module-info version, while `/artifact/…` is a
+**transparent Maven proxy** keyed by the Maven version — the file extension passes straight through, so
+`/artifact/<name>/<ver>/<name>.pom` returns the POM and the route works as a drop-in Maven repository URL.
+The next chapter covers every mode, POMs and metadata, and classifiers in full.
 
 The Jenesis build tool points at `repo.jenesis.build` out of the box, so when your `module-info.java`
 declares a `requires`, the build resolves it here automatically — you rarely call the service by hand. The

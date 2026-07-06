@@ -126,10 +126,24 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 
 ## Jenesis Modules (`src/modules/`) — user-facing: how you resolve modules through repo.jenesis.build
 
-- [ ] **M2 · Resolving through repo.jenesis.build** — the HTTP service is the product. Document the URL
-  shapes (`/module/<name>[/<version>]`, `/artifact/<…>`), the 302-redirect-to-Maven-Central contract, how
-  versions and classifiers are requested, following it with `curl -L`, how the Jenesis build tool uses it by
-  default, and pointing at a mirror that serves the same shapes. This is the chapter that matters most.
+- [ ] **M2 · Resolving through repo.jenesis.build** — the HTTP service is the product, and this is the
+  chapter that matters most. Mine the module README's repository section in full and cover, explicitly:
+  - **It is a module-name-addressable mirror of Maven Central.** Every response is a 302 redirect to the jar
+    (or POM, or metadata) on Maven Central; the service is a thin wrapper over the resolved TSVs.
+  - **The four route modes**, and the version each is keyed by:
+    - `artifact` — `/artifact/<name>[/<mavenVersion>]/<file>`, keyed by the **Maven coordinate version**. A
+      **transparent Maven proxy**: the request extension passes through verbatim, so it is a **drop-in Maven
+      `<repository>` URL**.
+    - `module` — `/module/<name>[/<moduleVersion>]/<file>.jar`, keyed by the **module-info version**
+      (publisher-declared; falls back to the Maven version). `.jar` only.
+    - `sources` and `documentation` — like `module`, but the redirect appends `-sources` / `-javadoc`.
+  - **How POMs and other files are read**: because `artifact` mode is extension-transparent, `<name>.pom`,
+    `<name>.pom.sha256`, `<name>.module` (Gradle metadata), etc. all resolve — show the worked examples.
+  - **How classifiers work**: a `-<classifier>` on the filename flips the lookup to the classifier-scoped
+    TSV (`artifacts-<classifier>.tsv` / `modules-<classifier>.tsv`) and becomes the Maven classifier on the
+    resulting filename.
+  - Following it with `curl -L`; how the Jenesis build tool points here by default; reading the TSVs
+    directly (raw GitHub) for your own resolver; and pointing at a mirror that serves the same shapes.
 - [ ] **M3 · The catalogue & reports** — reading the coverage summary, the per-year "top modules" reports
   (`/top/<year>`) and the current-state bleeding-edge report, and the drift report — as a *user* browsing
   what is modular, not as data files to parse.
