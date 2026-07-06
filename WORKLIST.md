@@ -162,7 +162,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **R4 · Storage** — SPI: `ArtifactStore` (streaming read/write, `writeBlob` content addressing,
   `writeVersioned` compare-and-set, `scope`, `list`). Implementations: filesystem, S3, Azure — and how each
   maps the primitives. Settings: store selection, credentials, quota.
-- [ ] **R5 · Formats** — SPI: `RepositoryFormat` / `ProxyFormat` / `ArtifactLayout`. Implementations: the
+- [x] **R5 · Formats** — SPI: `RepositoryFormat` / `ProxyFormat` / `ArtifactLayout`. Implementations: the
   built-in ecosystems (Maven, npm, PyPI, OCI/Docker, NuGet, Gem, Cargo, Conda, Conan, Composer, Go, Debian,
   RPM, …), grouped by shape. Settings: per-format upstreams.
 - [ ] **R6 · Proxying & groups** — SPI: the fetcher provider. Implementations: pull-through caching and group
