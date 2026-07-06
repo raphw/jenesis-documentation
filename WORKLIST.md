@@ -172,7 +172,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   Settings: `license-allowed`/`-denied`, `vulnerability-threshold`, `malware-action`, `deny-list`.
 - [x] **R8 · Provenance** — SPI: the provenance signer. Implementations: keyless Sigstore signing (Fulcio +
   Rekor) and DSSE attestation. Settings: the signing/token configuration.
-- [ ] **R9 · Search & inventory** — SPI: the search-query provider. Implementations: the Lucene index and the
+- [x] **R9 · Search & inventory** — SPI: the search-query provider. Implementations: the Lucene index and the
   licence inventory; the published incremental index. Settings: index enablement and intervals.
 - [ ] **R10 · Maintenance** — SPI: the maintenance task and its lease. Implementations: cleanup, retention,
   vulnerability re-scan, dependents index, reclamation. Settings: `scheduled-cleanup`, intervals,
