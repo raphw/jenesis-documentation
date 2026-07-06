@@ -105,7 +105,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   *(demo-31/35/36/37)*
 - [x] **T13 · jpx** — the module runner: `jpx <module|groupId:artifactId>[@version][/main-class] [args…]`;
   the `--modular`, `--docker`, and `--hash` options; the install layout under `~/.jenesis/jpx/`.
-- [ ] **T14 · Reference** — the command line and selectors; a configuration-key table; the built-in steps.
+- [x] **T14 · Reference** — the command line and selectors; a configuration-key table; the built-in steps.
 
   Every demo topic now maps to a chapter (the `(demo …)` tags above). When writing a chapter, add a small
   `tip` linking its demos. The demo list lives in `src/_data/demos.js`; keep it in sync with `demo/` in
