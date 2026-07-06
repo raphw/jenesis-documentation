@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: null
+description: The Jenesis product family — a Java-native build tool, launcher, module catalogue, and artifact repository.
+---
+<div class="landing">
+  <section class="landing-hero">
+    <h1>A Java-native build ecosystem</h1>
+    <p>
+      Jenesis is a small family of tools that take the Java platform at its word: builds configured in
+      Java, the module system treated as a feature rather than an obstacle, and no lock-in on the way in
+      or out. Pick a tool to read its documentation.
+    </p>
+  </section>
+
+  <div class="project-grid">
+    {% for s in sections %}
+      <a class="project-card" href="{{ s.url }}">
+        <img src="/assets/logos/light/{{ s.logo }}.svg" alt="" data-logo="{{ s.logo }}">
+        <span class="project-card__name">{{ s.title }}</span>
+        <p class="project-card__tagline">{{ s.tagline }}</p>
+      </a>
+    {% endfor %}
+  </div>
+
+  <section style="max-width: 46rem; margin: var(--app-space-6) auto 0;">
+    <h2 style="font-family: Archivo, sans-serif;">The idea</h2>
+    <p>
+      Every tool here shares a few convictions: configuration and extension happen in plain Java, not a
+      bespoke DSL; <code>module-info.java</code> is first-class, so a modular graph survives from build to
+      run; capabilities are discovered plug-ins rather than a monolith; and your artifacts and metadata are
+      always yours to take elsewhere. The documentation is organised the same way for each tool — an
+      introduction that assumes nothing, then chapters that go from the first command to the finer points.
+    </p>
+  </section>
+</div>

@@ -1,0 +1,17 @@
+{
+  "name": "jenesis-documentation",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Documentation site for the Jenesis product family (jenesis.build).",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "validate": "node scripts/validate-links.mjs",
+    "check": "npm run build && npm run validate"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

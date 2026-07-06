@@ -1,0 +1,42 @@
+---
+layout: base.njk
+---
+{% set chapters = collections[section] %}
+{% set current = page.url %}
+<div class="docs">
+  <aside class="docs-sidebar" id="section-nav">
+    <p class="docs-sidebar__heading">
+      <img src="/assets/logos/light/jenesis-{{ section }}.svg" alt="" width="20" height="20" data-logo="jenesis-{{ section }}">
+      {{ sectionTitle }}
+    </p>
+    <nav aria-label="{{ sectionTitle }} chapters">
+      <ul class="docs-menu">
+        {% for chapter in chapters %}
+          <li>
+            <a href="{{ chapter.url }}"{% if chapter.url == current %} aria-current="page"{% endif %}>{{ chapter.data.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="docs-content" id="main">
+    <article>
+      <h1>{{ title }}</h1>
+      {{ content | safe }}
+    </article>
+
+    {% set prev = null %}
+    {% set next = null %}
+    {% for chapter in chapters %}
+      {% if chapter.url == current %}
+        {% if not loop.first %}{% set prev = chapters[loop.index0 - 1] %}{% endif %}
+        {% if not loop.last %}{% set next = chapters[loop.index0 + 1] %}{% endif %}
+      {% endif %}
+    {% endfor %}
+    <nav class="docs-pager" aria-label="Chapter navigation">
+      {% if prev %}<a class="docs-pager__prev" href="{{ prev.url }}"><span>Previous</span>{{ prev.data.title }}</a>{% else %}<span></span>{% endif %}
+      {% if next %}<a class="docs-pager__next" href="{{ next.url }}"><span>Next</span>{{ next.data.title }}</a>{% endif %}
+    </nav>
+  </main>
+</div>

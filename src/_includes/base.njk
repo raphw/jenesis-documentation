@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} · {% endif %}Jenesis</title>
+  <meta name="description" content="{{ description or 'Documentation for the Jenesis product family: a Java-native build tool, launcher, module catalogue, and artifact repository.' }}">
+  <link rel="icon" href="/assets/logos/light/jenesis-tool.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="/assets/logos/dark/jenesis-tool.svg" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="/assets/css/pico.min.css">
+  <link rel="stylesheet" href="/assets/css/app.css">
+  <link rel="stylesheet" href="/assets/css/docs.css">
+  <!-- Set the theme before first paint so there is no flash. -->
+  <script>
+    (function () {
+      var t = localStorage.getItem("jenesis-theme");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.setAttribute("data-theme", "dark");
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href="/" aria-label="Jenesis home">
+        <img class="site-brand__mark" src="/assets/logos/light/jenesis-tool.svg" alt="" width="28" height="28" data-logo="jenesis-tool">
+        <span class="site-brand__name">Jenesis</span>
+      </a>
+      {% if section %}<button class="nav-toggle" aria-expanded="false" aria-controls="section-nav">Menu</button>{% endif %}
+      <nav class="site-nav" aria-label="Products">
+        {% for s in sections %}
+          <a href="{{ s.url }}"{% if page.url.startsWith(s.url) %} aria-current="page"{% endif %}>{{ s.title }}</a>
+        {% endfor %}
+      </nav>
+      <button class="theme-toggle" type="button" title="Switch theme" aria-label="Switch colour theme">◐</button>
+    </div>
+  </header>
+
+  {{ content | safe }}
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span>Jenesis — a Java-native build ecosystem.</span>
+      <span>Apache-2.0 · <a href="https://github.com/raphw">github.com/raphw</a></span>
+    </div>
+  </footer>
+
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/nav.js" defer></script>
+</body>
+</html>

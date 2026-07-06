@@ -1,0 +1,192 @@
+/*
+ * docs.css — the Jenesis documentation site, layered over app.css (the console design system) and Pico.
+ *
+ * It adds three things app.css does not: the Jenesis brand palette and heading font, the documentation
+ * layout (top bar, left menu, readable content column, prev/next), and the landing grid. It stays additive:
+ * brand colours are wired into Pico's own --pico-* variables so light/dark theming keeps working, and the
+ * app.* component classes (badge, card, list) remain available to chapter authors.
+ */
+
+/* ---- Brand ---------------------------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Archivo";
+  src: url("/assets/fonts/Archivo-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-display: swap;
+}
+
+:root {
+  --brand-ink: #26221C;
+  --brand-amber: #C97E2C;
+  --brand-cream: #F7F3EC;
+  --brand-rust: #9A5A1B;
+
+  /* Wire the brand into Pico so links, buttons and focus rings pick it up. */
+  --pico-primary: var(--brand-rust);
+  --pico-primary-hover: var(--brand-ink);
+  --pico-primary-focus: rgba(201, 126, 44, 0.35);
+  --pico-primary-inverse: var(--brand-cream);
+  --pico-font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --docs-measure: 46rem;              /* readable line length for prose */
+  --docs-sidebar-width: 16rem;
+  --docs-header-height: 3.5rem;
+}
+
+[data-theme="dark"] {
+  --pico-primary: var(--brand-amber);
+  --pico-primary-hover: var(--brand-cream);
+  --pico-primary-inverse: var(--brand-ink);
+}
+
+h1, h2, h3, .site-brand__name, .landing-hero h1 {
+  font-family: "Archivo", var(--pico-font-family);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+body { --pico-line-height: 1.6; }
+
+/* Logos are single-colour SVGs; the base page ships the light (ink) mark and JS swaps to the dark (cream)
+   mark under a dark theme. */
+[data-theme="dark"] img[data-logo] { content: none; }
+
+/* ---- Skip link + focus ---------------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute; left: -999px; top: 0; z-index: 100;
+  background: var(--brand-ink); color: var(--brand-cream);
+  padding: var(--app-space-2) var(--app-space-4); border-radius: 0 0 var(--app-radius-md) 0;
+}
+.skip-link:focus { left: 0; }
+
+/* ---- Top bar -------------------------------------------------------------------------------------------- */
+.site-header {
+  position: sticky; top: 0; z-index: 30;
+  background: var(--pico-background-color);
+  border-bottom: 1px solid var(--pico-muted-border-color);
+}
+.site-header__inner {
+  display: flex; align-items: center; gap: var(--app-space-4);
+  max-width: 80rem; margin: 0 auto; padding: 0 var(--app-space-4);
+  height: var(--docs-header-height);
+}
+.site-brand { display: inline-flex; align-items: center; gap: var(--app-space-2); text-decoration: none; color: inherit; }
+.site-brand__name { font-size: var(--app-font-size-lg); }
+.site-nav { display: flex; gap: var(--app-space-4); margin-left: auto; }
+.site-nav a { text-decoration: none; color: var(--pico-muted-color); font-size: var(--app-font-size-sm); }
+.site-nav a:hover, .site-nav a[aria-current] { color: var(--pico-primary); }
+.theme-toggle, .nav-toggle {
+  background: none; border: 1px solid var(--pico-muted-border-color); color: inherit;
+  width: auto; margin: 0; padding: var(--app-space-1) var(--app-space-3);
+  border-radius: var(--app-radius-md); font-size: var(--app-font-size-sm); line-height: 1.2; cursor: pointer;
+}
+.nav-toggle { margin-left: auto; display: none; }
+
+/* ---- Landing -------------------------------------------------------------------------------------------- */
+.landing { max-width: 60rem; margin: 0 auto; padding: var(--app-space-6) var(--app-space-4); }
+.landing-hero { text-align: center; padding: var(--app-space-6) 0; }
+.landing-hero h1 { font-size: var(--app-font-size-2xl); margin-bottom: var(--app-space-3); }
+.landing-hero p { max-width: 40rem; margin: 0 auto; color: var(--pico-muted-color); font-size: var(--app-font-size-lg); }
+
+.project-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--app-space-4); margin-top: var(--app-space-6);
+}
+.project-card {
+  display: flex; flex-direction: column; gap: var(--app-space-3);
+  padding: var(--app-space-5); text-decoration: none; color: inherit;
+  border: 1px solid var(--pico-muted-border-color); border-radius: var(--app-radius-lg);
+  background: var(--pico-card-background-color); transition: border-color 0.15s, transform 0.15s;
+}
+.project-card:hover { border-color: var(--pico-primary); transform: translateY(-2px); }
+.project-card img { width: 2.5rem; height: 2.5rem; }
+.project-card__name { font-family: "Archivo", var(--pico-font-family); font-weight: 800; font-size: var(--app-font-size-lg); }
+.project-card__tagline { color: var(--pico-muted-color); font-size: var(--app-font-size-sm); margin: 0; }
+
+/* ---- Docs layout ---------------------------------------------------------------------------------------- */
+.docs {
+  display: grid; grid-template-columns: var(--docs-sidebar-width) minmax(0, 1fr);
+  gap: var(--app-space-6); max-width: 80rem; margin: 0 auto; padding: 0 var(--app-space-4);
+  align-items: start;
+}
+.docs-sidebar {
+  position: sticky; top: var(--docs-header-height);
+  max-height: calc(100vh - var(--docs-header-height)); overflow-y: auto;
+  padding: var(--app-space-5) 0;
+}
+.docs-sidebar__heading {
+  display: flex; align-items: center; gap: var(--app-space-2);
+  font-family: "Archivo", var(--pico-font-family); font-weight: 800; font-size: var(--app-font-size-sm);
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--pico-muted-color); margin-bottom: var(--app-space-3);
+}
+.docs-menu { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+.docs-menu a {
+  display: block; padding: var(--app-space-2) var(--app-space-3);
+  text-decoration: none; color: var(--pico-muted-color); font-size: var(--app-font-size-sm);
+  border-left: 2px solid transparent; border-radius: 0 var(--app-radius-sm) var(--app-radius-sm) 0;
+}
+.docs-menu a:hover { color: var(--pico-color); background: var(--pico-card-sectioning-background-color); }
+.docs-menu a[aria-current] { color: var(--pico-primary); border-left-color: var(--pico-primary); font-weight: 600; }
+
+.docs-content { padding: var(--app-space-5) 0 var(--app-space-6); min-width: 0; }
+.docs-content article { max-width: var(--docs-measure); }
+.docs-content h1 { font-size: var(--app-font-size-2xl); margin-bottom: var(--app-space-5); }
+.docs-content h2 {
+  font-size: var(--app-font-size-xl); margin-top: var(--app-space-6); margin-bottom: var(--app-space-3);
+  padding-top: var(--app-space-4); border-top: 1px solid var(--pico-muted-border-color);
+}
+.docs-content h3 { font-size: var(--app-font-size-lg); margin-top: var(--app-space-5); margin-bottom: var(--app-space-2); }
+.docs-content p, .docs-content li { line-height: 1.65; }
+.docs-content pre {
+  background: var(--pico-code-background-color); border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--app-radius-md); padding: var(--app-space-4); overflow-x: auto; font-size: var(--app-font-size-sm);
+}
+.docs-content :not(pre) > code { font-size: 0.9em; }
+.docs-content table { display: block; overflow-x: auto; }
+
+/* Admonitions: <div class="note|tip|warning"> ... </div>. Reuse the app status palette. */
+.note, .tip, .warning {
+  border-radius: var(--app-radius-md); padding: var(--app-space-3) var(--app-space-4);
+  margin: var(--app-space-4) 0; border-left: 3px solid; font-size: var(--app-font-size-sm);
+}
+.note { background: var(--app-status-info-bg); color: var(--app-status-info-fg); border-color: var(--app-status-info-fg); }
+.tip { background: var(--app-status-pass-bg); color: var(--app-status-pass-fg); border-color: var(--app-status-pass-fg); }
+.warning { background: var(--app-status-warn-bg); color: var(--app-status-warn-fg); border-color: var(--app-status-warn-fg); }
+.note :last-child, .tip :last-child, .warning :last-child { margin-bottom: 0; }
+
+.docs-pager {
+  display: flex; justify-content: space-between; gap: var(--app-space-4);
+  margin-top: var(--app-space-6); padding-top: var(--app-space-4);
+  border-top: 1px solid var(--pico-muted-border-color); max-width: var(--docs-measure);
+}
+.docs-pager a {
+  display: flex; flex-direction: column; text-decoration: none;
+  padding: var(--app-space-3) var(--app-space-4); border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--app-radius-md); min-width: 0;
+}
+.docs-pager a:hover { border-color: var(--pico-primary); }
+.docs-pager__next { text-align: right; margin-left: auto; }
+.docs-pager span { font-size: var(--app-font-size-xs); color: var(--pico-muted-color); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ---- Footer --------------------------------------------------------------------------------------------- */
+.site-footer { border-top: 1px solid var(--pico-muted-border-color); margin-top: var(--app-space-6); }
+.site-footer__inner {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--app-space-3);
+  max-width: 80rem; margin: 0 auto; padding: var(--app-space-5) var(--app-space-4);
+  color: var(--pico-muted-color); font-size: var(--app-font-size-sm);
+}
+
+/* ---- Mobile --------------------------------------------------------------------------------------------- */
+@media (max-width: 48rem) {
+  .site-nav { display: none; }
+  .nav-toggle { display: inline-block !important; }
+  .docs { grid-template-columns: 1fr; }
+  .docs-sidebar {
+    position: static; max-height: none; padding: var(--app-space-4) 0;
+    border-bottom: 1px solid var(--pico-muted-border-color);
+  }
+  .docs-sidebar[hidden] { display: none; }
+  .docs-pager { flex-direction: column; }
+  .docs-pager__next { margin-left: 0; text-align: left; }
+}
