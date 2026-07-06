@@ -78,7 +78,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **T7 · Code quality & testing** *(new topic — the demos cover it, the outline did not)* — formatting and
   static analysis; code coverage; **test selection** (run only the tests a change affects); **mutation
   testing** (pitest). *(demo-11/23/24/25)*
-- [ ] **T8 · Other JVM languages** *(new)* — Kotlin, Scala, and Groovy: alone and mixed with Java, with their
+- [x] **T8 · Other JVM languages** *(new)* — Kotlin, Scala, and Groovy: alone and mixed with Java, with their
   code-quality checks, and enabling a Kotlin compiler plugin. *(demo-16…22)*
 - [ ] **T9 · Supply-chain features** *(new)* — build-time supply-chain support: generating an **SBOM**,
   checking **dependency licences** against policy, and **vulnerability scanning**; the combined
