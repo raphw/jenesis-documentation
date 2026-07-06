@@ -8,10 +8,11 @@
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",
-    "validate": "node scripts/validate-links.mjs",
+    "validate": "hyperlink --root _site --internal _site/index.html",
     "check": "npm run build && npm run validate"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "hyperlink": "^5.0.4"
   }
 }

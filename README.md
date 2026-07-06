@@ -12,7 +12,7 @@ Jenesis Repository console's design system (`app.css` over Pico) plus the Jenesi
 npm install
 npm run serve      # local preview with live reload
 npm run build      # produce _site/
-npm run validate   # check internal links in _site/
+npm run validate   # check internal links, assets and fragments in _site/ (hyperlink)
 npm run check      # build + validate (what CI runs)
 ```
 
