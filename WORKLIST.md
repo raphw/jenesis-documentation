@@ -182,7 +182,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   tenancy mode, default tenant, trusts.
 - [x] **R12 · Publish-through forwarding** — SPI: the forward transport. Implementations: the Central Portal
   transport and same-protocol replay over the store-backed outbox. Settings: targets and credentials.
-- [ ] **R13 · Migration & import** — SPI: the import source. Implementations: the Nexus, Artifactory, and
+- [x] **R13 · Migration & import** — SPI: the import source. Implementations: the Nexus, Artifactory, and
   Jenesis importers, the generic Maven tree-walk, and format-native enumeration; the `/api/assets` export
   surface. Settings: import triggers and source configuration.
 - [ ] **R14 · Observability** — the Micrometer metric convention, the Prometheus endpoint, and OTLP tracing.
