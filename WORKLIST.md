@@ -156,7 +156,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 
 - [x] **R2 · Getting started** — run the server; publish a Maven artifact and consume it with `mvn`; point it
   at a filesystem store; open the console.
-- [ ] **R3 · Architecture** — the plug-in model and `ServiceLoader` discovery through each SPI home's
+- [x] **R3 · Architecture** — the plug-in model and `ServiceLoader` discovery through each SPI home's
   `resolve()` / `installed()`; the store abstraction at a glance; the publication path (content-addressed
   blob → gate screening → pointer link → after-commit observers).
 - [ ] **R4 · Storage** — SPI: `ArtifactStore` (streaming read/write, `writeBlob` content addressing,
