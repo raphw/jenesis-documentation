@@ -103,7 +103,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
     Genuinely non-serializable state throws `NotSerializableException` at hash time, on the first run, rather
     than silently breaking invalidation — mention this so authors read the error correctly.
   *(demo-31/35/36/37)*
-- [ ] **T13 · jpx** — the module runner: `jpx <module|groupId:artifactId>[@version][/main-class] [args…]`;
+- [x] **T13 · jpx** — the module runner: `jpx <module|groupId:artifactId>[@version][/main-class] [args…]`;
   the `--modular`, `--docker`, and `--hash` options; the install layout under `~/.jenesis/jpx/`.
 - [ ] **T14 · Reference** — the command line and selectors; a configuration-key table; the built-in steps.
 
