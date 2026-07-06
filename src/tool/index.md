@@ -34,12 +34,16 @@ The chapters build up from zero knowledge:
 
 1. **Introduction** — you are here.
 2. **Getting started** — install via SDKMAN, build an example, and read the `Project.java` model.
-3. **Core concepts** — build steps, the build graph, and layouts.
+3. **Core concepts** — build steps, the build graph, layouts, and the module-system specifics.
 4. **Configuration** — `jenesis.properties`, per-module configuration, and profiles.
-5. **Building & running** — compile, test, package, `Execute`, and watch mode.
-6. **Dependencies** — resolution, strict pinning, and how module names are looked up.
-7. **Packaging** — jlink images, jpackage installers, native images, and launcher jars.
-8. **Running in Docker** — building or launching inside a container.
-9. **jpx** — running a published module's main class.
-10. **Reference** — the command line, configuration keys, and the built-in steps.
-11. **Demos** — a runnable example project for every feature (already available).
+5. **Building & running** — compile, annotation processing, test, `Execute`, and watch mode.
+6. **Dependencies** — resolution, strict pinning, module-name lookup, and exclusions.
+7. **Code quality & testing** — formatting, coverage, test selection, and mutation testing.
+8. **Other JVM languages** — Kotlin, Scala, and Groovy.
+9. **Supply-chain features** — SBOM, dependency licensing, and vulnerability scanning.
+10. **Packaging & distribution** — executables, bundles, jlink/jpackage, native images, launcher jars.
+11. **Build performance & isolation** — Docker isolation and the build cache.
+12. **Extending the build** — custom assemblers and build definitions.
+13. **jpx** — running a published module's main class.
+14. **Reference** — the command line, configuration keys, and the built-in steps.
+15. **Demos** — a runnable example project for every feature (already available).

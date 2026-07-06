@@ -42,34 +42,47 @@ narrow viewport to confirm it stays readable.
 
 ## Jenesis — the build tool (`src/tool/`)
 
+The chapter set covers every topic the demos exercise; the demo each chapter should cross-link is noted in
+`(demo …)`. Set each chapter's `order` front matter to its number here; Demos stays at `order: 99`.
+
 - [ ] **T2 · Getting started** — install with SDKMAN (`sdk install jenesis`); the
   `java build/jenesis/Project.java build` invocation; build the bundled example end to end and read its
-  output; a first tour of the `Project.java` record (root, target, layout, steps) — enough to recognise, not
-  yet to master.
-- [ ] **T3 · Core concepts** — the `BuildStep` (input folders → a fresh output folder, and how caching
-  keys off inputs); the build graph (`BuildExecutor`, steps and modules, selectors with `/`, `:`, `::`);
-  layouts (`auto`, `maven`, `modular`, `modular_to_maven`) and what each emits.
-- [ ] **T4 · Configuration** — `jenesis.properties` (the global `~/.jenesis` file and the project file);
-  per-module configuration under `META-INF/build.jenesis/`; profiles; the precedence order of the config
-  channels.
-- [ ] **T5 · Building & running** — the compile / test / jar / javadoc steps; running a module's `main` with
-  `Execute.java` (implicit vs. explicit main selection); watch mode.
-- [ ] **T6 · Dependencies** — resolution over Maven and module repositories; **strict pinning** (the
-  SHA-256 pins in `module-info.java` and why); how `requires` names are looked up (link to Jenesis Modules);
-  version negotiation.
-- [ ] **T7 · Packaging & distribution** — jlink runtime images, jpackage installers, native images, `bundle`
-  archives, and **launcher jars** (link to the Launcher section); the JReleaser handoff and SDKMAN
-  publication.
-- [ ] **T8 · Running in Docker** — `jenesis.project.docker.*` to build inside a container, and
-  `jenesis.execute.docker.*` to launch inside one; what is mounted and why.
-- [ ] **T9 · jpx** — the module runner: `jpx <module|groupId:artifactId>[@version][/main-class] [args…]`;
-  the `--modular`, `--docker`, and `--hash` options; the install layout under `~/.jenesis/jpx/`; how it
-  resolves and caches.
-- [ ] **T10 · Reference** — the command line and selectors; a configuration-key table; the built-in steps.
+  output; a first tour of the `Project.java` record (root, target, layout, steps). *(demo-01…04)*
+- [ ] **T3 · Core concepts** — the `BuildStep` (input folders → a fresh output folder, caching off inputs);
+  the build graph (`BuildExecutor`, steps and modules, selectors); layouts (`auto`, `maven`, `modular`,
+  `modular_to_maven`); and the **module-system specifics**: multi-release jars, module classifiers, platform
+  guards, and internal vs. external build modules. *(demo-02/04/08/27/28/29/30/33/34)*
+- [ ] **T4 · Configuration** — `jenesis.properties` (global `~/.jenesis` and the project file); per-module
+  configuration under `META-INF/build.jenesis/`; profiles; the precedence order. *(demo-15)*
+- [ ] **T5 · Building & running** — compile / test / jar / javadoc; **compiler arguments** and **annotation
+  processing**; running a module's `main` with `Execute.java` (implicit vs. explicit main); watch mode.
+  *(demo-05/06/09/10)*
+- [ ] **T6 · Dependencies** — resolution over Maven and module repositories; **strict pinning** (SHA-256 pins
+  in `module-info.java`); how `requires` names are looked up (link to Jenesis Modules); **Maven exclusions**;
+  version negotiation. *(demo-26)*
+- [ ] **T7 · Code quality & testing** *(new topic — the demos cover it, the outline did not)* — formatting and
+  static analysis; code coverage; **test selection** (run only the tests a change affects); **mutation
+  testing** (pitest). *(demo-11/23/24/25)*
+- [ ] **T8 · Other JVM languages** *(new)* — Kotlin, Scala, and Groovy: alone and mixed with Java, with their
+  code-quality checks, and enabling a Kotlin compiler plugin. *(demo-16…22)*
+- [ ] **T9 · Supply-chain features** *(new)* — build-time supply-chain support: generating an **SBOM**,
+  checking **dependency licences** against policy, and **vulnerability scanning**; the combined
+  supply-chain-security setup. (Distinct from the repository's serving-side gate — this is your own build.)
+  *(demo-12/13/14/39)*
+- [ ] **T10 · Packaging & distribution** — executables, `bundle` archives, **launcher jars** (link to the
+  Launcher section), jlink runtime images, jpackage installers, native images, publishing, and a BOM.
+  *(demo-05/06/07/32/40/41/43)*
+- [ ] **T11 · Build performance & isolation** — building/launching inside a container
+  (`jenesis.project.docker.*` / `jenesis.execute.docker.*`, what is mounted) and sharing outputs through the
+  **build cache**. *(demo-38/42)*
+- [ ] **T12 · Extending the build** — custom assemblers and fully custom Maven / modular / build definitions,
+  for when the defaults are not enough. *(demo-31/35/36/37)*
+- [ ] **T13 · jpx** — the module runner: `jpx <module|groupId:artifactId>[@version][/main-class] [args…]`;
+  the `--modular`, `--docker`, and `--hash` options; the install layout under `~/.jenesis/jpx/`.
+- [ ] **T14 · Reference** — the command line and selectors; a configuration-key table; the built-in steps.
 
-  When writing the chapters above, **cross-link the relevant demos** with a small note or `tip` (e.g. the
-  Packaging chapter → the executables/native-image/bundle demos; Dependencies → the licensing and
-  vulnerability demos). The demo list lives in `src/_data/demos.js`; keep it in sync with `demo/` in
+  Every demo topic now maps to a chapter (the `(demo …)` tags above). When writing a chapter, add a small
+  `tip` linking its demos. The demo list lives in `src/_data/demos.js`; keep it in sync with `demo/` in
   raphw/jenesis when demos are added or renamed.
 
 ## Jenesis Launcher (`src/launcher/`)

@@ -88,6 +88,20 @@ body { --pico-line-height: 1.6; }
 .landing-hero { text-align: center; padding: var(--app-space-6) 0; }
 .landing-hero h1 { font-size: var(--app-font-size-2xl); margin-bottom: var(--app-space-3); }
 .landing-hero p { max-width: 40rem; margin: 0 auto; color: var(--pico-muted-color); font-size: var(--app-font-size-lg); }
+.landing-release {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: var(--app-space-3); margin-top: var(--app-space-5); font-size: var(--app-font-size-sm);
+}
+.landing-release__version {
+  text-decoration: none; padding: var(--app-space-1) var(--app-space-3);
+  border: 1px solid var(--pico-muted-border-color); border-radius: 999px; color: var(--pico-muted-color);
+}
+.landing-release__version:hover { border-color: var(--pico-primary); color: var(--pico-primary); }
+.landing-release__version strong { color: var(--pico-primary); }
+.landing-release__install {
+  background: var(--pico-code-background-color); border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--app-radius-md); padding: var(--app-space-1) var(--app-space-3); font-size: var(--app-font-size-sm);
+}
 
 .project-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
