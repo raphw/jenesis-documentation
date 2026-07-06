@@ -16,17 +16,17 @@ npm run validate   # check internal links, assets and fragments in _site/ (hyper
 npm run check      # build + validate (what CI runs)
 ```
 
-Deployment is automatic: pushing to `main` builds the site, validates every internal link, and — only if
-that passes — publishes to GitHub Pages. A broken link fails the deploy.
+Deployment is automatic: pushing to `main` builds the site, validates every internal link, and - only if
+that passes - publishes to GitHub Pages. A broken link fails the deploy.
 
 ## How the site is structured
 
-- `src/index.njk` — the landing page (the project grid).
-- `src/<section>/` — one folder per tool: `tool`, `launcher`, `modules`, `repository`. Each folder's
+- `src/index.njk` - the landing page (the project grid).
+- `src/<section>/` - one folder per tool: `tool`, `launcher`, `modules`, `repository`. Each folder's
   `<section>.json` sets the shared layout and menu title.
-- `src/_includes/` — the page shell (`base.njk`) and the documentation layout with the sidebar
+- `src/_includes/` - the page shell (`base.njk`) and the documentation layout with the sidebar
   (`docs.njk`).
-- `src/assets/` — CSS (`pico.min.css`, `app.css`, `docs.css`), the logos and font, and the small theme /
+- `src/assets/` - CSS (`pico.min.css`, `app.css`, `docs.css`), the logos and font, and the small theme /
   navigation scripts.
 
 ## Writing a chapter
@@ -43,7 +43,7 @@ description: Build steps, the build graph, and layouts.
 Prose, `code`, and admonitions...
 ```
 
-`order` places it in the left menu; nothing else needs touching — the menu and the previous/next links are
+`order` places it in the left menu; nothing else needs touching - the menu and the previous/next links are
 derived from the files that exist. Keep chapters focused: short sections under clear headings, a `<div
 class="note">`, `class="tip">`, or `class="warning">` callout where it earns its place, and code blocks for
-anything runnable. The list of chapters still to write is in [`WORKLIST.md`](WORKLIST.md).
+anything runnable.

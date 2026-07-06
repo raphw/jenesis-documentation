@@ -5,10 +5,7 @@ layout: base.njk
 {% set current = page.url %}
 <div class="docs">
   <aside class="docs-sidebar" id="section-nav">
-    <p class="docs-sidebar__heading">
-      <img src="/assets/logos/light/jenesis-{{ section }}.svg" alt="" width="20" height="20" data-logo="jenesis-{{ section }}">
-      {{ sectionTitle }}
-    </p>
+    <p class="docs-sidebar__heading">{{ sectionTitle }}</p>
     <nav aria-label="{{ sectionTitle }} chapters">
       <ul class="docs-menu">
         {% for chapter in chapters %}

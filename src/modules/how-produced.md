@@ -1,10 +1,10 @@
 ---
 order: 4
 title: How the catalogue is produced
-description: A short, non-code overview for trust — how Maven Central is scanned, how each artifact's module name is read, and how current and complete the catalogue is.
+description: A short, non-code overview for trust - how Maven Central is scanned, how each artifact's module name is read, and how current and complete the catalogue is.
 ---
 
-You do not need any of this to use the service — the [resolving](/modules/resolving/) and
+You do not need any of this to use the service - the [resolving](/modules/resolving/) and
 [reports](/modules/reports/) chapters are the whole user story. This chapter is background for **trust**:
 where the catalogue's numbers come from, how fresh they are, and why a resolved answer is the right one.
 
@@ -15,7 +15,7 @@ repository.
 
 ## Reading each artifact's real module name
 
-The crawler does not guess a module name from coordinates or a POM — it opens the actual jar and reads the
+The crawler does not guess a module name from coordinates or a POM - it opens the actual jar and reads the
 name the publisher shipped. For each artifact it looks, in order, for:
 
 1. a `module-info.class` at the jar root → the artifact is a **named** module;
@@ -30,14 +30,14 @@ the split reflects what is really inside each jar, not a heuristic.
 
 ## How current it is
 
-The crawler runs on a schedule — **twice a day** — and appends only what is new since the last run, so the
+The crawler runs on a schedule - **twice a day** - and appends only what is new since the last run, so the
 catalogue tracks Maven Central continuously. Each report (the summary, the top-modules lists, the drift
 report) is regenerated daily and stamped with an *as of* date.
 
 <div class="warning">
   Maven Central's own index lags behind freshly published artifacts by <strong>up to a week</strong>, so a
   release from the last few days may not have been scanned yet. If a very recent version does not resolve,
-  it has usually not reached the index the crawler reads — not that it is missing from the catalogue.
+  it has usually not reached the index the crawler reads - not that it is missing from the catalogue.
 </div>
 
 You can watch the crawl in real time: [`data/STATUS.md`](https://github.com/raphw/jenesis-modules/blob/main/data/STATUS.md)
@@ -64,7 +64,7 @@ complete picture rather than trust a single pass:
 
 ## Why the resolved answer is trustworthy
 
-A module name is not owned by anyone on Maven Central — it is just a string a jar carries, and unrelated
+A module name is not owned by anyone on Maven Central - it is just a string a jar carries, and unrelated
 publishers routinely declare the same one (the collisions covered in the
 [resolving chapter](/modules/resolving/)). When the catalogue has to pick a single authoritative publisher
 for a name, it awards it to **whoever published that name first**, which keeps shaded copies and later
@@ -73,6 +73,6 @@ name-grabs out of the resolved view.
 That rule is only as good as the publication dates behind it, so the crawler is careful about them: it takes
 each artifact's real upload time from Maven Central's storage layer rather than the index's own timestamp,
 because the index occasionally re-stamps older releases and that would distort who was really first. The
-result is a first-owner decision you can rely on — and where the heuristic is wrong (a legitimate group
+result is a first-owner decision you can rely on - and where the heuristic is wrong (a legitimate group
 rename, say), an operator can override it with an explicit ownership policy without ever rewriting the
 underlying history.

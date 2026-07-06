@@ -1,11 +1,11 @@
 ---
 order: 7
 title: Code quality & testing
-description: The linters, formatters, coverage, test selection and mutation testing Jenesis runs for you — each turned on by dropping its config file in place, no build script and no plugin to register.
+description: The linters, formatters, coverage, test selection and mutation testing Jenesis runs for you - each turned on by dropping its config file in place, no build script and no plugin to register.
 ---
 
-A healthy codebase runs more than a compiler over its sources. Jenesis wires in the usual quality tools —
-static analysis, formatters, coverage, mutation testing — and a faster inner test loop, and it does so the
+A healthy codebase runs more than a compiler over its sources. Jenesis wires in the usual quality tools -
+static analysis, formatters, coverage, mutation testing - and a faster inner test loop, and it does so the
 same way it does everything else: **there is no plugin to register**. A tool turns itself on when its
 configuration file is present, and stays off when it is not. This chapter is the set of tools and how each
 one behaves.
@@ -17,7 +17,7 @@ switches on which tool.
 ## Static analysis
 
 Drop a tool's conventional configuration file into the configuration folder and the tool runs on the next
-build. Nothing else is needed — the file's presence is the switch, and its contents are the tool's own rules.
+build. Nothing else is needed - the file's presence is the switch, and its contents are the tool's own rules.
 
 | File | Tool | Inspects |
 | --- | --- | --- |
@@ -33,13 +33,13 @@ build. Nothing else is needed — the file's presence is the switch, and its con
 The source linters run **before compilation**, in parallel with `javac`; SpotBugs runs as a validator on the
 `binary` step, once the classes exist. Each tool resolves in its own dependency group (named after the tool,
 kept apart from your project's own dependencies), floats a `RELEASE` version, and runs in a forked JVM. A tool
-whose language is not present simply skips itself — a stray `detekt.yml` in a pure-Java project does nothing.
+whose language is not present simply skips itself - a stray `detekt.yml` in a pure-Java project does nothing.
 
 ### Report-only by default
 
 By default every linter is **report-only**: it records its findings but never fails the build. That makes it
 safe to turn a tool on across an existing codebase without an immediate red build. To make a finding a build
-failure instead, wire the tool with `.strict(true)` when you configure it in code — a non-zero tool exit then
+failure instead, wire the tool with `.strict(true)` when you configure it in code - a non-zero tool exit then
 fails the build.
 
 ### Switching a tool off
@@ -82,7 +82,7 @@ To apply the formatter and rewrite your sources in place, run the build with the
 java -Djenesis.format.rewrite=true build/jenesis/Project.java
 ```
 
-The switch flips the whole chain — the Java formatter, ktlint and scalafmt — from verifying to rewriting.
+The switch flips the whole chain - the Java formatter, ktlint and scalafmt - from verifying to rewriting.
 After a rewrite, a plain build passes the verify gate again.
 
 <div class="note">
@@ -92,7 +92,7 @@ After a rewrite, a plain build passes the verify gate again.
 
 ## Where the reports land
 
-Every tool writes its findings into a `reports/<kind>/` folder under its step's output — for example
+Every tool writes its findings into a `reports/<kind>/` folder under its step's output - for example
 `reports/checkstyle/checkstyle-report.xml`, `reports/pmd/`, `reports/spotbugs/`. You rarely need the exact
 path, because a **`stage` build collects every report from every module into one place**, each kind in its own
 subfolder:
@@ -107,7 +107,7 @@ module, and coverage reports land under `target/stage/reports/jacoco/<module>/` 
 ## Code coverage
 
 Coverage is a **test observation**: JaCoCo wraps the test run and records which code the tests touched. Turn
-it on by placing a `jacoco.properties` file in the configuration folder — in the Maven layout that means
+it on by placing a `jacoco.properties` file in the configuration folder - in the Maven layout that means
 `src/test/build.jenesis/`, since coverage is a test-side concern.
 
 With the file present, the test step is launched with the JaCoCo agent attached as a `-javaagent`; it
@@ -117,7 +117,7 @@ line by line. JaCoCo, like every tool here, resolves in its own group (`jacoco`)
 
 <div class="note">
   Coverage is <strong>reported, not enforced</strong>. A method your tests never reach shows up as uncovered
-  in the report, but the build stays green — coverage tells you where you stand, it does not gate the build.
+  in the report, but the build stays green - coverage tells you where you stand, it does not gate the build.
   Set <code>-Djenesis.observe.jacoco=false</code> to suppress it even when the file is present.
 </div>
 
@@ -144,19 +144,19 @@ on every save and a narrowed test pass keeps the feedback loop tight.
 <div class="warning">
   Test selection is a development-loop optimisation, <strong>not a correctness gate</strong>. Static selection
   cannot see reflection, resources or other indirect couplings, so continuous integration should keep running
-  the whole suite — a plain <code>build</code> with selection off.
+  the whole suite - a plain <code>build</code> with selection off.
 </div>
 
 ## Mutation testing
 
 Coverage tells you which lines a test *executed*; mutation testing tells you which behaviours a test actually
-*checks*. [PIT](https://pitest.org) (`pitest`) seeds small faults into your code — a `+` becomes a `-`, a
-return value is replaced with a constant — re-runs the tests against each mutant, and reports which mutants the
+*checks*. [PIT](https://pitest.org) (`pitest`) seeds small faults into your code - a `+` becomes a `-`, a
+return value is replaced with a constant - re-runs the tests against each mutant, and reports which mutants the
 tests **killed** and which **survived**. A surviving mutant is a change to the program that no test noticed.
 
 Like the linters, PIT is discovered from a config file: a `pitest.properties` in a tested module wires a
 `mutate` step alongside the normal test run, so the suite runs as usual *and* PIT then assesses how good it is.
-Unlike a bare marker, this file carries real configuration — the options PIT needs:
+Unlike a bare marker, this file carries real configuration - the options PIT needs:
 
 ```properties
 targetClasses=calc.Calculator   # which classes to mutate
@@ -173,7 +173,7 @@ place.
 
 Every tool above floats a `RELEASE` version in its own dependency group, so the first build downloads the
 latest and later builds reuse the cache. When you want a reproducible, checksum-verified tool chain, run
-`java build/jenesis/Project.java pin` — it records each resolved tool jar with its SHA-256 exactly as it pins
+`java build/jenesis/Project.java pin` - it records each resolved tool jar with its SHA-256 exactly as it pins
 your compilers and dependencies (see *Dependencies*). Some closures are large (PMD's CLI bundle alone pulls in
 well over a hundred artifacts), which is why the demos leave them floating for readability.
 

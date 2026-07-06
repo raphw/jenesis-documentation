@@ -5,7 +5,7 @@ description: Declaring dependencies in each layout; how they resolve over the Ma
 ---
 
 Every non-trivial build pulls in libraries. This chapter is about where you declare them, how Jenesis turns
-each declaration into a downloaded jar, and — because a build is only as trustworthy as the bytes it pulls —
+each declaration into a downloaded jar, and - because a build is only as trustworthy as the bytes it pulls -
 how to **pin** every one of those jars to an exact version *and* checksum, recorded in your own sources.
 
 ## Declaring a dependency
@@ -23,7 +23,7 @@ place depends on your layout (see *Core concepts*):
   </dependency>
   ```
 
-- A **modular** project (`module-info.java`) declares a `requires`, and nothing else — the module name *is*
+- A **modular** project (`module-info.java`) declares a `requires`, and nothing else - the module name *is*
   the dependency:
 
   ```java
@@ -39,22 +39,22 @@ result on the compile and runtime paths.
 
 Jenesis resolves through two named repositories, one per kind of coordinate:
 
-- **`maven`** — Maven coordinates (`groupId:artifactId:version`). Fetched over HTTP from Maven Central
+- **`maven`** - Maven coordinates (`groupId:artifactId:version`). Fetched over HTTP from Maven Central
   (`https://repo1.maven.org/maven2/`) and hardlinked into your **local Maven repository** (`~/.m2/repository`),
   exactly where `mvn` keeps them.
-- **`module`** — Java module names. Resolved through **[repo.jenesis.build](/modules/)**, the module-name
+- **`module`** - Java module names. Resolved through **[repo.jenesis.build](/modules/)**, the module-name
   index that maps a name like `com.fasterxml.jackson.databind` to its artifact and 302-redirects to the file
   on Maven Central.
 
 Which one a dependency uses follows from the layout. A `pom.xml` declares Maven coordinates, so it resolves
-through `maven`. A `requires` names a module, so it resolves through `module` — and this is the step that turns
+through `maven`. A `requires` names a module, so it resolves through `module` - and this is the step that turns
 a module name into something downloadable. The **[Jenesis Modules](/modules/)** section documents that lookup
 in full; the short version is that it is a thin, module-name-addressable mirror of Maven Central.
 
 <div class="note">
   Under the default <code>modular_to_maven</code> layout, a <code>requires</code> is resolved to the declaring
   module's <em>Maven coordinate</em> (its POM is fetched through the module index), and transitive resolution
-  then proceeds through Maven — so a module project reaches automatic-module and plain-classpath libraries too.
+  then proceeds through Maven - so a module project reaches automatic-module and plain-classpath libraries too.
   The strict <code>modular</code> layout resolves purely by module name. <em>Core concepts</em> covers the
   difference; the <code>dependencies</code> selector below shows it concretely.
 </div>
@@ -62,7 +62,7 @@ in full; the short version is that it is a thin, module-name-addressable mirror 
 ### Pointing at a different repository
 
 To resolve through a corporate mirror or a private repository instead of the public defaults, set an
-environment variable before the build — no project change required:
+environment variable before the build - no project change required:
 
 | Variable | What it overrides |
 | --- | --- |
@@ -73,7 +73,7 @@ environment variable before the build — no project change required:
 | `JENESIS_REPOSITORY_TOKEN` | The `Authorization` header for module-index fetches. |
 
 <div class="warning">
-  Fetches are refused over plaintext <code>http</code> — only <code>https</code> and <code>file</code> are
+  Fetches are refused over plaintext <code>http</code> - only <code>https</code> and <code>file</code> are
   allowed. A build that must pull from an internal <code>http</code> mirror has to opt in explicitly with
   <code>-Djenesis.repository.insecure=true</code>. A credential token is dropped before any redirect to a
   different host, so it never leaks to a redirect target.
@@ -98,18 +98,18 @@ When two paths through the graph ask for different versions of the same library,
 matches the repository:
 
 - **Maven** coordinates use Maven's own **nearest-wins** conflict resolution, and understand version ranges
-  and the `LATEST`/`RELEASE` selectors — the same behaviour `mvn` gives you.
+  and the `LATEST`/`RELEASE` selectors - the same behaviour `mvn` gives you.
 - **Module** names use **first-parent-wins**: the first requirer reached in the resolution walk fixes the
   version, and a later, deeper requirer asking for a different version is ignored.
 
-To override the negotiated result, declare the version you want directly — a `<version>` (or a
+To override the negotiated result, declare the version you want directly - a `<version>` (or a
 `<dependencyManagement>` entry) in Maven, or a **pin** in a modular project (below). A declared version always
 beats what negotiation would have chosen.
 
 ## Excluding a transitive (Maven only)
 
 A Maven dependency can drag in a transitive you do not want. Prune it with an `<exclusions>` block, exactly as
-in Maven — the excluded artifact never reaches the class path, tests included:
+in Maven - the excluded artifact never reaches the class path, tests included:
 
 ```xml
 <dependency>
@@ -131,10 +131,10 @@ place. Exclusions are therefore a Maven-layout feature only.
 
 ## Pinning: exact versions and checksums
 
-By default a resolved version can still drift — a `RELEASE` selector or an unpinned range resolves to whatever
+By default a resolved version can still drift - a `RELEASE` selector or an unpinned range resolves to whatever
 is newest today. **Pinning** freezes the entire transitive closure: every dependency records both an exact
 version *and* the SHA-256 checksum of the jar, in your own committed sources. A later build that resolves a jar
-whose bytes do not match the recorded checksum **fails** — so the build is resistant to a supply-chain swap at
+whose bytes do not match the recorded checksum **fails** - so the build is resistant to a supply-chain swap at
 the coordinate you already trusted.
 
 ### Recording the pins
@@ -146,7 +146,7 @@ sources with the result:
 java build/jenesis/Project.java pin
 ```
 
-`pin` is opt-in — it is not part of the default `build` — and it writes back into your project tree rather than
+`pin` is opt-in - it is not part of the default `build` - and it writes back into your project tree rather than
 under `target/`. In a **modular** project it adds a `@jenesis.pin` tag per dependency on the module
 declaration; in a **`pom.xml`** project it fills a `<dependencyManagement>` block, tagging each entry with a
 `<!--Checksum/…-->` comment. Commit the result and the pin set travels with the project.
@@ -167,14 +167,14 @@ shorthands for a project's own dependencies (the `main` group):
 
 | You write | Means |
 | --- | --- |
-| `com.fasterxml.jackson.databind` | a module name — `main/module/…` |
-| `org.slf4j/slf4j-api` | a Maven `groupId/artifactId` — `main/maven/…` |
+| `com.fasterxml.jackson.databind` | a module name - `main/module/…` |
+| `org.slf4j/slf4j-api` | a Maven `groupId/artifactId` - `main/maven/…` |
 | `main/maven/org.foo/bar/jar/native` | a coordinate with a type or classifier, written in full |
 
 A module project can therefore pin a plain Maven transitive it pulls in (say a non-modular library behind a
 named module) with the `groupId/artifactId` form, even though its own dependencies resolve through the module
-repository. The same `@jenesis.pin` grammar — including a `:<classifier>` qualifier and a trailing `[<guard>]`
-platform guard — is covered in *Core concepts*; here it is enough that `pin` writes and refreshes these lines
+repository. The same `@jenesis.pin` grammar - including a `:<classifier>` qualifier and a trailing `[<guard>]`
+platform guard - is covered in *Core concepts*; here it is enough that `pin` writes and refreshes these lines
 for you.
 
 <div class="tip">
@@ -191,25 +191,25 @@ How strictly the recorded pins are enforced is controlled by one property,
 
 | `-Djenesis.dependency.pin` | Versions | Checksums |
 | --- | --- | --- |
-| *(unset — the default)* | honoured where pinned | verified where a pin carries one; a dependency with no checksum is allowed |
-| `strict` | honoured | **required** — any third-party dependency without a pinned checksum fails the build |
+| *(unset - the default)* | honoured where pinned | verified where a pin carries one; a dependency with no checksum is allowed |
+| `strict` | honoured | **required** - any third-party dependency without a pinned checksum fails the build |
 | `versions` | honoured | not verified |
 | `ignore` | float freely | not verified |
 
-The default already validates every checksum you have recorded — a mismatch always fails the build. **Strict**
+The default already validates every checksum you have recorded - a mismatch always fails the build. **Strict**
 mode goes further and refuses to build at all until *nothing* is left unpinned, which is what you want in CI
 once a project is fully pinned: run `pin`, commit, then build under `-Djenesis.dependency.pin=strict` so no new
 un-vetted artifact can slip in unnoticed.
 
 <div class="note">
-  First-party artifacts built within the project are exempt from the strict checksum requirement — only
+  First-party artifacts built within the project are exempt from the strict checksum requirement - only
   third-party jars pulled from a repository must be pinned. So a multi-module project's own modules never need
   a checksum to satisfy strict mode.
 </div>
 
 <div class="tip">
   <a href="https://github.com/raphw/jenesis/tree/main/demo/demo-26-maven-exclusions">demo-26</a> excludes a
-  transitive (<code>commons-lang3</code>) from a Maven dependency and ships <strong>already pinned</strong> —
+  transitive (<code>commons-lang3</code>) from a Maven dependency and ships <strong>already pinned</strong> -
   its <code>&lt;dependencyManagement&gt;</code> holds the resolved closure with SHA-256 checksums, and the
-  excluded library is absent from it. It is a runnable project — see <a href="/tool/demos/">Demos</a>.
+  excluded library is absent from it. It is a runnable project - see <a href="/tool/demos/">Demos</a>.
 </div>

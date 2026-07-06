@@ -4,13 +4,13 @@ title: Introduction
 description: What Jenesis is, the problem it solves, and how these docs are organised.
 ---
 
-**Jenesis is a build tool for Java, written in Java.** A build is an ordinary Java program — you
+**Jenesis is a build tool for Java, written in Java.** A build is an ordinary Java program - you
 configure it by writing code against a small API, not by learning a new markup language, and you run it
 with the JDK you already have. There is no plugin ecosystem to install: a build is composed from steps
 that are just objects you can read, extend, and test.
 
 This section also covers **jpx**, a companion command that resolves and runs a published module's main
-class the way `npx` runs a package — it ships in the same distribution.
+class the way `npx` runs a package - it ships in the same distribution.
 
 ## Why another build tool
 
@@ -20,7 +20,7 @@ Two convictions shape everything here:
   directly. You get types, an IDE, and refactoring for your build the same as for your application.
 - **The module system is a feature, not a footnote.** `module-info.java` drives the build: Jenesis reads
   your declared modules, resolves the module path, and carries a real module graph all the way through to
-  packaging — instead of flattening it into a class path and hoping.
+  packaging - instead of flattening it into a class path and hoping.
 
 <div class="tip">
   New to Jenesis? Read this page, then <strong>Getting started</strong> to install it and run your first
@@ -32,18 +32,18 @@ Two convictions shape everything here:
 
 The chapters build up from zero knowledge:
 
-1. **Introduction** — you are here.
-2. **Getting started** — install via SDKMAN, build an example, and read the `Project.java` model.
-3. **Core concepts** — build steps, the build graph, layouts, and the module-system specifics.
-4. **Configuration** — `jenesis.properties`, per-module configuration, and profiles.
-5. **Building & running** — compile, annotation processing, test, `Execute`, and watch mode.
-6. **Dependencies** — resolution, strict pinning, module-name lookup, and exclusions.
-7. **Code quality & testing** — formatting, coverage, test selection, and mutation testing.
-8. **Other JVM languages** — Kotlin, Scala, and Groovy.
-9. **Supply-chain features** — SBOM, dependency licensing, and vulnerability scanning.
-10. **Packaging & distribution** — executables, bundles, jlink/jpackage, native images, launcher jars.
-11. **Build performance & isolation** — Docker isolation and the build cache.
-12. **Extending the build** — custom assemblers and build definitions.
-13. **jpx** — running a published module's main class.
-14. **Reference** — the command line, configuration keys, and the built-in steps.
-15. **Demos** — a runnable example project for every feature (already available).
+1. **Introduction** - you are here.
+2. **Getting started** - install via SDKMAN, build an example, and read the `Project.java` model.
+3. **Core concepts** - build steps, the build graph, layouts, and the module-system specifics.
+4. **Configuration** - `jenesis.properties`, per-module configuration, and profiles.
+5. **Building & running** - compile, annotation processing, test, `Execute`, and watch mode.
+6. **Dependencies** - resolution, strict pinning, module-name lookup, and exclusions.
+7. **Code quality & testing** - formatting, coverage, test selection, and mutation testing.
+8. **Other JVM languages** - Kotlin, Scala, and Groovy.
+9. **Supply-chain features** - SBOM, dependency licensing, and vulnerability scanning.
+10. **Packaging & distribution** - executables, bundles, jlink/jpackage, native images, launcher jars.
+11. **Build performance & isolation** - Docker isolation and the build cache.
+12. **Extending the build** - custom assemblers and build definitions.
+13. **jpx** - running a published module's main class.
+14. **Reference** - the command line, configuration keys, and the built-in steps.
+15. **Demos** - a runnable example project for every feature (already available).

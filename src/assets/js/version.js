@@ -1,5 +1,5 @@
 // Keep the landing page's "Latest release" version fresh without a rebuild: read the newest release tag
-// from the GitHub API and update the badge. Progressive enhancement — if the request fails or is rate
+// from the GitHub API and update the badge. Progressive enhancement - if the request fails or is rate
 // limited, the build-time fallback stays, and the release link is a permalink that is always correct.
 (function () {
   var el = document.querySelector("[data-latest-version]");

@@ -1,7 +1,7 @@
 ---
 order: 16
 title: Configuration reference
-description: Every setting the repository reads, in one place — grouped by the chapter that explains it, with its default and what it changes. Server startup properties, per-repository dials, the management endpoints, and the one-off import fields.
+description: Every setting the repository reads, in one place - grouped by the chapter that explains it, with its default and what it changes. Server startup properties, per-repository dials, the management endpoints, and the one-off import fields.
 ---
 
 Every earlier chapter introduces its own handful of settings in context. This chapter collects them
@@ -14,14 +14,14 @@ for the *what* and the *default*.
 There are only a few ways a value reaches the server, and the table columns below assume you know which
 applies:
 
-- **Server startup — an environment variable or a system property.** Cloud credentials and the store
+- **Server startup - an environment variable or a system property.** Cloud credentials and the store
   root are environment variables (`JENESIS_*`); everything wire-level is a `-Djenesis.repository.<key>=…`
   system property. The tables use the **short key** (`quota`, `auth`, `license-allowed`); the full system
   property prepends `jenesis.repository.` to it.
-- **Per repository — the console settings screen or the settings API.** Most gate, provenance, search
+- **Per repository - the console settings screen or the settings API.** Most gate, provenance, search
   and maintenance dials are *repository* settings you edit live; the change takes effect on the next
   request, no restart.
-- **Per run — a request body.** A migration is configured in the `POST` that launches it, not by a
+- **Per run - a request body.** A migration is configured in the `POST` that launches it, not by a
   standing key.
 
 Where a key is both a repository dial *and* pinnable from above, the two meet with a clear rule:
@@ -29,10 +29,10 @@ Where a key is both a repository dial *and* pinnable from above, the two meet wi
 <div class="note">
   A value pinned at startup (env var or <code>-Djenesis.repository.&lt;key&gt;=…</code>) <strong>wins over
   any stored per-repository edit.</strong> Pin the policy you want a deployment to hold to; leave the rest
-  for a repository — or a tenant, where the key is tenant-overridable — to set for itself.
+  for a repository - or a tenant, where the key is tenant-overridable - to set for itself.
 </div>
 
-A capability being *present* is usually not a setting at all — it is whether its module is on the
+A capability being *present* is usually not a setting at all - it is whether its module is on the
 server's path (`+source+store+s3`, `+source+proxy`, `source/oidc`, …). Those toggles are noted in
 [Architecture](/repository/architecture/) and each capability's chapter, not repeated here.
 
@@ -41,7 +41,7 @@ server's path (`+source+store+s3`, `+source+proxy`, `source/oidc`, …). Those t
 | Kind | How you write it |
 |------|------------------|
 | Boolean | `true` / `false`. |
-| Duration | ISO-8601 — `PT10M` (ten minutes), `PT1H` (an hour), `P1D` (a day), `P7D` (a week). One key, `scan-interval-millis`, is a plain millisecond count instead. |
+| Duration | ISO-8601 - `PT10M` (ten minutes), `PT1H` (an hour), `P1D` (a day), `P7D` (a week). One key, `scan-interval-millis`, is a plain millisecond count instead. |
 | Byte count | a plain number, or a `K` / `M` / `G` / `T` suffix (`10GB`). |
 | Verdict | `ALLOW` / `QUARANTINE` / `REJECT`. |
 | List | comma-separated, unless a key says otherwise. |
@@ -57,12 +57,12 @@ See [Getting started](/repository/getting-started/) and [Storage](/repository/st
 |-----|---------|--------------|
 | `JENESIS_STORE_ROOT` | *(required for filesystem)* | Root directory of the filesystem store. |
 | `jenesis.repository.store` | *(filesystem)* | Storage backend: unset = filesystem, `s3`, or `azure-blob`. |
-| `jenesis.repository.quota` | *(unset — no cap)* | Storage cap; a new artifact is refused with `507` once stored blob bytes reach it. Byte count or `K`/`M`/`G`/`T`. |
-| `jenesis.repository.rate-limit` | *(unset — no limit)* | Request ceiling in permits per minute, metered per tenant; excess sheds with `429` and a `Retry-After`. Actuator probes are never throttled. |
-| `SPRING_PROFILES_ACTIVE` | *(none)* | Set to `dev` for the built-in `admin`/`admin` form login on a local run — never in production. |
+| `jenesis.repository.quota` | *(unset - no cap)* | Storage cap; a new artifact is refused with `507` once stored blob bytes reach it. Byte count or `K`/`M`/`G`/`T`. |
+| `jenesis.repository.rate-limit` | *(unset - no limit)* | Request ceiling in permits per minute, metered per tenant; excess sheds with `429` and a `Retry-After`. Actuator probes are never throttled. |
+| `SPRING_PROFILES_ACTIVE` | *(none)* | Set to `dev` for the built-in `admin`/`admin` form login on a local run - never in production. |
 
 The tenant and repository of the fixed artifact space are `jenesis.repository.tenant` and
-`jenesis.repository.repository`, both defaulting to `default` — see
+`jenesis.repository.repository`, both defaulting to `default` - see
 [Multi-tenancy & authentication](/repository/multi-tenancy-auth/) below.
 
 ### Cloud store credentials
@@ -79,7 +79,7 @@ Read only by the backend you select. See [Storage](/repository/storage/).
 | `JENESIS_AZURE_CONTAINER` | *(default container)* | Azure Blob container to use. |
 
 <div class="tip">
-  Pointing a build at the server is not a repository setting — it is a client knob:
+  Pointing a build at the server is not a repository setting - it is a client knob:
   <code>-Djenesis.maven.uri</code>, <code>-Djenesis.module.uri</code> and
   <code>-Djenesis.module.token</code> on the consuming Jenesis or Maven build, covered in
   <a href="/repository/getting-started/">Getting started</a>.
@@ -103,14 +103,14 @@ Per-format system properties, read at startup. See [Proxying & groups](/reposito
 
 | Key | Default | What it sets |
 |-----|---------|--------------|
-| `jenesis.repository.proxy.<format>` | *(unset — hosted-only)* | Upstream URL a proxy-capable format mirrors, keyed by its name (`proxy.maven` → Maven Central, `proxy.oci` → Docker Hub). Naming it turns the format into a pull-through mirror. |
+| `jenesis.repository.proxy.<format>` | *(unset - hosted-only)* | Upstream URL a proxy-capable format mirrors, keyed by its name (`proxy.maven` → Maven Central, `proxy.oci` → Docker Hub). Naming it turns the format into a pull-through mirror. |
 | `jenesis.repository.proxy-miss-ttl` | `60s` | How long a definite upstream `404` is remembered in the negative cache; `0` disables it. |
 
 ---
 
 ## The compliance gate
 
-Per-repository dials — edit live, or pin from above. The verdict knobs and `deny-list` are
+Per-repository dials - edit live, or pin from above. The verdict knobs and `deny-list` are
 **tenant-overridable**. See [The compliance gate](/repository/compliance-gate/).
 
 ### Licence
@@ -149,7 +149,7 @@ Each feed is off until enabled; its endpoint has a default you rarely change.
 | `openssf` | `false` | Enable the OpenSSF malicious-packages dataset only. |
 | `kev` | `false` | Enable the CISA KEV known-exploited catalogue. |
 | `epss` | `false` | Enable FIRST EPSS exploitation-probability scores (a ranking signal). |
-| `<feed>-endpoint` | *(each feed's public endpoint)* | Override a feed's URL — `osv-endpoint`, `github-endpoint`, and so on — to point at a mirror or internal proxy. |
+| `<feed>-endpoint` | *(each feed's public endpoint)* | Override a feed's URL - `osv-endpoint`, `github-endpoint`, and so on - to point at a mirror or internal proxy. |
 | `github-token` | *(none)* | Optional token for a higher GHSA rate limit. |
 
 ---
@@ -202,12 +202,12 @@ See [Maintenance](/repository/maintenance/).
 | `prerelease-expiry` | *(none)* | Retention: expire prereleases older than this duration (releases unaffected). |
 | `not-downloaded-for` | *(none)* | Retention: evict versions not downloaded within this duration. |
 | `scheduled-scan` | `false` | Re-scan every repository against the advisory feeds on a timer. |
-| `scan-interval-millis` | `3600000` | How often the scheduled re-scan runs (a plain millisecond count — one hour). |
+| `scan-interval-millis` | `3600000` | How often the scheduled re-scan runs (a plain millisecond count - one hour). |
 | `kev-enforce` | `true` | Retroactively quarantine an already-published artifact once its CVE reaches the KEV catalogue. |
 | `dependents-index` | `false` | Build the reverse-dependency ("who depends on X") index in the background. |
 | `dependents-interval` | `PT1H` | How often the dependents sweep runs. |
 
-The console's volume-reclaim target is set with two management-level keys — `jenesis.ui.min-free-bytes`
+The console's volume-reclaim target is set with two management-level keys - `jenesis.ui.min-free-bytes`
 and `jenesis.ui.min-free-percent` (the free-space floor a super-admin's reclaim aims for).
 
 ---
@@ -219,13 +219,13 @@ See [Multi-tenancy & authentication](/repository/multi-tenancy-auth/).
 
 | Key | Default | What it sets |
 |-----|---------|--------------|
-| `auth` | `false` | Enforce the credential model. `false` leaves the server **open** — every request allowed. |
+| `auth` | `false` | Enforce the credential model. `false` leaves the server **open** - every request allowed. |
 | `tenant` | `default` | The tenant of the fixed artifact space a single-tenant deployment serves. Multi-tenant routing reads it from the key instead. |
 | `repository` | `default` | The repository of that fixed space. Multi-tenant routing reads it from the request path instead. |
 
-Finer controls — credential lifetime **policy** (a 90-day default, a hard ceiling, a rotation overlap of
+Finer controls - credential lifetime **policy** (a 90-day default, a hard ceiling, a rotation overlap of
 about a week), OIDC **trusts** (roughly an hour's minted-key TTL), custom **roles**, per-tenant **quota**
-and **rate limit** — are per-tenant data set through the management surface, not startup properties.
+and **rate limit** - are per-tenant data set through the management surface, not startup properties.
 
 ---
 
@@ -256,7 +256,7 @@ Surfaced when the `forwarding-central` module is installed.
 
 ## Migration & import
 
-A migration is not a standing setting — it is configured in the body of the `POST` that launches it.
+A migration is not a standing setting - it is configured in the body of the `POST` that launches it.
 See [Migration & import](/repository/migration-import/).
 
 | Field | Required | What it sets |
@@ -291,11 +291,11 @@ variables, or in the deployment's configuration. See [Observability](/repository
 
 ## The console
 
-The console reads no settings of its own beyond the server ones already listed — `SPRING_PROFILES_ACTIVE=dev`
+The console reads no settings of its own beyond the server ones already listed - `SPRING_PROFILES_ACTIVE=dev`
 for the local `admin`/`admin` login, and the `jenesis.ui.*` reclaim target under
 [Maintenance](/repository/maintenance/). See [The console](/repository/console/).
 
 <div class="note">
-  The theme switch (Auto / Light / Dark) is a per-browser preference, not a server setting — it changes
+  The theme switch (Auto / Light / Dark) is a per-browser preference, not a server setting - it changes
   nothing another user sees.
 </div>

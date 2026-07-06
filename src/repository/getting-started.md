@@ -8,13 +8,13 @@ This chapter takes you from nothing to a running repository. You build the serve
 folder on disk, open its web console, and then publish a Maven artifact into it and resolve that artifact
 back with plain `mvn`. Everything later in this section assumes only what is here.
 
-The server has **no database**. Every durable thing it owns — artifacts, generated POMs, checksums,
-indexes — lives in one **store**, and the simplest store is a directory on your disk. That is where we
+The server has **no database**. Every durable thing it owns - artifacts, generated POMs, checksums,
+indexes - lives in one **store**, and the simplest store is a directory on your disk. That is where we
 start; cloud backends come later.
 
 ## Prerequisites
 
-You need **a JDK, version 25 or newer**, and nothing else on the server side — the repository is itself a
+You need **a JDK, version 25 or newer**, and nothing else on the server side - the repository is itself a
 Jenesis build, so it launches straight from source with the JVM, with no daemon or wrapper. To exercise it
 you also want a `mvn` on your path.
 
@@ -34,7 +34,7 @@ java build/jenesis/Project.java build
 ```
 
 <div class="note">
-  The server is built with Jenesis the same way any project is — the same <code>Project.java</code>,
+  The server is built with Jenesis the same way any project is - the same <code>Project.java</code>,
   selectors, and module syntax the <a href="/tool/getting-started/">tool section</a> covers. To build just
   one backend and its dependencies you name its module, for example
   <code>java build/jenesis/Project.java +source+store+s3 build</code>.
@@ -43,7 +43,7 @@ java build/jenesis/Project.java build
 ## Run it on the filesystem
 
 Start the server and point it at a directory. The **filesystem backend is the default**, so you select
-nothing — you just tell it where to keep its data with `JENESIS_STORE_ROOT`:
+nothing - you just tell it where to keep its data with `JENESIS_STORE_ROOT`:
 
 ```bash
 JENESIS_STORE_ROOT=/var/lib/jenesis-repository \
@@ -53,7 +53,7 @@ JENESIS_STORE_ROOT=/var/lib/jenesis-repository \
 That is a complete, running repository. The server itself is **stateless and format-neutral**: it
 discovers whichever layouts, storage backends, importers, and the console are on its module path at
 startup and dispatches to them. A standard build puts the Maven layout, the Jenesis module layout, the
-OCI/Docker registry, the filesystem store, and the web console on that path — so the command above already
+OCI/Docker registry, the filesystem store, and the web console on that path - so the command above already
 serves all of them.
 
 The server listens on **port 8080** by default. Everything below assumes `http://localhost:8080`.
@@ -67,18 +67,18 @@ so a fresh deployment writes under `default/default/`:
 -Djenesis.repository.tenant=default -Djenesis.repository.repository=default   # the defaults
 ```
 
-Blobs are **content-addressed** — identical bytes are stored once, so a re-deploy of unchanged content
+Blobs are **content-addressed** - identical bytes are stored once, so a re-deploy of unchanged content
 needs no new space. You never edit files under the root by hand.
 
 <div class="tip">
-  To run on a cloud object store instead — S3, GCS/MinIO, or Azure Blob — you select the backend and give
+  To run on a cloud object store instead - S3, GCS/MinIO, or Azure Blob - you select the backend and give
   it a bucket or connection string. That is the subject of the <strong>Storage</strong> chapter; the
   filesystem backend here needs no selection at all.
 </div>
 
 ## Open the console
 
-The web console is at **`/console`** — browse repositories and artifacts and view their configuration. A
+The web console is at **`/console`** - browse repositories and artifacts and view their configuration. A
 generic, breadcrumbed file browser over any repository's namespace is at **`/browse`**.
 
 Sign-in is OAuth2 / OIDC. For a **local run**, start with the `dev` profile, which swaps in a built-in
@@ -91,7 +91,7 @@ SPRING_PROFILES_ACTIVE=dev JENESIS_STORE_ROOT=/var/lib/jenesis-repository \
 
 <div class="warning">
   The <code>dev</code> profile and its <code>admin</code>/<code>admin</code> login are for local use only.
-  Real deployments authenticate over OIDC and per-tenant keys — covered in the
+  Real deployments authenticate over OIDC and per-tenant keys - covered in the
   <strong>Multi-tenancy &amp; authentication</strong> chapter.
 </div>
 
@@ -146,12 +146,12 @@ your artifact:
 ```
 
 The Maven layout also **proxies Maven Central**, so this single URL serves both your own artifacts and
-everything from Central — you can point a build's mirror at it and resolve the whole graph through one
+everything from Central - you can point a build's mirror at it and resolve the whole graph through one
 endpoint.
 
 ## Point a Jenesis build at it
 
-A Jenesis build needs no new client — it points at the running repository with the existing knobs:
+A Jenesis build needs no new client - it points at the running repository with the existing knobs:
 
 ```bash
 -Djenesis.maven.uri=https://repo.example.com/repository/maven/
@@ -163,5 +163,5 @@ The Maven URI feeds Maven-mode resolution; the module URI and token feed module-
 the same server. See the tool section's [Dependencies](/tool/dependencies/) chapter for how those knobs
 fit into a build.
 
-You now have a working repository. The next chapter, **Architecture**, explains the plug-in model behind it
-— why every layout, backend, and screen is a discovered module over one content-addressed store.
+You now have a working repository. The next chapter, **Architecture**, explains the plug-in model behind it -
+why every layout, backend, and screen is a discovered module over one content-addressed store.

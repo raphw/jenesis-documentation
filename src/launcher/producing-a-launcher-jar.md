@@ -20,7 +20,7 @@ location](/tool/configuration/):
 launcher=true
 ```
 
-Like every packaging feature, it only runs for a module that declares a main class — the same
+Like every packaging feature, it only runs for a module that declares a main class - the same
 `@jenesis.main` tag (or `<mainClass>` POM property) the other packaging steps key off. The build then wires a
 `launcher` step into the package phase and writes one executable jar per runnable module:
 
@@ -31,21 +31,21 @@ target/.../launcher/<name>.jar
 ## What the bundler assembles
 
 The build resolves the published Jenesis Launcher artifact and produces the jar in four moves. Everything the
-launcher needs at run time — the layout described in *How it works* — is put in place here:
+launcher needs at run time - the layout described in *How it works* - is put in place here:
 
 1. **Shade the launcher into the jar root.** The launcher's own `build/jenesis/launcher/*.class` files are
    copied to the jar root, with the launcher's `module-info` and manifest dropped, so at run time they are the
    unnamed module hosting your application.
-2. **Explode each dependency into its own subfolder** — `classpath/<name>/` for a non-modular dependency,
+2. **Explode each dependency into its own subfolder** - `classpath/<name>/` for a non-modular dependency,
    `modulepath/<name>/` for a modular or automatic one, using the *same* modular split the `Execute` launcher
    and a [bundle](/tool/packaging-and-distribution/) use. `<name>` is the dependency's original jar file name,
    so automatic-module naming, which the JDK derives from that name, is unchanged.
 3. **Set the manifest `Main-Class`** to `build.jenesis.launcher.Launcher`, so `java -jar` starts the launcher.
-4. **Write `application.properties`** — the descriptor from *How it works*, carrying `mainClass`, `mainModule`
+4. **Write `application.properties`** - the descriptor from *How it works*, carrying `mainClass`, `mainModule`
    when the application is modular, the class-path order, and (when present) `agentClass`.
 
 <div class="note">
-  This is the same content a <a href="/tool/packaging-and-distribution/">bundle</a> holds — the exploded
+  This is the same content a <a href="/tool/packaging-and-distribution/">bundle</a> holds - the exploded
   <code>classpath/</code> and <code>modulepath/</code> subfolders and an <code>application.properties</code>.
   The launcher jar folds it into a single runnable jar with the launcher shaded in, so it needs no launch
   script; a bundle keeps the files separate for you to drop onto a JRE base.
@@ -53,7 +53,7 @@ launcher needs at run time — the layout described in *How it works* — is put
 
 ## The produced jar layout
 
-The result is an ordinary jar — every class and resource is a direct entry — with a fixed shape the launcher
+The result is an ordinary jar - every class and resource is a direct entry - with a fixed shape the launcher
 knows how to read:
 
 ```
@@ -68,7 +68,7 @@ foo.jar
 ```
 
 Nothing is merged: each dependency keeps its own `module-info`, `META-INF/services` files, and resources in
-its own subfolder. That is what lets the launcher rebuild the module graph at startup — see [*How it
+its own subfolder. That is what lets the launcher rebuild the module graph at startup - see [*How it
 works*](/launcher/how-it-works/) for how it reads this jar.
 
 ## The manifest wiring
@@ -82,7 +82,7 @@ class from `application.properties`:
 Main-Class: build.jenesis.launcher.Launcher
 ```
 
-When the descriptor carries an `agentClass` — the application bundles its own Java agents — the bundler adds a
+When the descriptor carries an `agentClass` - the application bundles its own Java agents - the bundler adds a
 second attribute so the JVM hands the launcher a real `Instrumentation` before `main` runs:
 
 ```
@@ -96,7 +96,7 @@ agent and access-control descriptor keys is covered in the *Reference* chapter.
 
 A class path is **ordered**: when two jars carry the same class or resource, the first one wins. Exploding the
 dependencies into subfolders would lose that order, so the bundler records it in a `classpath` property of
-`application.properties` — a comma-separated list of class-path dependency names:
+`application.properties` - a comma-separated list of class-path dependency names:
 
 ```properties
 mainClass=com.example.Main
@@ -104,13 +104,13 @@ classpath=dep1.jar,dep2.jar
 ```
 
 The launcher orders its class path by this list; any dependency the property does not name follows in
-dependency-name order. You never write this by hand — the build captures the resolved order for you.
+dependency-name order. You never write this by hand - the build captures the resolved order for you.
 
 ## The launcher is pinned like any dependency
 
 The Jenesis Launcher is resolved as a normal dependency, in its own `launcher` group, and is
 [pinned](/tool/dependencies/) like every other artifact the build uses. The exact launcher bytes shaded into
-your jar are therefore verified, and the produced jar stays reproducible — the same sources yield the same
+your jar are therefore verified, and the produced jar stays reproducible - the same sources yield the same
 bytes.
 
 With the jar produced, the next chapter turns to running it: the start-up flow, the single-loader

@@ -1,14 +1,14 @@
 ---
 order: 9
 title: Supply-chain features
-description: Build-time supply-chain support — generating a CycloneDX SBOM, checking dependency licences against a policy, scanning for known vulnerabilities, and hardening the whole build.
+description: Build-time supply-chain support - generating a CycloneDX SBOM, checking dependency licences against a policy, scanning for known vulnerabilities, and hardening the whole build.
 ---
 
 A build is only as trustworthy as the code it pulls in. Jenesis has four build-time features for knowing and
 governing that closure: a **software bill of materials** that records exactly what you shipped, a **licence
 check** that gates the build on your policy, a **vulnerability scan** against the OSV advisory database, and
 the **pinning** that guarantees the bytes you build are the bytes you vetted. None of them needs a plugin or a
-build script — each turns on from a convention, over the same resolved dependency graph.
+build script - each turns on from a convention, over the same resolved dependency graph.
 
 <div class="note">
   This is about hardening <em>your own</em> build. The Jenesis Repository has a separate, serving-side
@@ -18,7 +18,7 @@ build script — each turns on from a convention, over the same resolved depende
 
 ## Software bill of materials
 
-Every build emits a **CycloneDX** SBOM by default — a machine-readable list of every resolved component with
+Every build emits a **CycloneDX** SBOM by default - a machine-readable list of every resolved component with
 its version, content hash, and declared licence. There is nothing to enable and no external tool: an `Sbom`
 step runs before the jar is sealed and writes the document in one move, from the dependency graph, checksums,
 and licences the build already has.
@@ -41,8 +41,8 @@ places, one per consumer:
 
 Each component carries its `pkg:maven/…` package URL, its `SHA-256` hash, and its licence, with a `dependsOn`
 relationship back to the project. The document's `metadata.component` describes the project itself from the
-POM — its description, licence, developers (as CycloneDX `authors`), and homepage and source repository (as
-`website` and `vcs` references) — filling in only what the POM actually declares.
+POM - its description, licence, developers (as CycloneDX `authors`), and homepage and source repository (as
+`website` and `vcs` references) - filling in only what the POM actually declares.
 
 <div class="tip">
   The SBOM is <strong>reproducible</strong>: its <code>serialNumber</code> is a UUID derived from the
@@ -56,7 +56,7 @@ An optional `sbom.properties` in the configuration directory selects the format:
 
 | `format=` | Result |
 | --- | --- |
-| `json` | CycloneDX JSON — the default, also used when the file or the key is absent |
+| `json` | CycloneDX JSON - the default, also used when the file or the key is absent |
 | `xml` | CycloneDX XML |
 | `none` | disables the SBOM |
 
@@ -70,7 +70,7 @@ The licence check gates the build on the licences of its resolved dependencies. 
 `licensing.properties` file exists** in the configuration directory (`build.jenesis/` under the project root by
 default); the file's presence enables the check, its contents configure it.
 
-The check runs over the shipped (`main` compile/runtime) dependencies — in-build snapshots and build-tool
+The check runs over the shipped (`main` compile/runtime) dependencies - in-build snapshots and build-tool
 closures are excluded. Each dependency's declared licence is normalised to a canonical SPDX identifier and a
 category. A dependency that declares no licence is read from its jar instead: its embedded CycloneDX SBOM
 first, then the OSGi `Bundle-License` header, then a `META-INF/LICENSE` text file matched heuristically. The
@@ -106,7 +106,7 @@ The category keywords are `permissive`, `weak-copyleft`, `strong-copyleft`, `net
 ### Teaching it about a licence (optional)
 
 Normalisation draws on comprehensive built-in tables, so most projects need no configuration. To teach the
-resolver about a licence it does not know — a differently worded name, or an identifier that lacks a category —
+resolver about a licence it does not know - a differently worded name, or an identifier that lacks a category -
 drop an optional `spdx.properties` in the configuration directory. It uses one prefixed key space:
 
 ```properties
@@ -124,8 +124,8 @@ It is distinct from `licensing.properties`, which is the enforcement policy, not
 
 The vulnerability check gates the build on the **known vulnerabilities** of its resolved dependencies. Like the
 licence check, it stays off until its file, **`vulnerability.properties`**, exists in the configuration
-directory. With the file present, the build queries the public [OSV.dev](https://osv.dev) advisory database —
-no account, no API key — for the resolved coordinates, writes every match to
+directory. With the file present, the build queries the public [OSV.dev](https://osv.dev) advisory database -
+no account, no API key - for the resolved coordinates, writes every match to
 `reports/compliance/vulnerabilities.txt`, and applies your threshold:
 
 ```properties
@@ -148,7 +148,7 @@ The keys:
 </div>
 
 An unrecognised key fails the build. The licence and vulnerability checks are two steps of the same compliance
-module, each turned on by the presence of its own file — so you can run either, both, or neither. To keep both
+module, each turned on by the presence of its own file - so you can run either, both, or neither. To keep both
 files in place but skip both checks for a single build, pass the default-`true` override
 `-Djenesis.compliance=false`.
 
@@ -157,7 +157,7 @@ files in place but skip both checks for a single build, pass the default-`true` 
 The SBOM, licence, and vulnerability checks all describe the closure they resolve. **Pinning** is what makes
 that closure trustworthy in the first place: Jenesis pins every dependency by version *and* by the `SHA-256`
 checksum of the jar, and verifies each download against its pin. A coordinate whose bytes do not match its
-recorded checksum is rejected outright — exactly what happens if a repository serves a swapped or compromised
+recorded checksum is rejected outright - exactly what happens if a repository serves a swapped or compromised
 artifact. *[Dependencies](/tool/dependencies/)* covers how to record pins with the `pin` selector and how
 `-Djenesis.dependency.pin=strict` requires them; a hardened supply chain layers the checks above on top of a
 fully pinned, strict build.
@@ -167,7 +167,7 @@ fully pinned, strict build.
 Only the resolved **artifacts** carry a checksum; the `pom.xml` files read during resolution are *not* pinned,
 because some servers apply harmless whitespace or line-ending changes that would produce spurious mismatches.
 That leaves one gap: a tampered POM could try to introduce a dependency the jar checksums do not cover. **Strict
-pinning closes it** — any dependency a POM newly adds arrives as a coordinate with no pin, which strict mode
+pinning closes it** - any dependency a POM newly adds arrives as a coordinate with no pin, which strict mode
 rejects, so a manipulated POM cannot quietly pull in an unverified artifact. This is why strict pinning is
 recommended for builds in unsecured environments and for releases.
 
@@ -186,7 +186,7 @@ checksums are not consulted. `pin` then re-resolves that fresh closure and rewri
 
 <div class="warning">
   This step <em>establishes</em> trust rather than enforcing it: because it bypasses checksum verification
-  while it resolves, it re-blesses whatever the repository currently serves — a swapped artifact would be
+  while it resolves, it re-blesses whatever the repository currently serves - a swapped artifact would be
   written in as an accepted pin just the same. Run it only on a <strong>trusted machine</strong> against a
   <strong>trusted repository</strong>, review the resulting diff, and commit it. Every subsequent build then
   enforces the new pins against the artifacts you just vetted.

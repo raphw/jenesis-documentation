@@ -10,7 +10,7 @@ export default {
   groups: [
     {
       title: "Getting started",
-      blurb: "The four foundational project shapes — start here.",
+      blurb: "The four foundational project shapes - start here.",
       demos: [
         { slug: "demo-01-java-pom", name: "Java (Maven layout)", blurb: "A single-module Java project in the classic Maven layout." },
         { slug: "demo-02-java-modular", name: "Java (modular layout)", blurb: "The same, as a real JPMS module with a module-info." },
@@ -33,7 +33,7 @@ export default {
     },
     {
       title: "JVM languages",
-      blurb: "Kotlin, Scala and Groovy — alone, mixed with Java, and with quality tooling.",
+      blurb: "Kotlin, Scala and Groovy - alone, mixed with Java, and with quality tooling.",
       demos: [
         { slug: "demo-16-kotlin", name: "Kotlin", blurb: "A Kotlin (and mixed Java/Kotlin) project." },
         { slug: "demo-17-kotlin-quality", name: "Kotlin quality", blurb: "Kotlin with formatting and static-analysis checks." },

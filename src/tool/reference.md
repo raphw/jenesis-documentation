@@ -1,7 +1,7 @@
 ---
 order: 14
 title: Reference
-description: A lookup for the command line — targets and selectors — a grouped table of every configuration key with its default, and the built-in steps a selector can name.
+description: A lookup for the command line - targets and selectors - a grouped table of every configuration key with its default, and the built-in steps a selector can name.
 ---
 
 The earlier chapters built up Jenesis one topic at a time. This one is the flat reference you come back to:
@@ -18,7 +18,7 @@ recompiles that engine and runs it:
 java build/jenesis/Project.java [selectors…]
 ```
 
-Three faster launch forms produce the same result — see *[Getting started](/tool/getting-started/)* and
+Three faster launch forms produce the same result - see *[Getting started](/tool/getting-started/)* and
 *[Build performance &amp; isolation](/tool/build-performance-and-isolation/)*:
 
 | Form | Invocation | Notes |
@@ -45,7 +45,7 @@ property). The top-level targets the shipped layouts register:
 | --- | --- |
 | `build` | Compile, check, test, and package every module (the default). |
 | `stage` | Materialise the release tree under `target/stage/…` (see *[Packaging &amp; distribution](/tool/packaging-and-distribution/)*). |
-| `export` | Publish the staged tree — into the local Maven repository (`maven`), the local module repository (`modular`), or both. |
+| `export` | Publish the staged tree - into the local Maven repository (`maven`), the local module repository (`modular`), or both. |
 | `pin` | Rewrite every `pom.xml` / `module-info.java` so the transitive closure is pinned at source (see *[Dependencies](/tool/dependencies/)*). |
 | `dependencies` | Print each module's resolved dependency graph with licences. |
 | `ide` | Generate IntelliJ IDEA, VS Code, and Eclipse project metadata at the project root. |
@@ -68,8 +68,8 @@ java build/jenesis/Project.java +mymodule      # build just this module's subgra
 **Path selectors** are a slash-delimited path of `module/step` identities matched against the graph, with two
 wildcards:
 
-- `:` matches a single segment — `build/:/test` matches the `test` step of every direct child of `build`.
-- `::` matches any depth — `::/sign` matches every `sign` step anywhere in the tree.
+- `:` matches a single segment - `build/:/test` matches the `test` step of every direct child of `build`.
+- `::` matches any depth - `::/sign` matches every `sign` step anywhere in the tree.
 
 Wildcards are **lenient**: a branch that fails to match is silently skipped. A **literal** path that does not
 resolve throws `Unknown selector: …`. Once a step is matched, its predecessors run unconditionally, so its
@@ -83,14 +83,14 @@ inputs are always real folders.
 | `java build/jenesis/Project.java +mymodule` | Only the named module's subgraph. |
 
 <div class="tip">
-  Selectors are not part of the cache key — they only gate scheduling. A step run under a selector produces
+  Selectors are not part of the cache key - they only gate scheduling. A step run under a selector produces
   the same cached output a full build would, so a later unselected run hits the cache. See
   <em><a href="/tool/core-concepts/">Core concepts</a></em> for how change detection works.
 </div>
 
 ## Configuration keys
 
-Every knob is a system property, passed with `-D` or set in a `jenesis.properties` file — see
+Every knob is a system property, passed with `-D` or set in a `jenesis.properties` file - see
 *[Configuration](/tool/configuration/)* for files, profiles, and precedence. Some also read an environment
 variable as a fallback. Defaults apply when the key is unset.
 
@@ -232,7 +232,7 @@ in the linked chapter.
 
 ### Packaging
 
-Wired by keys in `packaging.properties` — see *[Packaging &amp; distribution](/tool/packaging-and-distribution/)*.
+Wired by keys in `packaging.properties` - see *[Packaging &amp; distribution](/tool/packaging-and-distribution/)*.
 
 | Step | Produces |
 | --- | --- |

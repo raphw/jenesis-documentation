@@ -1,5 +1,5 @@
 /*
- * app.css — the jenesis console design system, layered over the vendored Pico.css.
+ * app.css - the jenesis console design system, layered over the vendored Pico.css.
  *
  * This is the shared visual base for both consoles (the free repository console and the enterprise console that
  * extends it): a small set of design tokens (a type scale, a spacing scale, radii and a status palette) plus a
@@ -13,7 +13,7 @@
 
 /* ---- Design tokens ------------------------------------------------------------------------------------------ */
 :root {
-    /* Type scale — a modular scale a screen composes from, never an ad-hoc font-size. */
+    /* Type scale - a modular scale a screen composes from, never an ad-hoc font-size. */
     --app-font-size-xs: 0.75rem;
     --app-font-size-sm: 0.875rem;
     --app-font-size-base: 1rem;
@@ -21,7 +21,7 @@
     --app-font-size-xl: 1.5rem;
     --app-font-size-2xl: 2rem;
 
-    /* Spacing scale — every gap/margin/padding is a step on this scale. */
+    /* Spacing scale - every gap/margin/padding is a step on this scale. */
     --app-space-1: 0.25rem;
     --app-space-2: 0.5rem;
     --app-space-3: 0.75rem;
@@ -37,7 +37,7 @@
     /* Uniform icon box (see the Icon SPI, W4.2): square, currentColor-friendly. */
     --app-icon-size: 1.25rem;
 
-    /* Status palette — the semantic colours for the badge/pill. Both light and dark values are defined so no
+    /* Status palette - the semantic colours for the badge/pill. Both light and dark values are defined so no
        screen hard-codes a colour; the dark overrides live under [data-theme=dark] below. Chosen for WCAG-AA
        contrast against Pico's card background in each theme. */
     --app-status-pass-bg: #d8f3dc;
@@ -51,7 +51,7 @@
     --app-status-muted-bg: var(--pico-muted-border-color, #e0e0e0);
     --app-status-muted-fg: var(--pico-muted-color, #555);
 
-    /* Jenesis brand palette — from the logo kit: ink #26221C, amber #C97E2C, cream #F7F3EC, rust #9A5A1B.
+    /* Jenesis brand palette - from the logo kit: ink #26221C, amber #C97E2C, cream #F7F3EC, rust #9A5A1B.
        Wired into Pico's primary variables so links, buttons, focus rings and active states carry the brand
        (the semantic status palette above stays semantic). Light theme uses the darker rust for AA contrast
        on light surfaces; the dark blocks below switch primary to amber. Keep in step with the documentation
@@ -256,7 +256,7 @@
 }
 
 /* ---- Component: form field with inline help --------------------------------------------------------------- */
-/* Label, control, help text, validation state and a default-vs-effective note — the atom the config page builds
+/* Label, control, help text, validation state and a default-vs-effective note - the atom the config page builds
    from. */
 .app-field {
     margin-bottom: var(--app-space-4);
@@ -293,7 +293,7 @@
 
 /* ---- Component: badge / pill ------------------------------------------------------------------------------- */
 /* Status (passed / quarantined / signed) and config metadata (live / restart, changed). Colour is never the sole
-   signal — the label text always carries the meaning. */
+   signal - the label text always carries the meaning. */
 .app-badge {
     display: inline-flex;
     align-items: center;

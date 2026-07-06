@@ -1,5 +1,5 @@
 /*
- * docs.css — the Jenesis documentation site, layered over app.css (the console design system) and Pico.
+ * docs.css - the Jenesis documentation site, layered over app.css (the console design system) and Pico.
  *
  * It adds three things app.css does not: the Jenesis brand palette and heading font, the documentation
  * layout (top bar, left menu, readable content column, prev/next), and the landing grid. It stays additive:
@@ -66,6 +66,12 @@ body { --pico-line-height: 1.6; }
 .site-nav { display: flex; gap: var(--app-space-4); margin-left: auto; }
 .site-nav a { text-decoration: none; color: var(--pico-muted-color); font-size: var(--app-font-size-sm); }
 .site-nav a:hover, .site-nav a[aria-current] { color: var(--pico-primary); }
+.site-repo {
+  display: inline-flex; align-items: center; gap: var(--app-space-1);
+  text-decoration: none; color: var(--pico-muted-color); font-size: var(--app-font-size-sm);
+}
+.site-repo:hover { color: var(--pico-primary); }
+.site-repo__mark { flex: none; }
 .theme-toggle, .nav-toggle {
   background: none; border: 1px solid var(--pico-muted-border-color); color: inherit;
   width: auto; margin: 0; padding: var(--app-space-1) var(--app-space-3);
@@ -120,7 +126,6 @@ body { --pico-line-height: 1.6; }
   padding: var(--app-space-5) 0;
 }
 .docs-sidebar__heading {
-  display: flex; align-items: center; gap: var(--app-space-2);
   font-family: "Archivo", var(--pico-font-family); font-weight: 800; font-size: var(--app-font-size-sm);
   text-transform: uppercase; letter-spacing: 0.04em; color: var(--pico-muted-color); margin-bottom: var(--app-space-3);
 }
@@ -128,10 +133,10 @@ body { --pico-line-height: 1.6; }
 .docs-menu a {
   display: block; padding: var(--app-space-2) var(--app-space-3);
   text-decoration: none; color: var(--pico-muted-color); font-size: var(--app-font-size-sm);
-  border-left: 2px solid transparent; border-radius: 0 var(--app-radius-sm) var(--app-radius-sm) 0;
+  border-radius: var(--app-radius-sm);
 }
 .docs-menu a:hover { color: var(--pico-color); background: var(--pico-card-sectioning-background-color); }
-.docs-menu a[aria-current] { color: var(--pico-primary); border-left-color: var(--pico-primary); font-weight: 600; }
+.docs-menu a[aria-current] { color: var(--pico-primary); font-weight: 600; }
 
 .docs-content { padding: var(--app-space-5) 0 var(--app-space-6); min-width: 0; }
 .docs-content article { max-width: var(--docs-measure); }
@@ -187,14 +192,6 @@ body { --pico-line-height: 1.6; }
 .docs-pager a:hover { border-color: var(--pico-primary); }
 .docs-pager__next { text-align: right; margin-left: auto; }
 .docs-pager span { font-size: var(--app-font-size-xs); color: var(--pico-muted-color); text-transform: uppercase; letter-spacing: 0.04em; }
-
-/* ---- Footer --------------------------------------------------------------------------------------------- */
-.site-footer { border-top: 1px solid var(--pico-muted-border-color); margin-top: var(--app-space-6); }
-.site-footer__inner {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--app-space-3);
-  max-width: 80rem; margin: 0 auto; padding: var(--app-space-5) var(--app-space-4);
-  color: var(--pico-muted-color); font-size: var(--app-font-size-sm);
-}
 
 /* ---- Mobile --------------------------------------------------------------------------------------------- */
 @media (max-width: 48rem) {
