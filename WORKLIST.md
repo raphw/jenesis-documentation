@@ -159,7 +159,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **R3 · Architecture** — the plug-in model and `ServiceLoader` discovery through each SPI home's
   `resolve()` / `installed()`; the store abstraction at a glance; the publication path (content-addressed
   blob → gate screening → pointer link → after-commit observers).
-- [ ] **R4 · Storage** — SPI: `ArtifactStore` (streaming read/write, `writeBlob` content addressing,
+- [x] **R4 · Storage** — SPI: `ArtifactStore` (streaming read/write, `writeBlob` content addressing,
   `writeVersioned` compare-and-set, `scope`, `list`). Implementations: filesystem, S3, Azure — and how each
   maps the primitives. Settings: store selection, credentials, quota.
 - [ ] **R5 · Formats** — SPI: `RepositoryFormat` / `ProxyFormat` / `ArtifactLayout`. Implementations: the
