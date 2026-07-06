@@ -48,10 +48,14 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [ ] **T2 · Getting started** — install with SDKMAN (`sdk install jenesis`); the
   `java build/jenesis/Project.java build` invocation; build the bundled example end to end and read its
   output; a first tour of the `Project.java` record (root, target, layout, steps). *(demo-01…04)*
-- [ ] **T3 · Core concepts** — the `BuildStep` (input folders → a fresh output folder, caching off inputs);
-  the build graph (`BuildExecutor`, steps and modules, selectors); layouts (`auto`, `maven`, `modular`,
-  `modular_to_maven`); and the **module-system specifics**: multi-release jars, module classifiers, platform
-  guards, and internal vs. external build modules. *(demo-02/04/08/27/28/29/30/33/34)*
+- [ ] **T3 · Core concepts** — the `BuildStep` (input folders → a fresh output folder); the build graph
+  (`BuildExecutor`, steps and modules, selectors); layouts (`auto`, `maven`, `modular`, `modular_to_maven`);
+  and the **module-system specifics**: multi-release jars, module classifiers, platform guards, and internal
+  vs. external build modules. Introduce **incremental change detection** here: a step re-runs when its input
+  checksums change *or* its own configuration changes — because the cache content-hashes each step's
+  **serialized form**, not just its inputs. Flag the consequence plainly (detailed in *Extending the build*):
+  what invalidates a step is its serialized *state*, so editing a step's configuration re-runs it, but that
+  is the exact mechanism a custom step must respect. *(demo-02/04/08/27/28/29/30/33/34)*
 - [ ] **T4 · Configuration** — `jenesis.properties` (global `~/.jenesis` and the project file); per-module
   configuration under `META-INF/build.jenesis/`; profiles; the precedence order. *(demo-15)*
 - [ ] **T5 · Building & running** — compile / test / jar / javadoc; **compiler arguments** and **annotation
@@ -75,8 +79,19 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [ ] **T11 · Build performance & isolation** — building/launching inside a container
   (`jenesis.project.docker.*` / `jenesis.execute.docker.*`, what is mounted) and sharing outputs through the
   **build cache**. *(demo-38/42)*
-- [ ] **T12 · Extending the build** — custom assemblers and fully custom Maven / modular / build definitions,
-  for when the defaults are not enough. *(demo-31/35/36/37)*
+- [ ] **T12 · Extending the build** — writing your own `BuildStep`, plus custom assemblers and fully custom
+  Maven / modular / build definitions. **Custom-step best practices, and the change-detection limitation
+  (do not omit these — they are in the README and easy to get wrong):**
+  - A step is a **pure function of its input folders** → a fresh output folder; treat it as such.
+  - Change detection keys off the step's **serialized state, not its bytecode.** So putting the knobs that
+    should invalidate the step into **serialized fields** is what makes editing them re-run it — and,
+    conversely, changing a step's *logic* without changing its serialized fields will **not** invalidate the
+    cache. Call this trade-off out explicitly with an example.
+  - A step must hold only **serializable** state; a captured lambda/function must be declared `Serializable`
+    (Jenesis substitutes serializable functional types at the constructor so a captured `Path` works).
+    Genuinely non-serializable state throws `NotSerializableException` at hash time, on the first run, rather
+    than silently breaking invalidation — mention this so authors read the error correctly.
+  *(demo-31/35/36/37)*
 - [ ] **T13 · jpx** — the module runner: `jpx <module|groupId:artifactId>[@version][/main-class] [args…]`;
   the `--modular`, `--docker`, and `--hash` options; the install layout under `~/.jenesis/jpx/`.
 - [ ] **T14 · Reference** — the command line and selectors; a configuration-key table; the built-in steps.
