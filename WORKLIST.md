@@ -87,7 +87,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **T10 · Packaging & distribution** — executables, `bundle` archives, **launcher jars** (link to the
   Launcher section), jlink runtime images, jpackage installers, native images, publishing, and a BOM.
   *(demo-05/06/07/32/40/41/43)*
-- [ ] **T11 · Build performance & isolation** — building/launching inside a container
+- [x] **T11 · Build performance & isolation** — building/launching inside a container
   (`jenesis.project.docker.*` / `jenesis.execute.docker.*`, what is mounted) and sharing outputs through the
   **build cache**. *(demo-38/42)*
 - [ ] **T12 · Extending the build** — writing your own `BuildStep`, plus custom assemblers and fully custom
