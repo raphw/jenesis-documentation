@@ -147,7 +147,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **M3 · The catalogue & reports** — reading the coverage summary, the per-year "top modules" reports
   (`/top/<year>`) and the current-state bleeding-edge report, and the drift report — as a *user* browsing
   what is modular, not as data files to parse.
-- [ ] **M4 · How the catalogue is produced** — a short, non-code overview for trust: Maven Central is scanned
+- [x] **M4 · How the catalogue is produced** — a short, non-code overview for trust: Maven Central is scanned
   regularly, each artifact's real module name is read, named vs. automatic modules are distinguished, and the
   catalogue self-heals missing entries. Keep it to *what* happens and *how current* it is — not the crawler's
   internals, which are out of scope for user documentation.
