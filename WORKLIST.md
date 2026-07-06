@@ -144,7 +144,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
     resulting filename.
   - Following it with `curl -L`; how the Jenesis build tool points here by default; reading the TSVs
     directly (raw GitHub) for your own resolver; and pointing at a mirror that serves the same shapes.
-- [ ] **M3 · The catalogue & reports** — reading the coverage summary, the per-year "top modules" reports
+- [x] **M3 · The catalogue & reports** — reading the coverage summary, the per-year "top modules" reports
   (`/top/<year>`) and the current-state bleeding-edge report, and the drift report — as a *user* browsing
   what is modular, not as data files to parse.
 - [ ] **M4 · How the catalogue is produced** — a short, non-code overview for trust: Maven Central is scanned
