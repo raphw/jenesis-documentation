@@ -16,27 +16,17 @@
 }
 
 :root {
-  --brand-ink: #26221C;
-  --brand-amber: #C97E2C;
-  --brand-cream: #F7F3EC;
-  --brand-rust: #9A5A1B;
-
-  /* Wire the brand into Pico so links, buttons and focus rings pick it up. */
-  --pico-primary: var(--brand-rust);
-  --pico-primary-hover: var(--brand-ink);
-  --pico-primary-focus: rgba(201, 126, 44, 0.35);
-  --pico-primary-inverse: var(--brand-cream);
-  --pico-font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* The brand palette and the Pico primary wiring live in app.css (the shared console design system) so the
+     documentation site and both product consoles stay identical. These are local aliases to app.css's
+     --app-brand-* tokens for the few docs-only rules below; do not redefine the hex here. */
+  --brand-ink: var(--app-brand-ink);
+  --brand-amber: var(--app-brand-amber);
+  --brand-cream: var(--app-brand-cream);
+  --brand-rust: var(--app-brand-rust);
 
   --docs-measure: 46rem;              /* readable line length for prose */
   --docs-sidebar-width: 16rem;
   --docs-header-height: 3.5rem;
-}
-
-[data-theme="dark"] {
-  --pico-primary: var(--brand-amber);
-  --pico-primary-hover: var(--brand-cream);
-  --pico-primary-inverse: var(--brand-ink);
 }
 
 h1, h2, h3, .site-brand__name, .landing-hero h1 {
