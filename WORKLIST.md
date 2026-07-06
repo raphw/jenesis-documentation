@@ -185,7 +185,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **R13 · Migration & import** — SPI: the import source. Implementations: the Nexus, Artifactory, and
   Jenesis importers, the generic Maven tree-walk, and format-native enumeration; the `/api/assets` export
   surface. Settings: import triggers and source configuration.
-- [ ] **R14 · Observability** — the Micrometer metric convention, the Prometheus endpoint, and OTLP tracing.
+- [x] **R14 · Observability** — the Micrometer metric convention, the Prometheus endpoint, and OTLP tracing.
   Settings: exposure and tracing toggles.
 - [ ] **R15 · The console** — using the web UI: navigating repositories and artifacts, the settings and
   installed-modules screens, and the tenant-scoped view (implicit when there is one tenant). What an operator
