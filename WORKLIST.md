@@ -59,7 +59,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **T2 · Getting started** — install with SDKMAN (`sdk install jenesis`); the
   `java build/jenesis/Project.java build` invocation; build the bundled example end to end and read its
   output; a first tour of the `Project.java` record (root, target, layout, steps). *(demo-01…04)*
-- [ ] **T3 · Core concepts** — the `BuildStep` (input folders → a fresh output folder); the build graph
+- [x] **T3 · Core concepts** — the `BuildStep` (input folders → a fresh output folder); the build graph
   (`BuildExecutor`, steps and modules, selectors); layouts (`auto`, `maven`, `modular`, `modular_to_maven`);
   and the **module-system specifics**: multi-release jars, module classifiers, platform guards, and internal
   vs. external build modules. Introduce **incremental change detection** here: a step re-runs when its input
