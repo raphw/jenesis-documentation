@@ -10,6 +10,17 @@ tools' **Getting started** chapters first (they are what a new reader reaches fo
 
 ## Writing conventions
 
+- **Source every chapter from the project's README and its demos — lose nothing.** This documentation is
+  becoming the single home of end-user information: the projects' `README.md` files are being shortened to a
+  short intro plus genuinely technical/internal detail, and **all end-user content moves here.** So before
+  and while writing any chapter, read the relevant project `README.md` in full (and, for the tool section,
+  the `demo/*/README.md` files) and pull every piece of end-user information into the chapters. When a topic
+  has a chapter, nothing user-facing about it should remain only in a README. Two rules make this safe:
+  (1) migrate *end-user* information (how to use, configure, run, the caveats a user hits) — leave
+  developer/internal material (implementation internals, contribution notes) in the README; (2) **demos are
+  retained**, never migrated — cross-link them. After a section is drafted, do a **completeness pass**: read
+  the README top to bottom and confirm every end-user statement now has a home in a chapter (or is
+  deliberately technical-only). This is how nothing is lost as the READMEs shrink.
 - **Audience: users and operators, not developers.** This is user documentation — how to *use* and *run*
   the tools. Write for the person building with Jenesis, running a repository, or resolving a module — not
   for someone modifying Jenesis itself. No internals tours, no "how to contribute", no code-level walk of a
