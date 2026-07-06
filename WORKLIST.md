@@ -80,7 +80,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   testing** (pitest). *(demo-11/23/24/25)*
 - [x] **T8 · Other JVM languages** *(new)* — Kotlin, Scala, and Groovy: alone and mixed with Java, with their
   code-quality checks, and enabling a Kotlin compiler plugin. *(demo-16…22)*
-- [ ] **T9 · Supply-chain features** *(new)* — build-time supply-chain support: generating an **SBOM**,
+- [x] **T9 · Supply-chain features** *(new)* — build-time supply-chain support: generating an **SBOM**,
   checking **dependency licences** against policy, and **vulnerability scanning**; the combined
   supply-chain-security setup. (Distinct from the repository's serving-side gate — this is your own build.)
   *(demo-12/13/14/39)*
