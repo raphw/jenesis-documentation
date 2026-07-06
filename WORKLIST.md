@@ -84,7 +84,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   checking **dependency licences** against policy, and **vulnerability scanning**; the combined
   supply-chain-security setup. (Distinct from the repository's serving-side gate — this is your own build.)
   *(demo-12/13/14/39)*
-- [ ] **T10 · Packaging & distribution** — executables, `bundle` archives, **launcher jars** (link to the
+- [x] **T10 · Packaging & distribution** — executables, `bundle` archives, **launcher jars** (link to the
   Launcher section), jlink runtime images, jpackage installers, native images, publishing, and a BOM.
   *(demo-05/06/07/32/40/41/43)*
 - [ ] **T11 · Build performance & isolation** — building/launching inside a container
