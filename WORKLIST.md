@@ -174,7 +174,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   Rekor) and DSSE attestation. Settings: the signing/token configuration.
 - [x] **R9 · Search & inventory** — SPI: the search-query provider. Implementations: the Lucene index and the
   licence inventory; the published incremental index. Settings: index enablement and intervals.
-- [ ] **R10 · Maintenance** — SPI: the maintenance task and its lease. Implementations: cleanup, retention,
+- [x] **R10 · Maintenance** — SPI: the maintenance task and its lease. Implementations: cleanup, retention,
   vulnerability re-scan, dependents index, reclamation. Settings: `scheduled-cleanup`, intervals,
   `keep-last`, `max-age`.
 - [ ] **R11 · Multi-tenancy & authentication** — SPIs: the tenants directory and the auth mechanisms.
