@@ -113,7 +113,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 
 ## Jenesis Launcher (`src/launcher/`)
 
-- [ ] **L2 · How it works** — `ModuleLayer` reconstruction via an in-memory module finder; the single loader
+- [x] **L2 · How it works** — `ModuleLayer` reconstruction via an in-memory module finder; the single loader
   hosting named + unnamed modules; the exploded `modulepath/` and `classpath/` subfolders; on-demand
   `ZipFile` reads; the `application.properties` descriptor.
 - [ ] **L3 · Producing a launcher jar** — the build-tool packaging option that emits a launcher jar; the jar
