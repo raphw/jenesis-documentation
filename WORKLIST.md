@@ -170,7 +170,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
 - [x] **R7 · The compliance gate** — SPIs: the publication interceptor, gate policy, quality inspector, and
   advisory source. Implementations: licence policy, the vulnerability feeds (OSV, GHSA, EPSS, KEV), malware.
   Settings: `license-allowed`/`-denied`, `vulnerability-threshold`, `malware-action`, `deny-list`.
-- [ ] **R8 · Provenance** — SPI: the provenance signer. Implementations: keyless Sigstore signing (Fulcio +
+- [x] **R8 · Provenance** — SPI: the provenance signer. Implementations: keyless Sigstore signing (Fulcio +
   Rekor) and DSSE attestation. Settings: the signing/token configuration.
 - [ ] **R9 · Search & inventory** — SPI: the search-query provider. Implementations: the Lucene index and the
   licence inventory; the published incremental index. Settings: index enablement and intervals.
