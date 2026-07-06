@@ -118,7 +118,7 @@ The chapter set covers every topic the demos exercise; the demo each chapter sho
   `ZipFile` reads; the `application.properties` descriptor.
 - [x] **L3 · Producing a launcher jar** — the build-tool packaging option that emits a launcher jar; the jar
   layout; the `Main-Class` manifest wiring.
-- [ ] **L4 · Running & troubleshooting** — start-up flow; the single-loader consequences (automatic modules
+- [x] **L4 · Running & troubleshooting** — start-up flow; the single-loader consequences (automatic modules
   read the class path, named modules do not; package shadowing follows the JDK's rules); common pitfalls.
 - [ ] **L5 · Comparison with a fat jar** — module-info collisions, hand-merged `META-INF/services`, and the
   lost module graph — each contrasted with the launcher's subfolder approach.
