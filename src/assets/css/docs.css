@@ -128,7 +128,7 @@ body { --pico-line-height: 1.6; }
   scrollbar-width: none;                 /* Firefox: hide the menu scrollbar */
 }
 .docs-sidebar::-webkit-scrollbar { width: 0; height: 0; }   /* WebKit/Blink */
-.docs-menu { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+.docs-menu { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: stretch; gap: 2px; }
 .docs-menu a {
   display: block; padding: var(--app-space-2) var(--app-space-3);
   text-decoration: none; color: var(--pico-muted-color); font-size: var(--app-font-size-sm);
