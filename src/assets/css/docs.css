@@ -125,10 +125,6 @@ body { --pico-line-height: 1.6; }
   max-height: calc(100vh - var(--docs-header-height)); overflow-y: auto;
   padding: var(--app-space-5) 0;
 }
-.docs-sidebar__heading {
-  font-family: "Archivo", var(--pico-font-family); font-weight: 800; font-size: var(--app-font-size-sm);
-  text-transform: uppercase; letter-spacing: 0.04em; color: var(--pico-muted-color); margin-bottom: var(--app-space-3);
-}
 .docs-menu { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
 .docs-menu a {
   display: block; padding: var(--app-space-2) var(--app-space-3);
