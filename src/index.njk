@@ -42,17 +42,19 @@ description: The Jenesis product family - a Java-native build tool, launcher, mo
         <h3>The jar describes itself</h3>
         <p>
           Java ships its own project descriptor: <code>module-info.java</code>. Jenesis makes it the
-          primary one - the module descriptor drives compiling, resolving, packaging and running, so a
-          jar carries everything needed to understand it. That is the destination: a distribution
-          standard built on artifacts that explain themselves.
+          primary one - the module descriptor drives compiling, resolving, packaging and running, and no
+          <code>pom.xml</code> is needed anywhere along the way. Where a POM still matters, it is
+          generated from the <code>module-info</code>, so a modular project is just as consumable by
+          every project that relies on Maven. That is the destination: a distribution standard built on
+          artifacts that explain themselves.
         </p>
       </article>
       <article class="mission-point">
         <h3>Start today, no waiting</h3>
         <p>
           Modules and POMs interoperate in both directions: every Maven dependency is one
-          <code>requires</code> away, and everything you publish carries a generated POM any Maven build
-          can consume. Write POM-free applications now instead of waiting for the ecosystem, keep every
+          <code>requires</code> away, and everything you publish stays consumable from any Maven build.
+          Write POM-free applications now instead of waiting for the ecosystem, keep every
           advantage of modularity where it helps - and stay unrestrained where it doesn't, because
           non-modular code remains first-class all the way to packaging.
         </p>
