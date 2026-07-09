@@ -46,8 +46,9 @@ description: The Jenesis product family - a Java-native build tool, launcher, mo
           of what a project needs at build time and at run time. Jenesis makes it the primary one - the
           module descriptor drives compiling, resolving, packaging and running, there is no
           <code>pom.xml</code> to write, and every further advantage of modularity comes for free. POMs
-          keep working underneath: read where an automatic module still needs one, generated from the
-          <code>module-info</code> so projects that rely on Maven can consume yours - just never in your
+          keep working underneath: read where a dependency isn't modular yet - even a jar that only knows
+          the class path fits, because Jenesis blends class path and module path - and generated from the
+          <code>module-info</code> so projects that rely on Maven can consume yours, just never in your
           hands. That is the destination: a distribution standard built on artifacts that explain
           themselves.
         </p>
