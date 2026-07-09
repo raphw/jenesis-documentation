@@ -9,6 +9,11 @@ for how to build, preview, and validate the site.
   lives: markdown chapters, `.njk` templates, and data files like `src/_data/demos.js` and the section
   taglines in `eleventy.config.js`. Capitalize the proper name ("the Java Module System", not "the Java
   module system"); generic back-references like "the module system" are fine.
+- **Never present the Java Module System as a potential inconvenience, trade-off, or burden.** Its
+  primary framing is: a Java-native build- and runtime-dependency descriptor that replaces the POM, with
+  every further advantage of modularity coming for free. Avoid hedges like "where modularity helps" or
+  "if you want modules"; accommodating non-modular code is openness to the existing ecosystem, never an
+  escape hatch from modules.
 - **The published docs never discuss this documentation project itself or how it is created.** No
   mentions of the site's tooling (Eleventy), the docs repo, authorship, or writing status (e.g.
   "already available", "coming soon", "this site"). Reader navigation is fine ("this chapter covers…",

@@ -41,23 +41,25 @@ description: The Jenesis product family - a Java-native build tool, launcher, mo
       <article class="mission-point">
         <h3>The jar describes itself</h3>
         <p>
-          Java ships its own project descriptor: <code>module-info.java</code>. Jenesis makes it the
-          primary one - the module descriptor drives compiling, resolving, packaging and running, and you
-          never write a <code>pom.xml</code>. POMs keep working underneath: read where an automatic
-          module still needs one, generated from the <code>module-info</code> so projects that rely on
-          Maven can consume yours - just never in your hands. That is the destination: a distribution
-          standard built on artifacts that explain themselves.
+          Java ships its own project descriptor: <code>module-info.java</code>, a Java-native declaration
+          of what a project needs at build time and at run time. Jenesis makes it the primary one - the
+          module descriptor drives compiling, resolving, packaging and running, there is no
+          <code>pom.xml</code> to write, and every further advantage of modularity comes for free. POMs
+          keep working underneath: read where an automatic module still needs one, generated from the
+          <code>module-info</code> so projects that rely on Maven can consume yours - just never in your
+          hands. That is the destination: a distribution standard built on artifacts that explain
+          themselves.
         </p>
       </article>
       <article class="mission-point">
         <h3>Start today, no waiting</h3>
         <p>
           Modules and POMs interoperate in both directions: every Maven dependency is one
-          <code>requires</code> away, and everything you publish stays consumable from any Maven build.
-          Write POM-free applications now instead of waiting for the ecosystem, keep every advantage of
-          modularity where it helps - and stay unrestrained where it doesn't, because nothing here is
-          modules-only: non-modular code is first-class all the way to packaging, and Jenesis builds
-          classic Maven projects just as happily.
+          <code>requires</code> away - a real module where it ships one, an automatic module where it
+          doesn't - and everything you publish stays consumable from any Maven build. A fully modular
+          project starts today and reaches exactly as far as each dependency is ready for it, with no
+          waiting on the ecosystem. And the door is open at every stage: non-modular code stays
+          first-class, and Jenesis builds classic Maven projects just as happily.
         </p>
       </article>
       <article class="mission-point">
