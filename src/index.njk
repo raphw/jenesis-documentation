@@ -7,9 +7,10 @@ description: The Jenesis product family - a Java-native build tool, launcher, mo
   <section class="landing-hero">
     <h1>A Java-native build ecosystem</h1>
     <p>
-      Jenesis is a small family of tools that take the Java platform at its word: builds configured in
-      Java, the module system treated as a feature rather than an obstacle, and no lock-in on the way in
-      or out. Pick a tool to read its documentation.
+      Jenesis is a family of tools on a single mission: carry Java from POM-described artifacts to
+      self-describing modular jars - with builds written in plain Java, full interoperability with the
+      Maven world at every step, and no lock-in on the way in or out. Pick a tool to read its
+      documentation.
     </p>
     <p class="landing-release">
       <a class="landing-release__version" href="{{ release.releaseUrl }}">
@@ -29,14 +30,71 @@ description: The Jenesis product family - a Java-native build tool, launcher, mo
     {% endfor %}
   </div>
 
-  <section style="max-width: 46rem; margin: var(--app-space-6) auto 0;">
-    <h2 style="font-family: Archivo, sans-serif;">The idea</h2>
-    <p>
-      Every tool here shares a few convictions: configuration and extension happen in plain Java, not a
-      bespoke DSL; <code>module-info.java</code> is first-class, so a modular graph survives from build to
-      run; capabilities are discovered plug-ins rather than a monolith; and your artifacts and metadata are
-      always yours to take elsewhere. The documentation is organised the same way for each tool - an
-      introduction that assumes nothing, then chapters that go from the first command to the finer points.
+  <section class="landing-mission">
+    <h2>The mission</h2>
+    <p class="landing-mission__lede">
+      Java already carries everything a great build needs - a compiler, a module system, and a language
+      you know by heart. Jenesis takes the platform at its word, and every tool in the family removes one
+      more reason to reach for anything else.
     </p>
+    <div class="mission-grid">
+      <article class="mission-point">
+        <h3>The jar describes itself</h3>
+        <p>
+          Java ships its own project descriptor: <code>module-info.java</code>. Jenesis makes it the
+          primary one - the module descriptor drives compiling, resolving, packaging and running, so a
+          jar carries everything needed to understand it. That is the destination: a distribution
+          standard built on artifacts that explain themselves.
+        </p>
+      </article>
+      <article class="mission-point">
+        <h3>Start today, no waiting</h3>
+        <p>
+          Modules and POMs interoperate in both directions: every Maven dependency is one
+          <code>requires</code> away, and everything you publish carries a generated POM any Maven build
+          can consume. Write POM-free applications now instead of waiting for the ecosystem, keep every
+          advantage of modularity where it helps - and stay unrestrained where it doesn't, because
+          non-modular code remains first-class all the way to packaging.
+        </p>
+      </article>
+      <article class="mission-point">
+        <h3>Java is the build language</h3>
+        <p>
+          A build is a short Java program: types, an IDE, refactoring and a debugger included, and no
+          foreign DSL to learn. Most projects - a set of interdependent jars with a few tools on top -
+          build with next to no configuration, and whatever configuration remains is plain Java. Plugins
+          are downloaded only for strictly optional features you opt into, and incremental, parallel and
+          reproducible is the default, not an achievement.
+        </p>
+      </article>
+      <article class="mission-point">
+        <h3>Secure and self-sufficient</h3>
+        <p>
+          Supply-chain hardening is built in, not bolted on: dependencies are pinned and verified, SBOMs
+          and vulnerability scans are close at hand, and a build trusts what it can verify rather than
+          what a remote cache remembers - it runs the same on a laptop as in CI. The build itself ships
+          as source inside your repository, and a JDK is the only thing it asks for.
+        </p>
+      </article>
+      <article class="mission-point">
+        <h3>Maven Central, ready as modules</h3>
+        <p>
+          The modular world is already stocked. A <a href="/modules/">public catalogue</a> maps every
+          artifact on Maven Central to its stable module name and serves the whole repository as a true
+          module layer, so <code>requires com.fasterxml.jackson.databind;</code> resolves straight to the
+          artifact behind it. Decades of published Java become ready-to-use modules, today.
+        </p>
+      </article>
+      <article class="mission-point">
+        <h3>Free to enter, free to leave</h3>
+        <p>
+          A <a href="/repository/">module-aware artifact manager</a> that speaks the Maven layout and the
+          ecosystems around it - and treats leaving as respectfully as arriving. Importing from the
+          repository you run today is a built-in feature; so is walking out with every artifact and all
+          of your metadata. And its usefulness is never rationed: no component ceilings, no request
+          quotas, no formats reserved for a bigger licence.
+        </p>
+      </article>
+    </div>
   </section>
 </main>

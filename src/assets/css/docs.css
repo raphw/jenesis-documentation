@@ -115,6 +115,19 @@ body { --pico-line-height: 1.6; }
 .project-card__name { font-family: "Archivo", var(--pico-font-family); font-weight: 800; font-size: var(--app-font-size-lg); }
 .project-card__tagline { color: var(--pico-muted-color); font-size: var(--app-font-size-sm); margin: 0; }
 
+.landing-mission { margin-top: var(--app-space-6); padding-top: var(--app-space-6); }
+.landing-mission h2 { font-size: var(--app-font-size-xl); text-align: center; margin-bottom: var(--app-space-3); }
+.landing-mission__lede {
+  max-width: 44rem; margin: 0 auto; text-align: center;
+  color: var(--pico-muted-color); font-size: var(--app-font-size-lg);
+}
+.mission-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: var(--app-space-5) var(--app-space-6); margin-top: var(--app-space-6);
+}
+.mission-point h3 { font-size: var(--app-font-size-lg); margin: 0 0 var(--app-space-2); }
+.mission-point p { margin: 0; color: var(--pico-muted-color); font-size: var(--app-font-size-sm); line-height: 1.65; }
+
 /* ---- Docs layout ---------------------------------------------------------------------------------------- */
 .docs {
   display: grid; grid-template-columns: var(--docs-sidebar-width) minmax(0, 1fr);

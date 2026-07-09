@@ -1,7 +1,7 @@
 ---
 order: 1
 title: Introduction
-description: What Jenesis Repository is, the principles behind it, and how these docs are organised.
+description: What Jenesis Repository is, the principles behind it, and the path through the chapters.
 ---
 
 **Jenesis Repository is an artifact repository built from discovered plug-ins over a thin core.** It hosts
@@ -25,9 +25,9 @@ back to them:
 - **Read-first, libraries over hand-rolled.** Work is pre-computed on write or in a background sweep so reads
   are cheap, and a maintained library is preferred to a bespoke algorithm.
 
-## How these docs are organised
+## The shape of every chapter
 
-Because the system *is* its capabilities, each chapter is written the same way, in this order:
+Because the system *is* its capabilities, every chapter follows the same order:
 
 1. **The capability (its SPI)** - what it does, and that it is a discovered, swappable plug-in point: a
    provider supplies it, so it can be replaced with another implementation or simply be absent.

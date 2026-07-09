@@ -13,7 +13,7 @@ export default {
       blurb: "The four foundational project shapes - start here.",
       demos: [
         { slug: "demo-01-java-pom", name: "Java (Maven layout)", blurb: "A single-module Java project in the classic Maven layout." },
-        { slug: "demo-02-java-modular", name: "Java (modular layout)", blurb: "The same, as a real JPMS module with a module-info." },
+        { slug: "demo-02-java-modular", name: "Java (modular layout)", blurb: "The same, as a real Java Module System module with a module-info." },
         { slug: "demo-03-java-pom-multi", name: "Multi-module (Maven)", blurb: "Several Maven-layout modules built together." },
         { slug: "demo-04-java-modular-multi", name: "Multi-module (modular)", blurb: "A multi-module modular project and its module graph." },
       ],
@@ -66,7 +66,7 @@ export default {
     },
     {
       title: "The module system",
-      blurb: "Working with JPMS in earnest.",
+      blurb: "Working with the Java Module System in earnest.",
       demos: [
         { slug: "demo-08-java-multi-release", name: "Multi-release JAR", blurb: "A multi-release jar with a versioned module-info." },
         { slug: "demo-27-module-layout", name: "Pure modular layout", blurb: "A strictly modular source layout." },

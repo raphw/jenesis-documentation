@@ -73,7 +73,7 @@ Each language needs its standard library on the module path. You declare it as a
 
 Groovy's jar carries an `Automatic-Module-Name`, so `org.apache.groovy` resolves as an automatic module. The
 Scala standard library lives entirely in one module - `scala-library` - with `scala3-library_3` being an empty
-aggregator, so nothing splits `package scala` across two modules and the Java module system accepts it on the
+aggregator, so nothing splits `package scala` across two modules and the Java Module System accepts it on the
 module path with no hand-written wiring.
 
 ## Pinning the compiler

@@ -1,7 +1,7 @@
 ---
 order: 1
 title: Introduction
-description: What Jenesis is, the problem it solves, and how these docs are organised.
+description: What Jenesis is, the problem it solves, and the path through the chapters.
 ---
 
 **Jenesis is a build tool for Java, written in Java.** A build is an ordinary Java program - you
@@ -46,4 +46,4 @@ The chapters build up from zero knowledge:
 12. **Extending the build** - custom assemblers and build definitions.
 13. **jpx** - running a published module's main class.
 14. **Reference** - the command line, configuration keys, and the built-in steps.
-15. **Demos** - a runnable example project for every feature (already available).
+15. **Demos** - a runnable example project for every feature.

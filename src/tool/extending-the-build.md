@@ -139,7 +139,7 @@ licence-header stamping - fits the same shape.
 ## Reusing the toolchain from your own launcher
 
 When you want your own `main` but still the stock compile/jar/test flow, skip `Project` and call the
-convenience factory `MavenProject.make` (or `ModularProject.make` for a JPMS project). It discovers the
+convenience factory `MavenProject.make` (or `ModularProject.make` for a Java Module System project). It discovers the
 modules under a root, fills in sane defaults - a Maven Central repository, the right resolver, a digest - and
 leaves only the assembler for you to supply:
 

@@ -25,7 +25,7 @@ export default function (eleventy) {
   eleventy.addGlobalData("sections", () => [
     { key: "tool", url: "/tool/", logo: "jenesis-tool", repo: "https://github.com/raphw/jenesis", title: "Jenesis", tagline: "The Java-native build tool (and jpx, its module runner)." },
     { key: "launcher", url: "/launcher/", logo: "jenesis-launcher", repo: "https://github.com/raphw/jenesis-launcher", title: "Jenesis Launcher", tagline: "Executable jars that keep real Java modularity - no fat-jar merge." },
-    { key: "modules", url: "/modules/", logo: "jenesis-modules", repo: "https://github.com/raphw/jenesis-modules", title: "Jenesis Modules", tagline: "A catalogue mapping Maven artifacts to stable JPMS module names." },
+    { key: "modules", url: "/modules/", logo: "jenesis-modules", repo: "https://github.com/raphw/jenesis-modules", title: "Jenesis Modules", tagline: "A catalogue mapping Maven artifacts to stable module names for the Java Module System." },
     { key: "repository", url: "/repository/", logo: "jenesis-repository", repo: "https://github.com/raphw/jenesis-repository", title: "Jenesis Repository", tagline: "A modular, database-free artifact repository with a supply-chain gate." },
   ]);
 

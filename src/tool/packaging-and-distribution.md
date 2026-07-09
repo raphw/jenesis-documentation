@@ -206,7 +206,7 @@ like any other dependency, in its own `launcher` group, so the exact bytes are v
 reproducible.
 
 <div class="tip">
-  The launcher jar has its own section of this site - see
+  The launcher jar has its own section - see
   <a href="/launcher/">Jenesis Launcher</a> for how it reconstructs the module layer, the jar layout, and
   troubleshooting.
 </div>
