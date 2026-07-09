@@ -42,14 +42,12 @@ description: The Jenesis product family - a Java-native build tool, launcher, mo
       <article class="mission-point">
         <h3>The jar describes itself</h3>
         <p>
-          Java ships its own project descriptor: <code>module-info.java</code>, a Java-native declaration
-          of what a project needs at build time and at run time. Jenesis makes it the primary one - the
-          module descriptor drives compiling, resolving, packaging and running, there is no
-          <code>pom.xml</code> to write, and every further advantage of modularity comes for free. POMs
-          keep working underneath: read where a dependency isn't modular yet - even a jar that only knows
-          the class path fits, because Jenesis blends class path and module path - and generated from the
-          <code>module-info</code> so projects that rely on Maven can consume yours, just never in your
-          hands. That is the destination: a distribution standard built on artifacts that explain
+          Java ships its own project descriptor: <code>module-info.java</code> says what a project needs
+          to build and to run. Jenesis makes it the primary one - it drives compiling, resolving,
+          packaging and running, you never write a <code>pom.xml</code> again, and every further
+          advantage of modularity comes for free. POMs keep working quietly underneath - read where a
+          dependency isn't modular yet, generated where a Maven project consumes yours - just never in
+          your hands. The destination: a distribution standard built on artifacts that explain
           themselves.
         </p>
       </article>
@@ -88,8 +86,7 @@ description: The Jenesis product family - a Java-native build tool, launcher, mo
         <p>
           The modular world is already stocked. A <a href="/modules/">public catalogue</a> maps every
           artifact on Maven Central to its stable module name and serves the whole repository as a true
-          module layer, so <code>requires com.fasterxml.jackson.databind;</code> resolves straight to the
-          artifact behind it. Decades of published Java become ready-to-use modules, today.
+          module layer, so a <code>requires</code> line resolves straight to the artifact behind it. Decades of published Java become ready-to-use modules, today.
         </p>
       </article>
       <article class="mission-point">
