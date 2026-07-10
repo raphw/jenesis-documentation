@@ -33,8 +33,9 @@ jpx org.junit.platform.console                  # by module name
 jpx org.junit.platform:junit-platform-console   # by Maven coordinate
 ```
 
-With `--modular`, jpx resolves purely over module names, following each module's `requires` - so every
-dependency must itself be a named module.
+With `--modular`, jpx resolves purely over module names, following each module's `requires` with no POM
+involved at all - so every dependency must itself be a named module. For that reason it applies only to a
+module name, not to a Maven coordinate.
 
 ## The version - which release
 
