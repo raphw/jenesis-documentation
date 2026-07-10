@@ -15,22 +15,26 @@ entry point*.
 
 ## The name - module or Maven coordinate
 
-The name is resolved one of two ways, and jpx tells them apart by a single rule: **a module name can never
+You can name what to run in two ways, and jpx tells them apart by a single rule: **a module name can never
 contain a colon.**
 
-- **A Java module name** - e.g. `org.junit.platform.console`. jpx discovers its Maven coordinates as a POM
-  through [repo.jenesis.build](/modules/) and reads the dependency graph from Maven metadata, exactly as the
-  `modular_to_maven` layout does when it resolves a `requires` name.
-- **A `<groupId>:<artifactId>` pair** - e.g. `org.apache.commons:commons-lang3`. The colon marks it as Maven
-  coordinates, resolved directly.
+- **A Java module name** - e.g. `org.junit.platform.console`. jpx looks the module up in
+  [Jenesis Modules](/modules/) and downloads it, and everything it depends on, from Maven Central. This is
+  the everyday form: you name the module, nothing else.
+- **A `<groupId>:<artifactId>` pair** - e.g. `org.junit.platform:junit-platform-console`. The colon marks
+  it as a Maven coordinate, resolved from Maven Central directly. Reach for this when you want a specific
+  artifact, or one that carries no module name.
+
+Both of these run the very same tool - the JUnit console launcher - one by its module name, the other by
+its coordinate:
 
 ```bash
-jpx org.junit.platform.console            # by module name
-jpx org.junit.platform:junit-platform-console  # by Maven coordinate
+jpx org.junit.platform.console                  # by module name
+jpx org.junit.platform:junit-platform-console   # by Maven coordinate
 ```
 
-With `--modular`, resolution runs purely over module descriptors instead, walking `requires` clauses like
-the `modular` layout - every module must be explicitly named.
+With `--modular`, jpx resolves purely over module names, following each module's `requires` - so every
+dependency must itself be a named module.
 
 ## The version - which release
 
@@ -50,7 +54,7 @@ By default jpx launches the jar's **module main class** or its `Main-Class` mani
 `/<main-class>` to choose a different entry point:
 
 ```bash
-jpx com.example.tool/com.example.tool.alt.Cli
+jpx org.junit.platform.console/org.junit.platform.console.ConsoleLauncher
 ```
 
 This works exactly like `java -m <module>/<main-class>`, which also means a jar that declares **no** entry
