@@ -7,7 +7,7 @@ description: What jpx is and why it exists - run any published module or Maven a
 **jpx runs an already-published module or Maven artifact with one command.** Point it at a target and it
 resolves the dependency closure, installs it once under your home directory, and launches the main entry
 point. It is `npx` for the module path - a way to run a released tool without cloning, building, or
-writing a class path by hand.
+wiring up its paths by hand.
 
 ```bash
 jpx org.junit.platform.console --version
