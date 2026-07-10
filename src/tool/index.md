@@ -9,8 +9,8 @@ configure it by writing code against a small API, not by learning a new markup l
 with the JDK you already have. There is no plugin ecosystem to install: a build is composed from steps
 that are just objects you can read, extend, and test.
 
-This section also covers **jpx**, a companion command that resolves and runs a published module's main
-class the way `npx` runs a package - it ships in the same distribution.
+Its companion command **jpx** - resolving and running a published module's main class the way `npx` runs
+a package - ships in the same distribution and has [its own section](/jpx/).
 
 ## Why another build tool
 
@@ -44,6 +44,5 @@ The chapters build up from zero knowledge:
 10. **Packaging & distribution** - executables, bundles, jlink/jpackage, native images, launcher jars.
 11. **Build performance & isolation** - Docker isolation and the build cache.
 12. **Extending the build** - custom assemblers and build definitions.
-13. **jpx** - running a published module's main class.
-14. **Reference** - the command line, configuration keys, and the built-in steps.
-15. **Demos** - a runnable example project for every feature.
+13. **Reference** - the command line, configuration keys, and the built-in steps.
+14. **Demos** - a runnable example project for every feature.

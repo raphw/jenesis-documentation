@@ -182,7 +182,7 @@ java -Djenesis.execute.module=tools \
 <div class="note">
   <code>Execute</code> can also run the launched program inside a container, independently of the build - see
   <em>Build performance &amp; isolation</em>. Running an <em>already-published</em> module instead of the
-  current project is the job of <em>jpx</em>.
+  current project is the job of <a href="/jpx/">jpx</a>.
 </div>
 
 ## Watch mode

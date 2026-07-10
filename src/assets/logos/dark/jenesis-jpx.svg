@@ -4,7 +4,6 @@
     <rect x="48" y="24" width="20" height="20" rx="5" fill="#F7F3EC"></rect>
     <rect x="48" y="48" width="20" height="20" rx="5" fill="#F7F3EC"></rect>
     <rect x="24" y="48" width="20" height="20" rx="5" fill="#F7F3EC"></rect>
-    <path d="M8.4 38.2 Q10 36 11.6 38.2 L19.3 48.7 Q20.6 51 17.8 51 H2.2 Q-0.6 51 0.7 48.7 Z" fill="#C97E2C"></path>
-    <rect x="0" y="56" width="20" height="4" rx="2" fill="#C97E2C"></rect>
-    <rect x="0" y="64" width="20" height="4" rx="2" fill="#C97E2C"></rect>
+    <rect x="0" y="36" width="4.5" height="32" rx="2.25" fill="#C97E2C"></rect>
+    <path d="M10.7 36.7 Q8.5 36 8.5 38.4 V65.6 Q8.5 68 10.7 67.3 L18.9 54.6 Q20.6 52 18.9 49.4 Z" fill="#C97E2C"></path>
 </svg>
