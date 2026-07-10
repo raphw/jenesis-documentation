@@ -26,7 +26,7 @@ export default function (eleventy) {
     { key: "tool", url: "/tool/", logo: "jenesis-tool", repo: "https://github.com/raphw/jenesis", title: "Jenesis", tagline: "The Java-native build tool." },
     { key: "jpx", url: "/jpx/", logo: "jenesis-jpx", repo: "https://github.com/raphw/jenesis", title: "Jenesis JPX", tagline: "Runs any published module with a single command - npx for the module path." },
     { key: "launcher", url: "/launcher/", logo: "jenesis-launcher", repo: "https://github.com/raphw/jenesis-launcher", title: "Jenesis Launcher", tagline: "Executable jars that keep real Java modularity - no fat-jar merge." },
-    { key: "modules", url: "/modules/", logo: "jenesis-modules", repo: "https://github.com/raphw/jenesis-modules", title: "Jenesis Modules", tagline: "A catalogue mapping the artifacts on Maven Central to stable module names for the Java Module System." },
+    { key: "modules", url: "/modules/", logo: "jenesis-modules", repo: "https://github.com/raphw/jenesis-modules", title: "Jenesis Modules", tagline: "A catalogue of Maven Central's stably named modules - with validated ownership of every module name." },
     { key: "repository", url: "/repository/", logo: "jenesis-repository", repo: "https://github.com/raphw/jenesis-repository", title: "Jenesis Repository", tagline: "A modular, database-free artifact repository with a supply-chain gate." },
   ]);
 
