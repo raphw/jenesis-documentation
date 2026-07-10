@@ -18,8 +18,7 @@ jpx --docker org.junit.platform.console --version
 
 The installation folder and the host's Java home are mounted **read-only**, so the containerized run needs no
 network and no credentials of its own. Pass `--docker=<image>` to choose the image; with none, a minimal
-hardened image is used. This is the same launch-side isolation that `Execute.java` offers for a project's
-own code - see *[Build performance & isolation](/tool/build-performance-and-isolation/)*.
+hardened image is used.
 
 ## Verifying the installation
 
