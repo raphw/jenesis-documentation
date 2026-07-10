@@ -1,7 +1,7 @@
 // Eleventy configuration for the Jenesis documentation site.
 //
 // Content model: every documentation page carries front matter { section, order, title }.
-// `section` is one of tool | launcher | modules | repository and groups the page into that
+// `section` is one of tool | jpx | launcher | modules | repository and groups the page into that
 // tool's left-hand menu; `order` sorts it within the menu. A new chapter is a single Markdown
 // file with that front matter - it appears in the menu automatically, so adding a chapter never
 // has to touch navigation.
@@ -13,7 +13,7 @@ export default function (eleventy) {
 
   // One collection per tool section, sorted by the page's `order`, so the sidebar and the
   // prev/next links are derived from the files that actually exist.
-  for (const section of ["tool", "launcher", "modules", "repository"]) {
+  for (const section of ["tool", "jpx", "launcher", "modules", "repository"]) {
     eleventy.addCollection(section, (api) =>
       api
         .getFilteredByGlob(`src/${section}/**/*.md`)

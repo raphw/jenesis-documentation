@@ -16,9 +16,9 @@ jpx org.junit.platform.console --version
 That resolves the JUnit console launcher and its dependencies, installs them, and runs the tool - passing
 `--version` straight through to the launched program.
 
-jpx ships in the same distribution as the [Jenesis build tool](/tool/): install it through SDKMAN (see
-[Getting started](/tool/getting-started/)) and `jpx` is on your `PATH`. In a project that embeds Jenesis
-as source, the same command runs with nothing but a JDK: `java build/jenesis/Jpx.java <target>`.
+jpx is a command of its own, installed separately from the [Jenesis build tool](/tool/). In a project
+that embeds Jenesis as source, it also runs with nothing but a JDK: `java build/jenesis/Jpx.java
+<target>`.
 
 ## What's in this section
 

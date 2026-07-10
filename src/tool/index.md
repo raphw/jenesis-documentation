@@ -9,8 +9,8 @@ configure it by writing code against a small API, not by learning a new markup l
 with the JDK you already have. There is no plugin ecosystem to install: a build is composed from steps
 that are just objects you can read, extend, and test.
 
-Its companion command **jpx** - resolving and running a published module's main class the way `npx` runs
-a package - ships in the same distribution and has [its own section](/jpx/).
+Its companion tool **jpx** - resolving and running a published module's main class the way `npx` runs
+a package - is a command of its own with [its own section](/jpx/).
 
 ## Why another build tool
 
