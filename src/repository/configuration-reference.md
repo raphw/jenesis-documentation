@@ -41,7 +41,7 @@ server's path (`+source+store+s3`, `+source+proxy`, `source/oidc`, …). Those t
 | Kind | How you write it |
 |------|------------------|
 | Boolean | `true` / `false`. |
-| Duration | ISO-8601 - `PT10M` (ten minutes), `PT1H` (an hour), `P1D` (a day), `P7D` (a week). One key, `scan-interval-millis`, is a plain millisecond count instead. |
+| Duration | ISO-8601 - `PT10M` (ten minutes), `PT1H` (an hour), `P1D` (a day), `P7D` (a week); simple forms like `60s` / `5m` are also accepted. One key, `scan-interval-millis`, is a plain millisecond count instead. |
 | Byte count | a plain number, or a `K` / `M` / `G` / `T` suffix (`10GB`). |
 | Verdict | `ALLOW` / `QUARANTINE` / `REJECT`. |
 | List | comma-separated, unless a key says otherwise. |
@@ -102,7 +102,8 @@ Per-format system properties, read at startup. See [Proxying & groups](/reposito
 
 | Key | Default | What it sets |
 |-----|---------|--------------|
-| `jenesis.repository.proxy.<format>` | *(unset - hosted-only)* | Upstream URL a proxy-capable format mirrors, keyed by its name (`proxy.maven` → Maven Central, `proxy.oci` → Docker Hub). Naming it turns the format into a pull-through mirror. |
+| `jenesis.repository.proxy-enabled` | `true` | The pull-through switch for the whole deployment; `false` serves every format hosted-only. |
+| `jenesis.repository.proxy.<format>` | *(the format's canonical upstream)* | Overrides the upstream URL a proxy-capable format mirrors, keyed by its name (`proxy.maven` → Maven Central, `proxy.oci` → Docker Hub). A format that declares no canonical upstream stays hosted-only until named here. |
 | `jenesis.repository.proxy-miss-ttl` | `60s` | How long a definite upstream `404` is remembered in the negative cache; `0` disables it. |
 
 ---
@@ -202,7 +203,7 @@ See [Maintenance](/repository/maintenance/).
 | `not-downloaded-for` | *(none)* | Retention: evict versions not downloaded within this duration. |
 | `scheduled-scan` | `false` | Re-scan every repository against the advisory feeds on a timer. |
 | `scan-interval-millis` | `3600000` | How often the scheduled re-scan runs (a plain millisecond count - one hour). |
-| `kev-enforce` | `true` | Retroactively quarantine an already-published artifact once its CVE reaches the KEV catalogue. |
+| `kev-auto-hold` | `true` | Whether the `kev-enforce` pass retroactively quarantines an already-published artifact once its CVE reaches the KEV catalogue. |
 | `dependents-index` | `false` | Build the reverse-dependency ("who depends on X") index in the background. |
 | `dependents-interval` | `PT1H` | How often the dependents sweep runs. |
 

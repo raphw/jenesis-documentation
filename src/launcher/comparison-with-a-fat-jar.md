@@ -17,7 +17,7 @@ subfolder](/launcher/producing-a-launcher-jar/). Three things follow from that s
 
 Every modular dependency carries a `module-info.class` at its jar root. Merge two of them into one flat jar
 and they land at the **same path** - `module-info.class` can only exist once. The shading tool's only
-options are to drop all but one, or to rename them into something the module system no longer reads. Either
+options are to drop all but one, or to rename them into something the Java Module System no longer reads. Either
 way the modules stop being modules: their descriptors are gone, so nothing at run time knows what each one
 `requires`, `exports`, or `opens`.
 
@@ -45,7 +45,7 @@ one big class path: encapsulation is gone, `requires` edges are gone, strong mod
 Modular libraries silently degrade to running as unnamed-module code.
 
 A launcher jar rebuilds the graph instead. At startup it resolves the `modulepath/` subfolders into a fresh
-[`ModuleLayer`](/launcher/how-it-works/), so the modules come back as **real named modules** with their
+`ModuleLayer`, so the modules come back as **real named modules** with their
 `requires` and `exports` edges enforced - the faithful equivalent of a real `-p modulepath`. Non-modular
 dependencies become the unnamed module of the same loader, the analogue of `-cp classpath`.
 
@@ -68,7 +68,6 @@ The two jars run the same way - `java -jar app.jar` - but rebuild very different
   done. See <a href="/launcher/how-it-works/"><em>How it works</em></a> for that reconstruction in detail.
 </div>
 
-Choosing a launcher jar is therefore the right call precisely when your application - or any library it
-depends on - is modular and you want it to *stay* modular in the shipped artifact. If nothing you bundle is
-modular, a fat jar and a launcher jar behave alike; the launcher only starts to matter once a real module
-graph is worth keeping.
+Choosing a launcher jar therefore keeps your application exactly as the build resolved it: the module
+graph, the service files, and each dependency's identity all survive into the shipped artifact, and
+non-modular dependencies ride along as openly as they would on a real class path.

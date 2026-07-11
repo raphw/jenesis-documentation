@@ -1,5 +1,5 @@
 ---
-order: 14
+order: 13
 title: Reference
 description: A lookup for the command line - targets and selectors - a grouped table of every configuration key with its default, and the built-in steps a selector can name.
 ---
@@ -18,8 +18,8 @@ recompiles that engine and runs it:
 java build/jenesis/Project.java [selectors…]
 ```
 
-Three faster launch forms produce the same result - see *[Getting started](/tool/getting-started/)* and
-*[Build performance &amp; isolation](/tool/build-performance-and-isolation/)*:
+Three faster launch forms produce the same result (the SDKMAN wrapper is installed in
+*[Getting started](/tool/getting-started/)*):
 
 | Form | Invocation | Notes |
 | --- | --- | --- |
@@ -107,7 +107,7 @@ variable as a fallback. Defaults apply when the key is unset.
 | `jenesis.project.documentation` | `false` | Also assemble a per-module javadoc jar. |
 | `jenesis.project.watch` | `false` | Keep the process alive and rebuild on every source change (see *[Building &amp; running](/tool/building-and-running/)*). |
 | `jenesis.project.properties` | *(unset)* | Comma-separated **profile** names to activate. |
-| `jenesis.project.global` | `$HOME` | Folder holding the user-global `jenesis.properties`; empty string disables it. |
+| `jenesis.project.global` | `$HOME` | Base folder whose `.jenesis/` subfolder holds the user-global `jenesis.properties`; empty string disables it. |
 | `jenesis.project.configuration` | `build.jenesis/` | Path-separated project-wide configuration directories. |
 | `jenesis.project.boms` | *(unset)* | Path-separated list of imported BOM files. |
 | `jenesis.project.artifacts` | `.jenesis/artifacts` | The module-jar artifact cache (the `modular` layout only). |

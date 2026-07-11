@@ -133,7 +133,7 @@ dependencies and pinning have their own chapter later.
 Everything you ran above went through one file: `build/jenesis/Project.java`. It is a normal Java source
 file, and `Project` itself is a small Java **record** - so a build is configured as code, not markup. You
 almost never edit it; instead you either flip system properties on the command line or, for code-level
-control, write a tiny launcher of your own next to it (covered in *Extending the build*).
+control, write a tiny launcher of your own next to it (covered in *[Extending the build](/tool/extending-the-build/)*).
 
 Four fields carry the knobs you reach for first. Each has a `jenesis.project.*` system property that sets it
 before the build starts, and a matching in-code method (a "wither") for a custom launcher.

@@ -25,7 +25,7 @@ hardened image is used.
 `--hash=<prefix>` re-checks the installed jars against a digest you already trust, before every launch:
 
 ```bash
-jpx --hash=3f9a1c… org.junit.platform.console --version
+jpx --hash=3f9a1c0d2b4e6a8c9d1f3e5a7b9c0d2e org.junit.platform.console --version
 ```
 
 The prefix must be **at least 32 hex characters** of the target's SHA-256 digest - the digest recorded at

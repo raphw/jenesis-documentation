@@ -4,8 +4,9 @@ title: Building & running
 description: What the compile, test, and jar phases do; feeding the compiler extra arguments and annotation processors; running a module's main with Execute.java; and rebuilding on every change with watch mode.
 ---
 
-The default `build` target compiles, tests, and jars every module - you saw it run in *Getting started*, and
-*Core concepts* explained the step graph underneath. This chapter is about the everyday loop that graph
+The default `build` target compiles, tests, and jars every module - you saw it run in
+*[Getting started](/tool/getting-started/)*, and *[Core concepts](/tool/core-concepts/)* explained the step
+graph underneath. This chapter is about the everyday loop that graph
 drives: what each of those phases actually does, how to hand the compiler an extra flag or an annotation
 processor, how to run a module's `main`, and how to keep rebuilding as you edit.
 
@@ -17,7 +18,7 @@ module in dependency order.
 
 - **Compile** runs `javac` over the module's sources, resolving its dependencies onto the class or module
   path, and writes the `.class` files. Other-language compiles (Kotlin, Scala, Groovy) slot into the same
-  chain - see *Other JVM languages*.
+  chain - see *[Other JVM languages](/tool/other-jvm-languages/)*.
 - **Test** compiles and runs the module's tests. Jenesis **auto-detects the test framework** from the test
   dependencies you already declare - JUnit Platform (JUnit 5/6), JUnit 4, or TestNG - and resolves the
   matching console runner for you, so you never add it as an explicit dependency. In the modular layouts the
@@ -75,7 +76,7 @@ java -Djenesis.project.sources=true \
 `jenesis.project.sources` adds a per-module `-sources.jar`, and `jenesis.project.documentation` runs the
 documentation tool (`javadoc` for Java) and adds a `-javadoc.jar`. Both are off by default because they cost
 build time you do not want on every inner-loop run; turn them on for a release (or record them in a profile -
-see *Configuration*).
+see *[Configuration](/tool/configuration/)*).
 
 ## Passing extra arguments to a tool
 
@@ -114,14 +115,14 @@ declaration, naming the processor **by module name** (or `<repository>/<coordina
 /**
  * @jenesis.plugin org.immutables.value
  */
-module demo.classifier {
+module demo.annotations {
     requires static org.immutables.value;
 }
 ```
 
 Jenesis resolves the processor, places it on `javac`'s **processor path** (`--processor-module-path`), and the
 compiler runs it. The version is pinned the usual way - the `pin` step writes back the `@jenesis.pin` line for
-you (dependencies and pinning are covered in *Dependencies*).
+you (dependencies and pinning are covered in *[Dependencies](/tool/dependencies/)*).
 
 <div class="warning">
   Processors are run <strong>only from what you declare</strong>. A dependency that happens to bundle a
@@ -207,7 +208,7 @@ java -Djenesis.project.watch=true build/jenesis/Project.java +mymodule
 
 Setting `jenesis.project.watch=true` in a `jenesis.properties` file makes watch a project's default. Watch mode
 already skips a module's tests when none of its inputs changed; it can go finer and re-run only the tests a
-change can reach - a development-loop optimisation covered in *Code quality & testing*.
+change can reach - a development-loop optimisation covered in *[Code quality & testing](/tool/code-quality-and-testing/)*.
 
 <div class="tip">
   Executable projects with a declared entry point are

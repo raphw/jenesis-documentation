@@ -13,12 +13,6 @@ The reports live in the [`raphw/jenesis-modules`](https://github.com/raphw/jenes
 `data/`, are regenerated **once a day**, and each carries an *as of* date so you always know how fresh the
 numbers are. The front door is the **module summary**; every other report is linked from it.
 
-<div class="tip">
-  Start at the <a href="https://github.com/raphw/jenesis-modules/blob/main/data/SUMMARY.md">module
-  summary</a>. It opens with catalogue-wide totals and links straight to the per-year and bleeding-edge
-  reports.
-</div>
-
 ## The module summary
 
 [`SUMMARY.md`](https://github.com/raphw/jenesis-modules/blob/main/data/SUMMARY.md) is the coverage report
@@ -82,12 +76,12 @@ The symbols in that table:
 but pointed at **now** rather than a past year end. It takes the most recent popularity list and assesses it
 against current data, uncropped to any year: the module columns describe each artifact's latest version as it
 stands today, and the ⚠️ / 🚩 activity flags use rolling 12- and 36-month windows. Read the per-year reports
-for the trend; read this one for where modularization stands **right now**.
+for the trend; read this one for where modularisation stands **right now**.
 
 ## The drift report
 
-A module name is not owned by anyone on Maven Central - it is just a string a JAR carries, and unrelated
-artifacts routinely declare the same one (the collisions and injection covered
+A module name is not owned by anyone on Maven Central - it is just a string a jar carries, and unrelated
+artifacts routinely declare the same one (the collisions covered
 [in the previous chapter](/modules/resolving/)). The
 [**drift report**](https://github.com/raphw/jenesis-modules/blob/main/data/DRIFTERS.md) lists every module
 name published by **more than one groupId** whose ownership has not yet been fully decided.

@@ -46,6 +46,9 @@ independently:
 | `QUARANTINE` | It is held under a `/quarantine` view that **does not resolve** - stored for review, never served. |
 | `REJECT` | Nothing is stored; the orphaned blob is reclaimed by the usual garbage collection. |
 
+An `ALLOW` verdict is what the publication screen answers as `ACCEPT`: the policy verdict names the gate's
+decision, the screen's disposition names what the store does with the upload.
+
 Because the screen also has a **read side**, a verdict can change *after the fact*: a new advisory against a
 coordinate that has served for months **withholds** it from serving until it is reviewed. Everything held or
 refused is recorded with its coordinate, verdict, and reasons, and a reviewer works the queue - releasing a

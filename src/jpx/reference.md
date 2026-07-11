@@ -9,11 +9,11 @@ The whole surface of jpx is one target and a handful of flags. The target gramma
 
 | Flag | What it does |
 | --- | --- |
-| `--modular` | Resolve purely over module descriptors, walking `requires` clauses like the `modular` layout - every module must be explicitly named. |
+| `--modular` | Resolve purely over module descriptors, walking `requires` clauses like the [`modular` layout](/tool/core-concepts/) - every module must be explicitly named. |
 | `--docker[=<image>]` | Run the launched process in a container while resolution and installation stay on the host. |
 | `--hash=<prefix>` | Verify the installed jars against a known digest before launching. |
 
-`--docker` and `--hash` are covered in depth under
+`--modular` is covered in depth under [Choosing a target](/jpx/targets/); `--docker` and `--hash` under
 [Isolation & verification](/jpx/isolation-and-verification/).
 
 ## Usage

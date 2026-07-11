@@ -155,5 +155,6 @@ Every capability in this section is one of these seams. This is where each plugs
 | Import sources and importers | Migration & import |
 | Console panels | The console |
 
-Each opens with the capability, then its implementations, then its settings. The next chapter, **Storage**,
-starts at the bottom of the stack - the store every one of these seams writes through.
+Each opens with the capability, then its implementations, then its settings; the console's chapter is a
+tour of the UI those panels compose. The next chapter, **Storage**, starts at the bottom of the stack - the
+store every one of these seams writes through.

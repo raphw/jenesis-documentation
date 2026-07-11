@@ -33,8 +33,9 @@ together.
 
 ## Pull-through caching
 
-Pull-through is the everyday shape: point a format at an upstream and the repository becomes a build's
-**single front door** - it serves your own artifacts and mirrors everything upstream, from one URL.
+Pull-through is the everyday shape: with a format pointed at an upstream - its canonical default, or one
+you name - the repository becomes a build's **single front door**: it serves your own artifacts and mirrors
+everything upstream, from one URL.
 
 ### A miss becomes a local hit
 
@@ -116,17 +117,18 @@ imports.
 
 ### Per-format upstreams
 
-Point a proxy-capable format at an upstream, keyed by the format's name, and pull-through switches on for it:
+Pull-through is on out of the box. Each proxy-capable format declares its **canonical public upstream** -
+Maven Central for the Maven layout, Docker Hub for OCI, the public registry for npm - and mirrors it with
+nothing to configure. A format that declares no canonical upstream (one whose ecosystem has no single
+public registry) is served hosted-only until you name one. Two properties adjust this:
 
 ```bash
--Djenesis.repository.proxy.maven=https://repo1.maven.org/maven2/   # the Maven layout's upstream
--Djenesis.repository.proxy.oci=https://registry-1.docker.io/       # the OCI format's upstream
+-Djenesis.repository.proxy-enabled=false                           # serve every format hosted-only
+-Djenesis.repository.proxy.maven=https://mirror.example.com/maven/ # override one format's upstream
 ```
 
-Each proxy-capable format knows its **canonical public upstream** - Maven Central for the Maven layout,
-Docker Hub for OCI, the public registry for npm - so the value above is simply that well-known URL. A format
-with no configured upstream is served hosted-only; naming the upstream is what turns the format into a
-mirror.
+`proxy-enabled` is the deployment-wide switch; the per-format `proxy.<format>` key, keyed by the format's
+name, points a format at a different upstream - or gives one to a format that declares none.
 
 ### The negative-cache window
 

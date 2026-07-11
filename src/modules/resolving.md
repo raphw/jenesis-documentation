@@ -144,7 +144,7 @@ that name.
 <div class="note">
   A module resolves only if some artifact on Maven Central declared that module name. If you get a
   <code>404</code> for a name you expected, the artifact may ship neither a <code>module-info</code> nor an
-  <code>Automatic-Module-Name</code> - the <a href="/modules/">reports</a> show what is and is not covered.
+  <code>Automatic-Module-Name</code> - the <a href="/modules/reports/">reports</a> show what is and is not covered.
 </div>
 
 ## Using it from the build tool
@@ -208,7 +208,8 @@ alongside as `artifacts-<classifier>.tsv` and `modules-<classifier>.tsv`.
 <div class="warning">
   A module name is <strong>not</strong> a namespaced or authoritative identifier - it is just a string a jar
   carries, and unrelated artifacts can and do declare the same one. These resolved views already pick a single
-  owner per name for you; the audit log behind them, and how ownership is decided, is covered in
-  <a href="/modules/">the catalogue chapter</a>. If you resolve directly, pin the
+  owner per name for you; the audit log behind them is covered in
+  <a href="/modules/reports/">the catalogue chapter</a>, and how ownership is decided in
+  <a href="/modules/how-produced/">how the catalogue is produced</a>. If you resolve directly, pin the
   <code>(groupId, artifactId)</code> you expect rather than trusting a name on its own.
 </div>

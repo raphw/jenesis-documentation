@@ -106,9 +106,9 @@ jenesis-repo vulnerabilities my-repo     # re-scan what you already hold
 ```
 
 The same scan is served at `GET /api/vulnerabilities?repo=` and on a per-repository **Vulnerabilities**
-console panel. So the answer arrives *without anyone asking*, a **scheduled re-scan** (`scheduled-scan`,
+console panel. So the answer arrives *without anyone asking*: a **scheduled re-scan** (`scheduled-scan`,
 cadence `scan-interval-millis`) re-sweeps every repository on a timer and publishes per-repository counts as
-Micrometer gauges - `jenesis_vulnerabilities_count` and `jenesis_vulnerabilities_known_exploited_count`,
+Micrometer gauges - `jenesis.vulnerabilities.count` and `jenesis.vulnerabilities.known.exploited.count`,
 tagged by tenant and repository - logging a warning for any repository holding a known-exploited artifact.
 A dashboard alert on the known-exploited gauge then fires the moment a CVE you already hold lands on the KEV
 catalogue, with no scan to remember to run. This pass is **read-only**, so it takes no lease; each node
@@ -116,11 +116,13 @@ refreshes its own gauges.
 
 <div class="tip">
   Reporting is one thing, <strong>enforcement</strong> another. A second, exclusive pass
-  (<code>kev-enforce</code>, on by default) quarantines an already-published artifact once its CVE lands on
-  the known-exploited catalogue - the same <code>/quarantine</code> hold and review queue the gate writes,
-  and an operator's release sticks. Only the actively-exploited set is ever auto-held; everything below KEV
-  stays report-only, so a broad new CVE can never mass-hold a repository. (Its opt-in license counterpart,
-  <code>license-retro-enforce</code>, is covered with the gate.)
+  (<code>kev-enforce</code>; its <code>kev-auto-hold</code> switch is on by default) quarantines an
+  already-published artifact once its CVE lands on the known-exploited catalogue - the same
+  <code>/quarantine</code> hold and review queue the gate writes, and an operator's release sticks. Only the
+  actively-exploited set is ever auto-held; everything below KEV stays report-only, so a broad new CVE can
+  never mass-hold a repository. Its licence counterpart, <code>license-retro-enforce</code>, holds releases
+  against the licence policy the same way - opt-in, running only once its <code>license-retro-hold</code>
+  setting names an enforcement tier.
 </div>
 
 ### Dependents index
@@ -165,7 +167,7 @@ settings screen when its module is installed.
 | `not-downloaded-for` | *(none)* | Deployment-default retention: evict versions not downloaded within this duration. |
 | `scheduled-scan` | `false` | Re-scan every repository against the advisory feeds on a timer, publishing per-repository gauges. |
 | `scan-interval-millis` | `3600000` | How often the scheduled re-scan runs, **in milliseconds** (one hour). |
-| `kev-enforce` / `kev-auto-hold` | `true` | Retroactively quarantine an already-published artifact once its CVE reaches the known-exploited catalogue. |
+| `kev-auto-hold` | `true` | Whether the `kev-enforce` pass retroactively quarantines an already-published artifact once its CVE reaches the known-exploited catalogue. |
 | `dependents-index` | `false` | Build the reverse-dependency ("who depends on X") index in the background. |
 | `dependents-interval` | `PT1H` | How often the dependents sweep runs. |
 | `cleanup-lease` | `PT10M` | Time-to-live of the single-writer maintenance lease that keeps a mutating sweep on one node. |

@@ -155,8 +155,8 @@ A Jenesis build needs no new client - it points at the running repository with t
 
 ```bash
 -Djenesis.maven.uri=https://repo.example.com/repository/maven/
--Djenesis.module.uri=https://repo.example.com/repository/ \
-  -Djenesis.module.token=jenk_<tenant>.<secret>
+-Djenesis.module.uri=https://repo.example.com/repository/
+-Djenesis.module.token=jenk_<tenant>.<secret>
 ```
 
 The Maven URI feeds Maven-mode resolution; the module URI and token feed module-name resolution against

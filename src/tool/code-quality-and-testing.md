@@ -10,7 +10,7 @@ same way it does everything else: **there is no plugin to register**. A tool tur
 configuration file is present, and stays off when it is not. This chapter is the set of tools and how each
 one behaves.
 
-Every file below lives in a **configuration folder** (`build.jenesis/` by default). *Configuration* covers
+Every file below lives in a **configuration folder** (`build.jenesis/` by default). *[Configuration](/tool/configuration/)* covers
 where those folders sit and how per-module and profile overrides work; here we only care about which file
 switches on which tool.
 
@@ -138,7 +138,7 @@ whose bytecode changed, walks the graph to the tests that reach them, and passes
 change that reaches no test runs nothing; any non-class change (a resource, a dependency) falls back to the
 full suite.
 
-Test selection is meant mainly for **watching** a project (see *Building & running*), where the build re-runs
+Test selection is meant mainly for **watching** a project (see *[Building & running](/tool/building-and-running/)*), where the build re-runs
 on every save and a narrowed test pass keeps the feedback loop tight.
 
 <div class="warning">
@@ -174,7 +174,7 @@ place.
 Every tool above floats a `RELEASE` version in its own dependency group, so the first build downloads the
 latest and later builds reuse the cache. When you want a reproducible, checksum-verified tool chain, run
 `java build/jenesis/Project.java pin` - it records each resolved tool jar with its SHA-256 exactly as it pins
-your compilers and dependencies (see *Dependencies*). Some closures are large (PMD's CLI bundle alone pulls in
+your compilers and dependencies (see *[Dependencies](/tool/dependencies/)*). Some closures are large (PMD's CLI bundle alone pulls in
 well over a hundred artifacts), which is why the demos leave them floating for readability.
 
 <div class="tip">

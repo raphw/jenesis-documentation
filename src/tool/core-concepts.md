@@ -4,7 +4,7 @@ title: Core concepts
 description: Build steps, the build graph, the four layouts, the module-system specifics, and how Jenesis decides what to rebuild.
 ---
 
-*Getting started* ran a build and toured `Project.java`. This chapter opens the box: what a build actually
+*[Getting started](/tool/getting-started/)* ran a build and toured `Project.java`. This chapter opens the box: what a build actually
 *is*, how Jenesis shapes your project into one, the module-system details it handles for you, and the rule
 that decides - on every run - what recompiles and what is reused. Everything here is machinery you rely on
 rather than write; the chapters after this one put it to work.
@@ -118,7 +118,7 @@ That is exactly why `auto` never selects `modular` for you.
 </div>
 
 You can force a layout for one run with a system property, or record it in a project file (covered in
-*Configuration*):
+*[Configuration](/tool/configuration/)*):
 
 ```bash
 java -Djenesis.project.layout=modular build/jenesis/Project.java
@@ -223,7 +223,7 @@ The same `[<guard>]` suffix works on the `<!--jenesis.pin ... -->` comment block
 selects the version of a (typically transitive) coordinate per platform. Every variant stays committed in
 source with its own checksum, so the build is reproducible from the repository alone on any machine - selection
 only decides *which* checksum-validated line applies. Full pin grammar and strict pinning are covered in
-*Dependencies*.
+*[Dependencies](/tool/dependencies/)*.
 
 ### Internal and external build modules
 

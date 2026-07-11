@@ -44,9 +44,9 @@ derives from that name - is unchanged.
 | `mainModule` | the module owning `mainClass`, when the application is modular |
 | `agentClass` | bundled Java agents to run before `main`, if any |
 
-`mainClass` is the only always-present key. A bundle that declares no `mainClass` is not an application at
-all but a self-contained Java agent. The full set of descriptor keys - agents, module-access grants, and
-signed-jar reconstruction - is the subject of the *Reference* chapter.
+`mainClass` is present in every application bundle. A bundle that declares no `mainClass` is not an
+application at all but a self-contained Java agent. The full set of descriptor keys - agents, module-access
+grants, and signed-jar reconstruction - is the subject of the [*Reference*](/launcher/reference/) chapter.
 
 ## How a launch proceeds
 
@@ -85,7 +85,8 @@ An in-memory module finder builds a module descriptor for each `modulepath/` jar
 `module-info.class`, or derived for an automatic module from its `Automatic-Module-Name` or jar file name,
 with its `META-INF/services` providers scanned in. The boot layer is immutable, so a fresh child layer is the
 only way to add these modules at run time, and the right one: they stay real named modules. What these rules
-mean in practice - and the pitfalls they create - is the subject of *Running & troubleshooting*.
+mean in practice - and the pitfalls they create - is the subject of
+[*Running & troubleshooting*](/launcher/running-and-troubleshooting/).
 
 ## Reading the bundle on demand
 

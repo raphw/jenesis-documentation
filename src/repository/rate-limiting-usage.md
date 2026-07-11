@@ -125,7 +125,6 @@ Both startup properties, read once when the server boots:
 | `jenesis.repository.track-key-usage` | `false` | Record each credential's last use, source address and use count on the batching worker. |
 
 A tenant's own ceiling is per-tenant data set through `PUT /api/rate-limit` above, not a startup property -
-the same pattern as its quota in
-[Multi-tenancy & authentication](/repository/multi-tenancy-auth/). And as everywhere, absence degrades
+the same pattern as its quota in *Multi-tenancy & authentication*. And as everywhere, absence degrades
 gracefully: a deployment without the rate-limiting module never limits, and one without the usage module
 records nothing and says so on health.

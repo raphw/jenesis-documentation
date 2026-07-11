@@ -26,7 +26,7 @@ curl -L https://repo.jenesis.build/module/com.fasterxml.jackson.databind/2.18.0
 There are two main modes: `/module/…` resolves by the module-info version, while `/artifact/…` is a
 **transparent Maven proxy** keyed by the Maven version - the file extension passes straight through, so
 `/artifact/<name>/<ver>/<name>.pom` returns the POM and the route works as a drop-in Maven repository URL.
-The next chapter covers every mode, POMs and metadata, and classifiers in full.
+[The next chapter](/modules/resolving/) covers every mode, POMs and metadata, and classifiers in full.
 
 The Jenesis build tool points at `repo.jenesis.build` out of the box, so when your `module-info.java`
 declares a `requires`, the build resolves it here automatically - you rarely call the service by hand. The
@@ -35,7 +35,7 @@ URL shapes are the whole contract, so a mirror that serves the same shapes is a 
 <div class="note">
   A module can only be resolved if its jar carries a stable name - a real <code>module-info</code> or an
   <code>Automatic-Module-Name</code>. Artifacts that ship neither cannot be requested by module name; the
-  reports show how much of Maven Central is covered.
+  <a href="/modules/reports/">reports</a> show how much of Maven Central is covered.
 </div>
 
 ## What's in this section

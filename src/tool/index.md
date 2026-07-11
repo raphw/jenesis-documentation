@@ -18,7 +18,7 @@ Two convictions shape everything here:
 
 - **Configuration is code.** A build is expressed in `Project.java`, a normal Java file the JDK launches
   directly. You get types, an IDE, and refactoring for your build the same as for your application.
-- **The module system is a feature, not a footnote.** `module-info.java` drives the build: Jenesis reads
+- **The Java Module System is a feature, not a footnote.** `module-info.java` drives the build: Jenesis reads
   your declared modules, resolves the module path, and carries a real module graph all the way through to
   packaging - instead of flattening it into a class path and hoping.
 

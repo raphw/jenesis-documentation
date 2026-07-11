@@ -27,7 +27,7 @@ back to them:
 
 ## The shape of every chapter
 
-Because the system *is* its capabilities, every chapter follows the same order:
+Because the system *is* its capabilities, every capability chapter follows the same order:
 
 1. **The capability (its SPI)** - what it does, and that it is a discovered, swappable plug-in point: a
    provider supplies it, so it can be replaced with another implementation or simply be absent.
@@ -46,7 +46,7 @@ Because the system *is* its capabilities, every chapter follows the same order:
 2. **Getting started** - run the server, publish and consume an artifact, point it at a store.
 3. **Architecture** - the plug-in model, `ServiceLoader` discovery, and the publication path.
 4. **Storage** - the `ArtifactStore` SPI, then the filesystem, S3, and Azure backends.
-5. **Formats** - the format SPIs, then the built-in ecosystems (Maven, npm, PyPI, OCI, …).
+5. **Formats** - the format SPIs, then the built-in Maven, module, OCI/Docker and raw layouts.
 6. **Proxying & groups** - the fetcher SPI, pull-through caching, and group repositories.
 7. **The compliance gate** - the publication-interceptor and policy SPIs, then licence, vulnerability, and
    malware screening.
@@ -57,7 +57,7 @@ Because the system *is* its capabilities, every chapter follows the same order:
 12. **Rate limiting & usage tracking** - the limiter and usage-tracker SPIs, then the token bucket and the
     batching worker.
 13. **Publish-through forwarding** - the transport SPI and its implementations.
-14. **Migration & import** - the import-source SPI, then the Nexus, Artifactory, and Jenesis importers.
+14. **Migration & import** - the import-source SPI, then the Nexus, Artifactory, and Jenesis connectors.
 15. **Observability** - metrics and tracing.
-16. **The console** - the web UI and its contribution seams.
+16. **The console** - signing in, browsing, and reading a deployment's capabilities.
 17. **Configuration reference** - every setting in one place.

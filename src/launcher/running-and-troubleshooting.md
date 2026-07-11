@@ -30,7 +30,7 @@ java -javaagent:foo.jar=args -jar your-app.jar
 
 The agent and its dependencies stay in the bundle's own isolated loader, off the host's class path. The full
 agent story - bundled `agentClass` agents, the manifest attributes that capture an `Instrumentation`, and
-running several agent bundles in one JVM - is covered in the *Reference* chapter.
+running several agent bundles in one JVM - is covered in the [*Reference*](/launcher/reference/) chapter.
 
 ## What the single loader means for your code
 

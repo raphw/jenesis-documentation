@@ -4,7 +4,7 @@ title: Search & inventory
 description: Finding an artifact without knowing its exact path, rolling a repository's declared licences up into facet counts, and publishing a resumable index a downstream tool can sync - the search-query capability, its Lucene and licence-inventory implementations, the published incremental index, and the settings that turn each on.
 ---
 
-[Browse](/repository/getting-started/) walks a repository one prefix at a time - good when you know
+[Browse](/repository/console/) walks a repository one prefix at a time - good when you know
 roughly where a coordinate lives. **Search** answers the other question: *find me everything matching a
 term*, without knowing the path. Around it grows an **inventory**: what licences the repository holds, and
 a compact index a downstream tool can pull to mirror the repository's contents.

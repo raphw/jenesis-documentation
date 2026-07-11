@@ -23,7 +23,7 @@ Because every class is then a direct entry of the outer jar, the launcher reads 
 
 <div class="note">
   The launcher is produced by the Jenesis build tool's packaging step. If you have not read the build tool's
-  <a href="/tool/">Packaging chapter</a> yet, start there - this section explains what the resulting jar does
+  <a href="/tool/packaging-and-distribution/">Packaging &amp; distribution chapter</a> yet, start there - this section explains what the resulting jar does
   and how it does it.
 </div>
 
@@ -33,5 +33,5 @@ Because every class is then a direct entry of the outer jar, the launcher reads 
 2. **How it works** - module-layer reconstruction, exploded subfolders, and on-demand reads.
 3. **Producing a launcher jar** - the build-tool packaging option and the jar layout.
 4. **Running & troubleshooting** - start-up, the single-loader model, and common pitfalls.
-5. **Comparison** - how it differs from a shaded fat jar, point by point.
+5. **Comparison with a fat jar** - how it differs from a shaded fat jar, point by point.
 6. **Reference** - the manifest entries and the launcher's own configuration.

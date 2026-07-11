@@ -57,7 +57,7 @@ What these folders can hold - presence activates, contents configure:
 - **Compliance**: `licensing.properties`, `vulnerability.properties`, `spdx.properties`.
 - **Test observability**: `jacoco.properties`, `graal.properties`, `pitest.properties`.
 - **Forked-tool arguments**: `process-<command>.properties` - extra flags for `javac`, `kotlinc`, `jar`, and
-  the like (see *Building & running*).
+  the like (see *[Building & running](/tool/building-and-running/)*).
 
 Each of these is the subject of a later chapter; here the point is only *where* they go and that a file's mere
 presence switches its feature on.
@@ -126,8 +126,8 @@ The weakest layer is a **user-global `jenesis.properties`**, read from `~/.jenes
 project - your shared personal defaults. It is optional and ignored when absent, and it may declare its own
 profiles, resolved relative to its `.jenesis` folder.
 
-The `jenesis.project.global` property relocates that folder (default `$HOME`) or, set to an empty string,
-switches the user-global layer off entirely.
+The `jenesis.project.global` property names the base folder (default `$HOME`) whose `.jenesis/` subfolder
+holds that file - or, set to an empty string, switches the user-global layer off entirely.
 
 <div class="tip">
   The <a href="https://github.com/raphw/jenesis/tree/main/demo/demo-15-profiles">demo-15</a> project is a

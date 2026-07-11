@@ -11,9 +11,10 @@ the **pinning** that guarantees the bytes you build are the bytes you vetted. No
 build script - each turns on from a convention, over the same resolved dependency graph.
 
 <div class="note">
-  This is about hardening <em>your own</em> build. The Jenesis Repository has a separate, serving-side
-  compliance gate that screens artifacts as they are published; that is a different product and a different
-  chapter. Here, everything runs inside your build, against the dependencies you resolve.
+  This is about hardening <em>your own</em> build. The <a href="/repository/">Jenesis Repository</a> has a
+  separate, serving-side <a href="/repository/compliance-gate/">compliance gate</a> that screens artifacts as
+  they are published; that is a different product with its own documentation section. Here, everything runs
+  inside your build, against the dependencies you resolve.
 </div>
 
 ## Software bill of materials
@@ -27,7 +28,7 @@ and licences the build already has.
 java build/jenesis/Project.java
 ```
 
-Where the SBOM is a supply-chain counterpart to the `dependencies` selector (see *[Dependencies](/tool/dependencies/)*):
+The SBOM is a supply-chain counterpart to the `dependencies` selector (see *[Dependencies](/tool/dependencies/)*):
 where that *prints* the resolved graph, the SBOM *freezes* it into a publishable artifact. It lands in three
 places, one per consumer:
 

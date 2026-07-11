@@ -11,8 +11,8 @@ complete reference for both, for when you read, verify, or hand-craft a bundle.
 
 ## The descriptor: `application.properties`
 
-A plain `key=value` properties file at the jar root. Every key is optional except `mainClass`, whose absence
-turns the bundle into a [Java agent](#bundled-java-agents) rather than an application.
+A plain `key=value` properties file at the jar root. Every key is optional; a descriptor without
+`mainClass` describes a [Java agent](#bundled-java-agents) rather than an application.
 
 | Key | Value |
 | --- | --- |
@@ -117,7 +117,8 @@ certificate chain:
 
 ```properties
 mainClass=com.example.Main
-signature.guava.jar=MIIF...              # Base64 of the signer's certificate chain (PKCS#7)
+# Base64 of the signer's certificate chain (PKCS#7):
+signature.guava.jar=MIIF...
 ```
 
 For each such class-path dependency the launcher reconstructs a `CodeSigner` and attaches it to that
@@ -139,8 +140,8 @@ the rest appear only when the bundle carries agents.
 | --- | --- | --- |
 | `Main-Class` | `build.jenesis.launcher.Launcher` | Always - makes `java -jar foo.jar` start the launcher. |
 | `Launcher-Agent-Class` | `build.jenesis.launcher.LauncherAgent` | An application that bundles agents; captures an `Instrumentation` before `main` under `java -jar foo.jar`. |
-| `Premain-Class` | `LauncherAgent` (or a unique trampoline) | An agent bundle attached with `java -javaagent:foo.jar`. |
-| `Agent-Class` | `LauncherAgent` (or a unique trampoline) | An agent bundle attached dynamically at run time. |
+| `Premain-Class` | `build.jenesis.launcher.LauncherAgent` (or a unique trampoline) | An agent bundle attached with `java -javaagent:foo.jar`. |
+| `Agent-Class` | `build.jenesis.launcher.LauncherAgent` (or a unique trampoline) | An agent bundle attached dynamically at run time. |
 | `Can-Redefine-Classes` | `true` | Grants the bundled agents class-redefinition capability. |
 | `Can-Retransform-Classes` | `true` | Grants the bundled agents class-retransformation capability. |
 

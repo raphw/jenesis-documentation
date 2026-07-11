@@ -11,7 +11,7 @@ how to **pin** every one of those jars to an exact version *and* checksum, recor
 ## Declaring a dependency
 
 You never add a dependency in a build script. You declare it the same way the ecosystem already does, and the
-place depends on your layout (see *Core concepts*):
+place depends on your layout (see *[Core concepts](/tool/core-concepts/)*):
 
 - A **`pom.xml`** project lists a dependency the normal Maven way, in `<dependencies>`:
 
@@ -42,7 +42,7 @@ Jenesis resolves through two named repositories, one per kind of coordinate:
 - **`maven`** - Maven coordinates (`groupId:artifactId:version`). Fetched over HTTP from Maven Central
   (`https://repo1.maven.org/maven2/`) and hardlinked into your **local Maven repository** (`~/.m2/repository`),
   exactly where `mvn` keeps them.
-- **`module`** - Java module names. Resolved through **[repo.jenesis.build](/modules/)**, the module-name
+- **`module`** - Java module names. Resolved through **repo.jenesis.build**, the module-name
   index that maps a name like `com.fasterxml.jackson.databind` to its artifact and 302-redirects to the file
   on Maven Central.
 

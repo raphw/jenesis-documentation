@@ -104,7 +104,7 @@ A credential's rights are stored as a map of **scope → rights**:
 | `manage:read` / `manage:write` | view / change management surfaces |
 
 Because a right names its surface, **one key can carry any mix** - repository, cache and management rights
-together - which is how a single credential authorizes a combined deployment. A grant check reads the stored
+together - which is how a single credential authorises a combined deployment. A grant check reads the stored
 objects on **every request**, so revoking or narrowing a grant takes effect at once, and an **expired key is
 rejected before its grants are even read**.
 
@@ -170,7 +170,7 @@ worth this much, for this long.*
 
 ### Console sign-in: OIDC, SAML and SCIM
 
-The mechanisms above authenticate **machines**. **People** sign in to the [console](/repository/) over
+The mechanisms above authenticate **machines**. **People** sign in to the [console](/repository/console/) over
 OAuth2 / **OIDC** - or, in a multi-tenant edition, **SAML** - and a directory can push users and groups in over
 **SCIM**, mapping group membership to the roles above. These sign-in and provisioning mechanisms are edition
 capabilities that plug into the same authentication seam and resolve to the same credential model, so a

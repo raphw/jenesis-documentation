@@ -7,7 +7,7 @@ description: Compiling Kotlin, Scala and Groovy - alone or mixed with Java in on
 Jenesis is not a Java-only build tool. Drop `.kt`, `.scala` or `.groovy` sources into a module and it resolves
 the matching compiler and builds them, mixed freely with Java, into one modular jar and its generated POM - with
 **no build script to write**. You do not turn a language on; Jenesis detects it from the file extensions present
-and wires the right compiler into the same step graph *Core concepts* described.
+and wires the right compiler into the same step graph *[Core concepts](/tool/core-concepts/)* described.
 
 This chapter covers what changes when a module holds more than Java: how two compilers share one module, the one
 rule that decides which packages you can export, the standard-library dependency each language needs, their
@@ -84,7 +84,7 @@ is locked independently of the standard library your module ships against, so pi
 for your code can never downgrade the `kotlinc` that compiles it.
 
 The compilers float a latest version by default. Run the `pin` step to record each resolved compiler jar with its
-version and SHA-256, exactly as it pins your Java compilers and dependencies (see *Dependencies*):
+version and SHA-256, exactly as it pins your Java compilers and dependencies (see *[Dependencies](/tool/dependencies/)*):
 
 ```bash
 java build/jenesis/Project.java pin
@@ -99,7 +99,7 @@ java build/jenesis/Project.java pin
 ## Code-quality tools per language
 
 Each language brings its own linters and formatter, wired the same config-file-only way as the Java tools in
-*Code quality & testing*: drop the tool's configuration file into a `build.jenesis/` folder and it runs on the
+*[Code quality & testing](/tool/code-quality-and-testing/)*: drop the tool's configuration file into a `build.jenesis/` folder and it runs on the
 next build. A tool whose language is absent self-skips, so a stray config file in a Java-only project does
 nothing.
 
@@ -123,7 +123,8 @@ and scalafmt together with the Java formatter.
 
 ## A compiler plugin
 
-A Kotlin or Scala compiler plugin is declared exactly like a Java annotation processor (*Building & running*),
+A Kotlin or Scala compiler plugin is declared exactly like a Java annotation processor
+(*[Building & running](/tool/building-and-running/)*),
 with one addition: **name the compiler first**, so the plugin resolves in that compiler's own group rather than
 on `javac`'s processor path.
 
