@@ -47,6 +47,10 @@ asset is **never downloaded**, so an unsupported format costs no bandwidth.
 ## Implementations - the connectors (read half)
 
 Three source connectors ship, each keyed by a stable **source name** you pass when you trigger the import.
+That name is also the connector's toggle: an installed connector is removed from the accepted `source`
+values with `jenesis.repository.<name>=false` (`jenesis.repository.nexus=false`), degrading exactly like a
+missing module - see
+[Feature toggles & implementation selection](/repository/configuration-reference/).
 
 ### Nexus
 

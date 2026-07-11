@@ -28,6 +28,12 @@ that claims its path - so formats plug in without the core naming any of them.
   capabilities off its module set: the formats present <em>are</em> the ecosystems it speaks.
 </div>
 
+An installed format is also switchable off by configuration alone: `jenesis.repository.<name>=false`
+(`JENESIS_REPOSITORY_MAVEN=false` as an environment variable) keeps a format from activating at
+discovery, so its paths unclaim and its importer skips - exactly as if the module were absent. That
+is how one image carrying every format is trimmed per deployment instead of rebuilt; see
+[Feature toggles & implementation selection](/repository/configuration-reference/).
+
 ### Two optional powers a format may take
 
 Beyond serving requests, a format can opt into either of two extra capabilities. A format that has no use

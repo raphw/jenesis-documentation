@@ -81,6 +81,25 @@ S3's `If-None-Match` / `If-Match` conditional writes - the coordination is the b
 lock service. And because `PutObject` needs the object length up front, a streamed upload of unknown length
 spills to a temp file rather than to the heap, preserving the fixed-memory guarantee.
 
+### Google Cloud Storage
+
+There is also a **native GCS backend** - the same modular AWS SDK v2 client speaking GCS's
+S3-compatible XML API, with the GCS differences handled for you: the version token is the object
+**generation** (GCS honours `If-Match` only on reads), so `writeVersioned` is a cross-node
+compare-and-set over the `x-goog-if-generation-match` precondition, and uploads skip the chunked
+signing GCS does not decode. It authenticates with an HMAC key pair (Cloud Storage → Settings →
+Interoperability):
+
+```bash
+-Djenesis.repository.store=gcs
+JENESIS_GCS_BUCKET=my-artifacts
+JENESIS_GCS_ACCESS_KEY_ID=...            # the HMAC pair
+JENESIS_GCS_SECRET_ACCESS_KEY=...
+```
+
+The plain S3 backend pointed at `storage.googleapis.com` (above) still works; the native backend is
+the one to pick when you want generation-token compare-and-set semantics rather than ETags.
+
 ### Azure Blob
 
 The Azure backend (azure-storage-blob SDK) stores objects in an Azure Blob container and behaves exactly
@@ -103,7 +122,13 @@ One setting picks the backend; leaving it unset uses the filesystem.
 |-------------------------------|---------|----------|
 | *(unset)* | Filesystem *(default)* | `JENESIS_STORE_ROOT` |
 | `s3` | S3 / GCS / MinIO / Ceph | `JENESIS_AWS_BUCKET` (+ `JENESIS_AWS_ENDPOINT` for non-AWS) |
+| `gcs` | Google Cloud Storage (native) | `JENESIS_GCS_BUCKET` + the `JENESIS_GCS_ACCESS_KEY_ID` / `JENESIS_GCS_SECRET_ACCESS_KEY` HMAC pair |
 | `azure-blob` | Azure Blob | `JENESIS_AZURE_CONNECTION_STRING` (+ optional `JENESIS_AZURE_CONTAINER`) |
+
+The store is the exclusive seam with a loud failure mode: a selection naming a backend that is not on
+the module path, or one missing its required keys, **fails the boot** rather than silently falling
+back to another store - persisting against the wrong backend is never the safe default. See
+[Feature toggles & implementation selection](/repository/configuration-reference/).
 
 ### Credentials
 

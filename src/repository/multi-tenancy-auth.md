@@ -205,4 +205,8 @@ Beyond these, the finer-grained controls are **per-tenant data** held in the sto
 that installs it, not through a startup property.
 Installing the OIDC module (`source/oidc`) enables token exchange; installing a tenant-directory module enables
 more than the one configured tenant. A plain server without those runs enforcing, single-tenant, and
-key-only - which is a complete, safe deployment on its own.
+key-only - which is a complete, safe deployment on its own. Both are also configuration-switchable
+where installed: `jenesis.repository.oidc=false` turns the token exchange off exactly like the
+missing module (`/api/token` answers `501`), and the exclusive seams select by name -
+`jenesis.repository.token-exchange=oidc`, `jenesis.repository.tenants=store-tenants` - per
+[Feature toggles & implementation selection](/repository/configuration-reference/).

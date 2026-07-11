@@ -32,9 +32,12 @@ Where a key is both a repository dial *and* pinnable from above, the two meet wi
   for a repository - or a tenant, where the key is tenant-overridable - to set for itself.
 </div>
 
-A capability being *present* is usually not a setting at all - it is whether its module is on the
-server's path (`+source+store+s3`, `+source+proxy`, `source/oidc`, …). Those toggles are noted in
-[Architecture](/repository/architecture/) and each capability's chapter, not repeated here.
+A capability being *present* is not a setting - it is whether its module is on the server's path
+(`+source+store+s3`, `+source+proxy`, `source/oidc`, …), noted in
+[Architecture](/repository/architecture/) and each capability's chapter. But every *installed*
+implementation also carries a uniform runtime toggle, and an exclusive seam a selection key - the
+**Feature toggles & implementation selection** section just below - so one image carrying every
+module is trimmed by configuration instead of rebuilt.
 
 ### Value formats
 
@@ -48,6 +51,44 @@ server's path (`+source+store+s3`, `+source+proxy`, `source/oidc`, …). Those t
 
 ---
 
+## Feature toggles & implementation selection
+
+Startup keys, read at `ServiceLoader` discovery - the convention every discovered implementation
+follows, so an image carrying every module (the all-in-one image) is shaped with `docker run -e`
+rather than rebuilt. Spring's relaxed binding makes every key an environment variable:
+`jenesis.repository.maven` is `JENESIS_REPOSITORY_MAVEN`, `jenesis.repository.store` is
+`JENESIS_REPOSITORY_STORE`.
+
+- **A parallel implementation** (a format, an import source, a feed - many active at once) toggles by
+  its name: `jenesis.repository.<feature>=true|false`. **Unset means enabled**; only an explicit
+  `false` disables, and a disabled implementation is simply not activated at discovery - it degrades
+  exactly like a missing module (`jenesis.repository.maven=false` removes the Maven layout, and its
+  importer with it). The advisory feeds are the deliberate exception: each stays **opt-in**
+  (`osv=true`, …), so an unconfigured deployment consults no external API.
+- **An exclusive seam** (one active implementation) selects by name with
+  `jenesis.repository.<spi>=<feature>`; unset picks the noted default or the first enabled
+  implementation in discovery order, and a selection naming an uninstalled implementation degrades to
+  the documented `501` rather than failing the boot.
+- **Required-config self-disable:** an implementation that cannot run without a key (a credential, a
+  bucket) disables itself when that key is unset and logs one line naming the missing keys and the
+  `jenesis.repository.<feature>=false` switch that silences it. The selected **store** is the one
+  exception - it fails loudly, because silently falling back would persist against the wrong backend.
+
+| Selection key | Default | Chooses among |
+|---------------|---------|---------------|
+| `jenesis.repository.store` | `filesystem` | The storage backend: `filesystem`, `s3`, `gcs`, `azure-blob`. See [Storage](/repository/storage/). |
+| `jenesis.repository.fetcher` | *(first enabled - `http`)* | The upstream HTTP fetcher every proxy and import shares. See [Proxying & groups](/repository/proxying/). |
+| `jenesis.repository.token-exchange` | *(first enabled - `oidc`)* | The OIDC token-exchange implementation behind `/api/token`. See [Multi-tenancy & authentication](/repository/multi-tenancy-auth/). |
+| `jenesis.repository.tenants` | *(first enabled)* | The tenant-directory implementation (`store-tenants` in the standard image). |
+| `jenesis.repository.rate-limiter` | *(first enabled - `token-bucket`)* | The rate-limiter implementation. See [Rate limiting & usage tracking](/repository/rate-limiting-usage/). |
+| `jenesis.repository.key-usage` | *(first enabled - `batching`)* | The credential usage-tracker implementation. |
+| `jenesis.repository.retention` | *(first enabled - `cleaner`)* | The retention engine behind the cleanup and retention endpoints. See [Maintenance](/repository/maintenance/). |
+
+An implementation's *own* settings keep their documented keys - the tables below and
+`JENESIS_AWS_BUCKET`-style credentials - the toggle only decides whether it activates.
+
+---
+
 ## Server & storage
 
 Startup environment variables and system properties, read once when the server boots.
@@ -56,7 +97,7 @@ See [Getting started](/repository/getting-started/) and [Storage](/repository/st
 | Key | Default | What it sets |
 |-----|---------|--------------|
 | `JENESIS_STORE_ROOT` | *(required for filesystem)* | Root directory of the filesystem store. |
-| `jenesis.repository.store` | *(filesystem)* | Storage backend: unset = filesystem, `s3`, or `azure-blob`. |
+| `jenesis.repository.store` | *(filesystem)* | Storage backend: unset = filesystem, `s3`, `gcs`, or `azure-blob`. |
 | `jenesis.repository.quota` | *(unset - no cap)* | Storage cap; a new artifact is refused with `507` once stored blob bytes reach it. Byte count or `K`/`M`/`G`/`T`. |
 | `SPRING_PROFILES_ACTIVE` | *(none)* | Set to `dev` for the built-in `admin`/`admin` form login on a local run - never in production. |
 
@@ -74,6 +115,10 @@ Read only by the backend you select. See [Storage](/repository/storage/).
 | `JENESIS_AWS_ENDPOINT` | *(AWS)* | Custom endpoint for a non-AWS S3 store (GCS, MinIO, Ceph). |
 | `JENESIS_AWS_ACCESS_KEY_ID` | *(AWS chain)* | Explicit S3 access key; set together with the secret key, else the standard AWS credential chain is used. |
 | `JENESIS_AWS_SECRET_ACCESS_KEY` | *(AWS chain)* | Explicit S3 secret key; set together with the access key. |
+| `JENESIS_GCS_BUCKET` | *(required for `gcs`)* | Bucket for the native Google Cloud Storage backend. |
+| `JENESIS_GCS_ACCESS_KEY_ID` | *(required for `gcs`)* | GCS HMAC access key (Cloud Storage → Settings → Interoperability); set with the secret. |
+| `JENESIS_GCS_SECRET_ACCESS_KEY` | *(required for `gcs`)* | GCS HMAC secret key; set with the access key. |
+| `JENESIS_GCS_ENDPOINT` / `JENESIS_GCS_REGION` | *(GCS defaults)* | Custom endpoint / region for the GCS backend. |
 | `JENESIS_AZURE_CONNECTION_STRING` | *(required for `azure-blob`)* | Azure account connection string. |
 | `JENESIS_AZURE_CONTAINER` | *(default container)* | Azure Blob container to use. |
 
@@ -92,6 +137,7 @@ System property, read at startup. See [Formats](/repository/formats/).
 
 | Key | Default | What it sets |
 |-----|---------|--------------|
+| `jenesis.repository.<format>` | *(enabled)* | Toggle an installed format by its name (`maven`, `jenesis`, `oci`, `raw`, …); `false` degrades it exactly like a missing module - its paths unclaim, and its importer skips. |
 | `jenesis.repository.maven-metadata-compute` | `false` | Compute `maven-metadata.xml` on read from stored version folders instead of serving the published bytes verbatim. |
 
 ---
@@ -285,6 +331,10 @@ See [Migration & import](/repository/migration-import/).
 
 The Maven importer honours the same `maven-metadata-compute` opt-in as the Maven format: with it on, a
 source `maven-metadata.xml` is dropped and regenerated from the imported version folders.
+
+An installed connector is also switchable off by name - `jenesis.repository.nexus=false` removes
+`nexus` from the accepted `source` values, per the **Feature toggles & implementation selection**
+section above.
 
 ---
 

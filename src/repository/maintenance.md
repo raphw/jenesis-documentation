@@ -80,7 +80,12 @@ PUT  /repository/{repo}/admin/retention       # set keep-last / max-age / prerel
 
 <div class="warning">
   Retention is itself a module. On a deployment without it, the cleanup and retention endpoints answer
-  <code>501</code> - "retention is not installed" - rather than silently doing nothing.
+  <code>501</code> - "retention is not installed" - rather than silently doing nothing. Where it
+  <em>is</em> installed, <code>jenesis.repository.cleaner=false</code> gates it off to the same
+  <code>501</code>, and the exclusive seam selects an engine by name with
+  <code>jenesis.repository.retention</code> (<code>cleaner</code> is the shipped implementation) - see
+  <a href="/repository/configuration-reference/">Feature
+  toggles &amp; implementation selection</a>.
 </div>
 
 #### Pins

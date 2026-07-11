@@ -104,16 +104,21 @@ a `404` whether it was served directly, pulled through a proxy, or found in a gr
 
 ### Enabling upstream connectivity
 
-There is no on/off flag - connectivity is the `http` fetcher module **being on the path**. A standard build
-includes it; to confirm or to build it explicitly you name its module the way you would a storage backend or
-a format:
+Connectivity is the `http` fetcher module **being on the path**. A standard build includes it; to
+confirm or to build it explicitly you name its module the way you would a storage backend or a
+format:
 
 ```bash
 java build/jenesis/Project.java +source+proxy build   # the HTTP fetcher and its dependencies
 ```
 
 With no fetcher module present the server still runs - it just serves only what it holds and refuses
-imports.
+imports. An *installed* fetcher can be switched off the same way every discovered implementation can
+- `jenesis.repository.http=false` degrades it exactly like the missing module - and the fetcher is an
+exclusive seam, so `jenesis.repository.fetcher=<name>` selects among installed implementations
+(unset picks the first enabled one; a selection naming an uninstalled fetcher degrades to the same
+refused-imports state, never a failed boot). See
+[Feature toggles & implementation selection](/repository/configuration-reference/).
 
 ### Per-format upstreams
 

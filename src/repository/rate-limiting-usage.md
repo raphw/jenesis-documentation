@@ -51,7 +51,11 @@ next request - nothing is rebuilt; the bucket simply refills toward the new cap.
 The bucket is **per process**. In a replicated deployment each node meters independently, so the effective
 ceiling is the configured rate times the node count - the usual, cheap trade for keeping a coordination
 service off the hot path. A front door that pins a tenant to one node keeps the number exact; a
-coordinated limiter for exact global metering would be another module behind the same seam.
+coordinated limiter for exact global metering would be another module behind the same seam - it is an
+exclusive one, selected with `jenesis.repository.rate-limiter` (`token-bucket` is the shipped
+implementation, and `jenesis.repository.token-bucket=false` stands it down like a missing module); the
+usage tracker's seam mirrors it as `jenesis.repository.key-usage` (`batching`). See
+[Feature toggles & implementation selection](/repository/configuration-reference/).
 
 ### The ceiling
 
