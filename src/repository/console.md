@@ -1,5 +1,5 @@
 ---
-order: 15
+order: 16
 title: The console
 description: Using the web console - signing in, browsing repositories and artifacts, reading a repository's settings, the installed-capabilities view, the theme switch, and how the console scopes itself to a tenant.
 ---

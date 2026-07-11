@@ -1,5 +1,5 @@
 ---
-order: 14
+order: 15
 title: Observability
 description: How the repository reports on itself - one instrumentation point that feeds logs, metrics and traces at once; the Micrometer naming convention and the tags it keeps off your meters; the Actuator and Prometheus endpoints; and the OTLP tracing you switch on with two settings.
 ---
@@ -79,7 +79,7 @@ endpoints, over the same HTTP port as the repository:
 
 <div class="tip">
   The health probes are never rate-limited, so an aggressive
-  <a href="/repository/getting-started/"><code>rate-limit</code></a> setting can never make your
+  <a href="/repository/rate-limiting-usage/"><code>rate-limit</code></a> setting can never make your
   orchestrator think the server is down.
 </div>
 

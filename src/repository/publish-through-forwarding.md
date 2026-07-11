@@ -1,5 +1,5 @@
 ---
-order: 12
+order: 13
 title: Publish-through forwarding
 description: Publishing to your repository and having it forward each accepted artifact on to another registry - the forward-transport capability, its same-protocol replay and Sonatype Central Portal implementations, the store-backed outbox and single-writer drain behind them, and the settings that point them at a target.
 ---

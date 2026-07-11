@@ -1,5 +1,5 @@
 ---
-order: 16
+order: 17
 title: Configuration reference
 description: Every setting the repository reads, in one place - grouped by the chapter that explains it, with its default and what it changes. Server startup properties, per-repository dials, the management endpoints, and the one-off import fields.
 ---
@@ -58,7 +58,6 @@ See [Getting started](/repository/getting-started/) and [Storage](/repository/st
 | `JENESIS_STORE_ROOT` | *(required for filesystem)* | Root directory of the filesystem store. |
 | `jenesis.repository.store` | *(filesystem)* | Storage backend: unset = filesystem, `s3`, or `azure-blob`. |
 | `jenesis.repository.quota` | *(unset - no cap)* | Storage cap; a new artifact is refused with `507` once stored blob bytes reach it. Byte count or `K`/`M`/`G`/`T`. |
-| `jenesis.repository.rate-limit` | *(unset - no limit)* | Request ceiling in permits per minute, metered per tenant; excess sheds with `429` and a `Retry-After`. Actuator probes are never throttled. |
 | `SPRING_PROFILES_ACTIVE` | *(none)* | Set to `dev` for the built-in `admin`/`admin` form login on a local run - never in production. |
 
 The tenant and repository of the fixed artifact space are `jenesis.repository.tenant` and
@@ -226,6 +225,21 @@ See [Multi-tenancy & authentication](/repository/multi-tenancy-auth/).
 Finer controls - credential lifetime **policy** (a 90-day default, a hard ceiling, a rotation overlap of
 about a week), OIDC **trusts** (roughly an hour's minted-key TTL), custom **roles**, per-tenant **quota**
 and **rate limit** - are per-tenant data set through the management surface, not startup properties.
+
+---
+
+## Rate limiting & usage tracking
+
+Startup properties, read once when the server boots.
+See [Rate limiting & usage tracking](/repository/rate-limiting-usage/).
+
+| Key | Default | What it sets |
+|-----|---------|--------------|
+| `jenesis.repository.rate-limit` | *(unset - no limit)* | Deployment-default request ceiling in permits per minute, metered per tenant; excess sheds with `429` and a `Retry-After`. Actuator probes are never throttled. |
+| `jenesis.repository.track-key-usage` | `false` | Record each credential's last use, source address and use count on the batching worker. |
+
+A tenant's own rate ceiling is per-tenant data set through the management surface
+(`PUT /api/rate-limit`), not a startup property.
 
 ---
 

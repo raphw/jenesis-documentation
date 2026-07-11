@@ -200,8 +200,9 @@ configuration is read.
 | `repository` | `default` | The repository of that fixed space. A multi-tenant routing reads the repository from the request path instead. |
 
 Beyond these, the finer-grained controls are **per-tenant data** held in the store - credential lifetime
-**policy** (default and ceiling), OIDC **trusts**, custom **roles**, and a tenant's **quota** and **rate
-limit** - set through the management surface of a deployment that installs it, not through a startup property.
+**policy** (default and ceiling), OIDC **trusts**, custom **roles**, and a tenant's **quota** and
+**[rate limit](/repository/rate-limiting-usage/)** - set through the management surface of a deployment
+that installs it, not through a startup property.
 Installing the OIDC module (`source/oidc`) enables token exchange; installing a tenant-directory module enables
 more than the one configured tenant. A plain server without those runs enforcing, single-tenant, and
 key-only - which is a complete, safe deployment on its own.

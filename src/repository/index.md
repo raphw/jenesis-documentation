@@ -54,8 +54,10 @@ Because the system *is* its capabilities, every chapter follows the same order:
 9. **Search & inventory** - the search SPI, then the index and licence inventory.
 10. **Maintenance** - the sweep SPI, then cleanup, retention, scanning, and reclamation.
 11. **Multi-tenancy & authentication** - the tenants and auth SPIs, then key, OIDC, SAML, and SCIM.
-12. **Publish-through forwarding** - the transport SPI and its implementations.
-13. **Migration & import** - the import-source SPI, then the Nexus, Artifactory, and Jenesis importers.
-14. **Observability** - metrics and tracing.
-15. **The console** - the web UI and its contribution seams.
-16. **Configuration reference** - every setting in one place.
+12. **Rate limiting & usage tracking** - the limiter and usage-tracker SPIs, then the token bucket and the
+    batching worker.
+13. **Publish-through forwarding** - the transport SPI and its implementations.
+14. **Migration & import** - the import-source SPI, then the Nexus, Artifactory, and Jenesis importers.
+15. **Observability** - metrics and tracing.
+16. **The console** - the web UI and its contribution seams.
+17. **Configuration reference** - every setting in one place.

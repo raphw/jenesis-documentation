@@ -150,6 +150,7 @@ Every capability in this section is one of these seams. This is where each plugs
 | Search index and licence inventory | Search & inventory |
 | Background maintenance tasks | Maintenance |
 | Tenant directory and auth mechanisms | Multi-tenancy & authentication |
+| Rate limiter and usage tracker | Rate limiting & usage tracking |
 | Publish-through forwarding | Publish-through forwarding |
 | Import sources and importers | Migration & import |
 | Console panels | The console |
