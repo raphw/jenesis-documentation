@@ -270,6 +270,7 @@ are in the selection-key table above. See [Maintenance](/repository/maintenance/
 | `jenesis.walk.segments` | `32` | Target number of ranges a walk pass is split into across nodes. |
 | `jenesis.walk.ttl` | `900` | Seconds before a dead node's segment claim expires and its segment resumes elsewhere (a plain second count). |
 | `jenesis.gc.stride` | `20000` | Checkpoint stride of the garbage collector's own walk passes. |
+| `jenesis.gc.grace` | *(none)* | Optional ISO-8601 wall-clock floor on the condemn-to-collect grace, on top of the one-pass generation gap - a blob is not reclaimed until its condemned marker is at least this old, so fast generation turnover across nodes cannot shorten the grace. |
 
 ---
 

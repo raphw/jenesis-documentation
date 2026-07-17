@@ -222,6 +222,7 @@ The walk and collector read **startup keys, spelled in full** (they are not per-
 | `jenesis.walk.ttl` | `900` | Seconds before a dead node's segment claim expires and its segment is resumed elsewhere. |
 | `jenesis.repository.gc` | *(none installed - nothing reclaimed)* | Selects the garbage collector; `mark-sweep` is the shipped implementation. |
 | `jenesis.gc.stride` | `20000` | Checkpoint stride of the collector's own walk passes. |
+| `jenesis.gc.grace` | *(none)* | Optional ISO-8601 wall-clock floor on the condemn-to-collect grace, on top of the one-pass gap. Set it so a blob is never reclaimed until it has carried its condemned marker at least this long - a guard for when several nodes collect, or a node re-collects after a lease expiry, and generations advance faster than the collection interval. |
 
 ## Settings
 
