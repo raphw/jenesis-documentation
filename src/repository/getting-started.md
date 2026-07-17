@@ -1,7 +1,7 @@
 ---
 order: 2
 title: Getting started
-description: Run a Jenesis Repository server on the filesystem, publish and consume a Maven artifact, and open the console.
+description: Run a Jenesis Repository server on the filesystem - from source or as the all-in-one image - publish and consume a Maven artifact, and open the console.
 ---
 
 This chapter takes you from nothing to a running repository. You build the server, start it against a
@@ -75,6 +75,36 @@ needs no new space. You never edit files under the root by hand.
   it a bucket or connection string. That is the subject of the <strong>Storage</strong> chapter; the
   filesystem backend here needs no selection at all.
 </div>
+
+## Or run the all-in-one image
+
+If you would rather run a container than a JDK, the clone also builds the **all-in-one image**: one image
+carrying every format, every storage backend, every import connector, the token exchange, the rate limiter,
+the usage tracker, and the web console -
+
+```bash
+docker build -t jenesis-repository:free .
+docker run -p 8080:8080 -v jenesis-data:/data jenesis-repository:free
+```
+
+The store defaults to the filesystem under `/data` (mount a volume there), and the server listens on
+port 8080 - the same running repository as above. Everything on board is **on until configured off**, and
+because every `jenesis.repository.*` key is also an environment variable, the image is shaped with
+`docker run -e` rather than rebuilt:
+
+```bash
+# disable the Maven layout; select the S3 backend
+docker run -p 8080:8080 \
+  -e JENESIS_REPOSITORY_MAVEN=false \
+  -e JENESIS_REPOSITORY_STORE=s3 -e JENESIS_AWS_BUCKET=my-artifacts \
+  jenesis-repository:free
+```
+
+A capability that needs configuration it does not have - a cloud backend without its bucket, the token
+exchange without a trust - simply disables itself until its keys arrive. The trim convention is covered in
+[Feature toggles & implementation selection](/repository/configuration-reference/); the same image also runs
+the web console as a second container against the same store
+(`docker run -e MAINCLASS=build.jenesis.repository.bundle.Console -e PORT=8081 …`).
 
 ## Open the console
 

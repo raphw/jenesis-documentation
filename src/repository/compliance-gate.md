@@ -44,7 +44,7 @@ independently:
 |---------|--------------|
 | `ALLOW` | The artifact is stored and served normally. |
 | `QUARANTINE` | It is held under a `/quarantine` view that **does not resolve** - stored for review, never served. |
-| `REJECT` | Nothing is stored; the orphaned blob is reclaimed by the usual garbage collection. |
+| `REJECT` | Nothing is served or pointed at; the orphaned blob is left for [garbage collection](/repository/maintenance/) to reclaim. |
 
 An `ALLOW` verdict is what the publication screen answers as `ACCEPT`: the policy verdict names the gate's
 decision, the screen's disposition names what the store does with the upload.

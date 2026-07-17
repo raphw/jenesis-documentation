@@ -50,6 +50,10 @@ contributes no panel, so the set of panels you see is a live picture of what thi
 you never have to read the startup log to find out. If a server is running with no panels at all, the
 page says so plainly rather than showing a blank screen.
 
+The console also reflects the deployment's mode. On a server running in
+[read-only mode](/repository/multi-tenancy-auth/), every console page carries a **read-only banner**, so
+nobody wonders why a write was refused - the page itself says the deployment does not accept them.
+
 ## Browsing repositories and artifacts
 
 The **browse** view - reachable from its panel and directly at **`/browse`** - is a generic file
@@ -64,12 +68,21 @@ reads the repository's own listing rather than knowing about Maven, npm, or OCI 
 - The tree is **lazy**. Each level lists only its immediate children, and a folder's contents are
   fetched only when you open it. A browse never scans or downloads a whole repository, so it stays fast
   over a namespace with millions of entries.
+- A **Download asset listing** action streams the repository's full inventory - every published path with
+  its size and SHA-256, read straight from the pointer tree. It is the console face of the `GET /api/assets`
+  export covered in [Migration & import](/repository/migration-import/), so getting your data out is one
+  click, never the paid feature.
 
 <div class="note">
   Because browse reads the published pointer tree and never opens a stored blob, it is cheap even on a
   very large repository, and it can never be steered outside a repository's own namespace - the path is
   guarded against <code>..</code> traversal.
 </div>
+
+Browse shows **exactly what a `GET` would serve** - no more. The review subtree where the
+[compliance gate](/repository/compliance-gate/) holds quarantined artifacts is never listed and never
+navigable, so a reader with browse access cannot enumerate the paths or sizes of withheld artifacts; the
+**Download asset listing** export honours the same rule.
 
 ## Reading a repository's settings
 
@@ -97,6 +110,12 @@ which formats, storage backend, compliance screens, importers, and authenticatio
 installed on this deployment. This is the operator's answer to "is the OSV feed actually on?" or "does
 this server have the S3 backend?" - read straight from the running process rather than inferred from
 configuration files.
+
+The view is organised the way the server itself is: an **SPI catalog**, grouped by the *seam* - the
+plug-in point from [Architecture](/repository/architecture/) - with the installed implementations that
+provide each listed beneath it. It is pure discovery over the running process's Java Module System graph,
+the same `provides` declarations the server loads plug-ins from, so what you read here is what the
+dispatcher actually discovered - and it reads no artifact data to say so.
 
 It is the same principle as the panels: a capability that is not installed simply does not appear.
 Confirming a capability here is the quickest way to check that an intended module made it onto the

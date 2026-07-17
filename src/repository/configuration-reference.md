@@ -83,6 +83,8 @@ rather than rebuilt. Spring's relaxed binding makes every key an environment var
 | `jenesis.repository.rate-limiter` | *(first enabled - `token-bucket`)* | The rate-limiter implementation. See [Rate limiting & usage tracking](/repository/rate-limiting-usage/). |
 | `jenesis.repository.key-usage` | *(first enabled - `batching`)* | The credential usage-tracker implementation. |
 | `jenesis.repository.retention` | *(first enabled - `cleaner`)* | The retention engine behind the cleanup and retention endpoints. See [Maintenance](/repository/maintenance/). |
+| `jenesis.repository.walk` | *(first enabled - `store`)* | The artifact-walk implementation store-sweeping passes enumerate through. See [Maintenance](/repository/maintenance/). |
+| `jenesis.repository.gc` | *(none installed - nothing reclaimed)* | The garbage collector (`mark-sweep` is the shipped implementation); with none installed or selected no content blob is ever reclaimed. See [Maintenance](/repository/maintenance/). |
 
 An implementation's *own* settings keep their documented keys - the tables below and
 `JENESIS_AWS_BUCKET`-style credentials - the toggle only decides whether it activates.
@@ -256,6 +258,19 @@ See [Maintenance](/repository/maintenance/).
 The console's volume-reclaim target is set with two management-level keys - `jenesis.ui.min-free-bytes`
 and `jenesis.ui.min-free-percent` (the free-space floor a super-admin's reclaim aims for).
 
+### The artifact walk & garbage collection
+
+Startup system properties, **spelled in full as written** (they are not `jenesis.repository.`-prefixed
+repository dials). The implementation selections - `jenesis.repository.walk` and `jenesis.repository.gc` -
+are in the selection-key table above. See [Maintenance](/repository/maintenance/).
+
+| Key | Default | What it sets |
+|-----|---------|--------------|
+| `jenesis.walk.checkpoint` | `1000` | Keys visited between durable cursor commits of a walk segment. |
+| `jenesis.walk.segments` | `32` | Target number of ranges a walk pass is split into across nodes. |
+| `jenesis.walk.ttl` | `900` | Seconds before a dead node's segment claim expires and its segment resumes elsewhere (a plain second count). |
+| `jenesis.gc.stride` | `20000` | Checkpoint stride of the garbage collector's own walk passes. |
+
 ---
 
 ## Multi-tenancy & authentication
@@ -266,6 +281,7 @@ See [Multi-tenancy & authentication](/repository/multi-tenancy-auth/).
 | Key | Default | What it sets |
 |-----|---------|--------------|
 | `auth` | `false` | Enforce the credential model. `false` leaves the server **open** - every request allowed. |
+| `read-only` | `false` | Deployment-wide read-only mode: every write - external or internal - is refused with `403`, all reads work normally. Advertised at `GET /api/capabilities`. |
 | `tenant` | `default` | The tenant of the fixed artifact space a single-tenant deployment serves. Multi-tenant routing reads it from the key instead. |
 | `repository` | `default` | The repository of that fixed space. Multi-tenant routing reads it from the request path instead. |
 

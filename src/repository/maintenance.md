@@ -1,7 +1,7 @@
 ---
 order: 10
 title: Maintenance
-description: The background passes that keep a repository healthy - trimming old versions, re-checking what you already hold against fresh advisories, indexing who depends on what, and reclaiming disk. The maintenance-task capability and its single-writer lease, the cleanup, re-scan and dependents implementations, and the settings that turn each on.
+description: The background passes that keep a repository healthy - trimming old versions, re-checking what you already hold against fresh advisories, indexing who depends on what, and reclaiming disk. The maintenance-task capability and its single-writer lease, the cleanup, re-scan and dependents implementations, the shared artifact walk and the opt-in garbage collector, and the settings that turn each on.
 ---
 
 A repository does more than serve what you push to it. Over time it accumulates old versions you no
@@ -155,6 +155,73 @@ free-space target is met (`min-free-bytes` or `min-free-percent`). It is a cross
 deliberately a super-admin concern rather than a per-tenant one - run from the console's instances screen.
 Unlike the cleanup sweep, which removes only what a repository's own retention rules release, a reclaim is a
 blunt free-space guarantee for when a bounded volume is filling up.
+
+## The shared artifact walk
+
+Each pass above visits what it already knows how to find - a repository's versions, its stored SBOMs. A pass
+that must visit **everything the store holds** rides a different primitive: the **shared artifact walk**, one
+ordered, resumable enumeration of the store's keys that every store-sweeping consumer uses instead of writing
+its own listing loop. The walk is itself a discovered capability - `jenesis.repository.walk` selects an
+implementation by name, and the shipped `store` walk descends the store's own key layout through ordered
+paging - and it hands every rider the same guarantees:
+
+- **It resumes, never restarts.** Progress is committed as a compare-and-set cursor every
+  `jenesis.walk.checkpoint` keys (default `1000`). A node that dies mid-pass loses at most the uncommitted
+  tail, which is re-visited on resume - so a consumer is written to tolerate seeing an item twice, and a pass
+  over a huge store survives any interruption.
+- **Replicas split the work without a coordinator.** A pass is planned as up to `jenesis.walk.segments`
+  contiguous ranges (default `32`), and each node claims a segment with a compare-and-set write - a claim is
+  refused, never stolen. A dead node's claim expires after `jenesis.walk.ttl` seconds (default `900`) and
+  another node resumes the segment from its last cursor.
+- **State lives only in the store.** Like everything else, a pass's manifest and cursors are objects in the
+  object store - there is no scheduler database, and a pass survives the death of any process that ran it.
+
+The walk also carries a **rebuild seam**: one enumeration of the published pointers can feed every installed
+walk consumer its retained items. A plug-in enabled late - a new index, a new gauge - back-fills its whole
+view from one shared pass rather than shipping a scan of its own.
+
+## Garbage collection
+
+Content addressing splits removal in two. Evicting a version removes its *pointer*; the *blob* it pointed at
+may be shared with other versions, so blobs are reclaimed separately, once nothing references them. Beyond
+what the cleanup sweep releases, a store also accrues blobs no pass ever revisits - the orphan of a rejected
+or crashed upload, bytes whose every pointer is long gone. The **garbage collector** is the capability that
+finds and reclaims them.
+
+Deleting data is the one unrecoverable act, so garbage collection is the most strictly opt-in capability in
+the product: **with no collector module installed, nothing is ever reclaimed** - the standard image ships
+without one, and its absence costs only disk. Installing one is a deliberate choice, and
+`jenesis.repository.gc` selects among installed collectors by name; **`mark-sweep`** is the shipped
+implementation.
+
+The `mark-sweep` collector rides the shared artifact walk - never a listing loop of its own - and is built so
+a live blob can never be deleted:
+
+- **Mark, sharded.** A walk over the serving pointers records every referenced blob hash, flushed durably
+  *before* each cursor commit - so a committed cursor never lies about a reference that was still sitting in
+  a buffer. The sweep then reads the content-addressed namespace in hash order, one leading-byte shard at a
+  time, so memory stays bounded on a store of any size.
+- **Condemn, then collect.** A pass that finds an unreferenced blob does not delete it - it **condemns** it
+  with a marker. Only a *later* pass that finds the blob still unreferenced deletes it, with the marker
+  re-read immediately before the delete. Every blob therefore gets at least one full pass interval of grace.
+- **The write path cooperates.** Landing a pointer - a publish, a promotion, a deduplicated re-deploy of
+  bytes already stored - clears the blob's condemned marker, so content that becomes referenced again between
+  passes is never collected.
+- **Only blobs are judged.** The collector only ever evaluates content-addressed blob objects; every other
+  object in the store - pointers, indexes, configuration - is untouched by construction.
+- **A dry run first.** The collector distinguishes a read-only **plan** - what a collection *would* reclaim,
+  writing nothing - from the collection itself, so a first run can be previewed before anything is deleted.
+
+The walk and collector read **startup keys, spelled in full** (they are not per-repository dials):
+
+| Key | Default | Meaning |
+|-----|---------|---------|
+| `jenesis.repository.walk` | *(first enabled - `store`)* | Selects the artifact-walk implementation store-sweeping passes enumerate through. |
+| `jenesis.walk.checkpoint` | `1000` | Keys visited between durable cursor commits of a walk segment. |
+| `jenesis.walk.segments` | `32` | Target number of ranges a pass is split into across nodes. |
+| `jenesis.walk.ttl` | `900` | Seconds before a dead node's segment claim expires and its segment is resumed elsewhere. |
+| `jenesis.repository.gc` | *(none installed - nothing reclaimed)* | Selects the garbage collector; `mark-sweep` is the shipped implementation. |
+| `jenesis.gc.stride` | `20000` | Checkpoint stride of the collector's own walk passes. |
 
 ## Settings
 

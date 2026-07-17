@@ -83,6 +83,8 @@ there - the surface that needed it reports so, and the rest keeps working:
 | Credential-usage tracking (`source/usage`) | nothing records last-use, and the worker reports as off |
 | Rate limiting (`source/ratelimit`) | nothing is limited |
 | Token exchange (`source/oidc`) | a CI job cannot trade its identity token for a short-lived credential |
+| Artifact walk (`source/walk`) | store-sweeping passes have no shared enumeration; the surfaces that ride one degrade gracefully |
+| Garbage collector (`source/gc`) | no content blob is ever reclaimed - deletion is strictly opt-in |
 
 Each of these has its own chapter. The point here is the mechanism: the core asks the seam, and the seam
 answers from what is on the path.
@@ -124,6 +126,9 @@ provenance, forwarding, and observability all hang off it. An accepted publish t
 4. **After-commit observers run.** Only once an accepted artifact is linked and serving are the observer
    hooks notified - the seam that forwarding, webhooks, replication, and scan hand-offs ride. An observer has
    **no say in the verdict** and its failure is logged and contained, so it can never fail the upload.
+   Removal is symmetric: when a version is unpublished or evicted, the same observers are notified once per
+   removed pointer - contained the same way, never blocking the removal - so a derived view learns about
+   deletions through the same seam it learned about publishes.
 
 <div class="note">
   Screening also has a <strong>read side</strong>: a screen can <em>withhold</em> an
@@ -149,6 +154,7 @@ Every capability in this section is one of these seams. This is where each plugs
 | Provenance signing and attestation | Provenance |
 | Search index and licence inventory | Search & inventory |
 | Background maintenance tasks | Maintenance |
+| Shared artifact walk and garbage collection | Maintenance |
 | Tenant directory and auth mechanisms | Multi-tenancy & authentication |
 | Rate limiter and usage tracker | Rate limiting & usage tracking |
 | Publish-through forwarding | Publish-through forwarding |

@@ -7,7 +7,7 @@ description: What Jenesis Repository is, the principles behind it, and the path 
 **Jenesis Repository is an artifact repository built from discovered plug-ins over a thin core.** It hosts
 and proxies many package formats (Maven, npm, PyPI, Docker/OCI, and more), screens what passes through a
 supply-chain gate, and persists everything through a single storage abstraction - with **no database**: the
-store (a filesystem, S3, or Azure) is the only durable state.
+store (a filesystem, S3, GCS, or Azure) is the only durable state.
 
 ## The principles
 
@@ -45,14 +45,14 @@ Because the system *is* its capabilities, every capability chapter follows the s
 1. **Introduction** - you are here.
 2. **Getting started** - run the server, publish and consume an artifact, point it at a store.
 3. **Architecture** - the plug-in model, `ServiceLoader` discovery, and the publication path.
-4. **Storage** - the `ArtifactStore` SPI, then the filesystem, S3, and Azure backends.
+4. **Storage** - the `ArtifactStore` SPI, then the filesystem, S3, GCS, and Azure backends.
 5. **Formats** - the format SPIs, then the built-in Maven, module, OCI/Docker and raw layouts.
 6. **Proxying & groups** - the fetcher SPI, pull-through caching, and group repositories.
 7. **The compliance gate** - the publication-interceptor and policy SPIs, then licence, vulnerability, and
    malware screening.
 8. **Provenance** - the signer SPI, then keyless (Sigstore) signing and attestation.
 9. **Search & inventory** - the search SPI, then the index and licence inventory.
-10. **Maintenance** - the sweep SPI, then cleanup, retention, scanning, and reclamation.
+10. **Maintenance** - the sweep SPI, then cleanup, retention, scanning, garbage collection, and reclamation.
 11. **Multi-tenancy & authentication** - the tenants and auth SPIs, then key, OIDC, SAML, and SCIM.
 12. **Rate limiting & usage tracking** - the limiter and usage-tracker SPIs, then the token bucket and the
     batching worker.

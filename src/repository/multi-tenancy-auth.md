@@ -1,7 +1,7 @@
 ---
 order: 11
 title: Multi-tenancy & authentication
-description: One server, many isolated tenants, and every request identified by a key. The tenant-directory and authentication capabilities, the fixed- vs. multi-tenant routing and the key/OIDC/SAML/SCIM mechanisms that implement them, and the settings that switch enforcement on.
+description: One server, many isolated tenants, and every request identified by a key. The tenant-directory and authentication capabilities, the fixed- vs. multi-tenant routing and the key/OIDC/SAML/SCIM mechanisms that implement them, the deployment-wide read-only mode, and the settings that switch enforcement on.
 ---
 
 Everything so far assumed a single, open repository. A real deployment serves **many teams from one server**,
@@ -187,6 +187,30 @@ Whichever mechanism denies a request, the server records the failure by **mechan
 `saml`) and outcome, exposed as a metric so a dashboard can watch authentication health across all of them at
 once.
 
+## Read-only mode
+
+Authentication decides *who* may write; a second, deployment-wide switch removes writing altogether.
+**Read-only mode** (`jenesis.repository.read-only=true`, env `JENESIS_REPOSITORY_READ_ONLY`, off by default)
+refuses **every** write with `403` - a hosted publish, an import, every mutating admin action - while browse,
+download, search and all read APIs work normally.
+
+The refusal is enforced at one low-level choke point: a decorator wraps the storage seam itself, so an
+*internal* write - a pull-through proxy caching an upstream artifact, an import replaying assets - is refused
+before any bytes are stored, and the write-producing background jobs are disabled. There is no path around
+it, whatever credentials a request carries.
+
+Two deployments want this:
+
+- **A browsable-but-immutable demo or archive** - the contents are the point; changing them is not.
+- **A public read-only mirror.** Pair one firewalled read-write instance that publishes into a shared store
+  with public read-only instances serving reads from it - the public face cannot be made to write, not even
+  through its own proxy caching.
+
+A client or console does not have to probe for the mode: the server advertises it, together with whether the
+wire is credential-gated, at a capability endpoint - `GET /api/capabilities` answers a small JSON map
+(`readOnly`, `auth`) a distribution extends as it adds capabilities - and the
+[console](/repository/console/) shows a read-only banner when the mode is on.
+
 ## Settings
 
 Authentication and tenancy are pinned from above the store - an environment variable or a
@@ -196,6 +220,7 @@ configuration is read.
 | Key | Default | Meaning |
 |-----|---------|---------|
 | `auth` | `false` | Enforce the credential model. `false` leaves the server **open** - every request allowed. |
+| `read-only` | `false` | Refuse every write - external or internal - with `403`, while all reads work normally. Advertised at `GET /api/capabilities`. |
 | `tenant` | `default` | The tenant of the fixed artifact space a single-tenant deployment serves. A multi-tenant routing ignores it and reads the tenant from the key. |
 | `repository` | `default` | The repository of that fixed space. A multi-tenant routing reads the repository from the request path instead. |
 
