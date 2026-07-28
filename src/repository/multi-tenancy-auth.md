@@ -38,6 +38,13 @@ a directory module is installed** - a plain server never shows a control it cann
 consequence is that both shapes share **one store layout**: switching a deployment between single- and
 multi-tenant is a configuration change, and the data is found where it was left.
 
+<div class="note">
+  A multi-node deployment folds the resolved <strong>tenant set</strong> - what the tenant-directory
+  <code>TenantsProvider</code> seam reports - into the consistency fingerprint each node publishes. So two
+  nodes wired to <em>different</em> tenant sets are flagged as a configuration mismatch, not mistaken for one
+  node merely lagging the other. A single-tenant deployment - the one configured tenant - is unaffected.
+</div>
+
 ### The authentication seam
 
 Enforcement runs one **credential model** - a key on a request, checked against stored grants - behind a

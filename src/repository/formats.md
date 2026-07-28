@@ -47,7 +47,8 @@ format.
 - **Coordinate exposure (`ArtifactLayout`).** The format can expose the **neutral coordinate** behind a
   request path - its `{ecosystem, coordinate, version}`, whether the version is a prerelease, and the set of
   paths a version occupies. This lets inventory, search, and cleanup key on the coordinate a format supplies
-  rather than each having to parse the format's own path layout.
+  rather than each having to parse the format's own path layout. Both JVM coordinate layouts - Maven and the
+  module layout - supply one.
 
 ## The built-in formats
 
@@ -66,7 +67,12 @@ and the Jenesis module layout, so a single upload feeds both ecosystems.
 - **The Jenesis module layout** is served under `/repository/module/` and `/repository/artifact/`, and
   resolves artifacts **by module name** rather than by Maven coordinate. Its route shapes mirror the public
   [repo.jenesis.build](/modules/resolving/) service, so a Jenesis `modular` build resolves against your own
-  server exactly the way it resolves against the hosted one.
+  server exactly the way it resolves against the hosted one. Like the Maven layout, it also **exposes its
+  coordinate** (`ArtifactLayout`): a `/module/<name>/<version>/<file>` path - and the version-less
+  `/module/<name>/<name>.jar` "latest" pointer - resolves to a neutral coordinate whose ecosystem is
+  `Jenesis`, whose coordinate is the **module name** itself (no `group:artifact` split), plus the version. So
+  the module layout participates in every coordinate-aware feature that reads a layout - download and usage
+  tracking, cleanup and retention by coordinate, and coordinate-based routing - rather than falling through.
 
 The two layouts are bridged in one direction: when you publish a **modular jar** to the Maven layout, the
 server reads the jar's module name back from the just-stored blob and **cross-publishes** it into the module

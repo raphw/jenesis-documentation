@@ -68,8 +68,8 @@ certificate minted per signing session. The keyless signer module:
 4. publishes the certificate chain at `/api/provenance/certificate`.
 
 The certificate is reused across attestations until it nears expiry, then re-minted. `keyless-fulcio-url`
-can point at a self-hosted Sigstore stack backed by your own identity provider - the enterprise deployment
-story - or at a public instance such as `sigstage.dev`.
+can point at a self-hosted Sigstore stack backed by your own identity provider - for a deployment that runs
+its own trust root - or at a public instance such as `sigstage.dev`.
 
 <div class="note">
   There is no long-lived signing key to protect: the private key lives only for the few minutes its

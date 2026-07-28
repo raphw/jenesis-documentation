@@ -31,6 +31,13 @@ format has **no importer on the path is reported skipped** - and because content
 asset is **never downloaded**, so an unsupported format costs no bandwidth.
 
 <div class="note">
+  The import <em>edge</em> is itself a seam. An <code>ImportEdgeProvider</code> SPI lets a distribution own
+  the repository's import surface: when a provider is installed, the built-in edge
+  (<code>/repository/admin/import</code>, below) yields to it, so an alternative import surface composes
+  cleanly without overriding beans. With no provider present the built-in edge serves normally.
+</div>
+
+<div class="note">
   Because an importer writes through the format's normal publish primitives, an imported artifact passes
   through the same publication pipeline as a fresh upload - so the <a
   href="/repository/compliance-gate/">compliance gate</a> screens what you migrate in, exactly as it screens
